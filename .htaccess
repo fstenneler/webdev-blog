@@ -1,4 +1,3 @@
 RewriteEngine On
  
 RewriteRule ^admin/ index.php?zone=backend [QSA,L]
- 

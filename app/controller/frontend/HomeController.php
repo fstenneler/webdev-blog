@@ -9,6 +9,7 @@ class HomeController extends ControllerApp
  
     public function getView()
     {
+
         return $this->app()->HTTPResponse()->generateView();
 
     }

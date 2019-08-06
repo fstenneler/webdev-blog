@@ -13,7 +13,7 @@ class Route extends ApplicationComponent
 
     public function setLastRoute() 
     {
-        if(strtolower($this->app()->getPageName()) != 'login' && $this->app()->HTTPRequest()->getExists('action') == false) {
+        if(strtolower($this->app()->getPageName()) != 'login' && strtolower($this->app()->getPageName()) != 'signup' && strtolower($this->app()->getPageName()) != 'account' && $this->app()->HTTPRequest()->getExists('action') == false) {
             $_SESSION['lastZoneName'] = $this->app()->getZoneName();
             $_SESSION['lastUrl'] = $this->app()->HTTPRequest()->requestURI();
         } 

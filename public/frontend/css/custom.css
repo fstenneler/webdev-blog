@@ -1,0 +1,114 @@
+.form-error {
+    color: #9d1111;
+    margin-top: 40px;
+}
+
+/* -------------------------------------------------------------------
+ * ## header search trigger
+ * ------------------------------------------------------------------- */
+ .header__search-trigger {
+    right: 80px;
+  }
+  .header__sign-in-trigger {
+    position: absolute;
+    top: 38%;
+    right: 30px;
+    cursor: pointer;
+  }
+
+  #header__connection_modal {
+      position: absolute;
+      right: 10px;
+      top: 100%;
+      margin: 0;
+      padding: 1.8rem;
+      background: #151515;
+      border-radius: 0 0 3px 3px;
+      text-align: left;
+      z-index: 500;
+      display: none;
+  }
+
+  #header__connection_modal a {
+    white-space: nowrap;
+    font-family: "Nunito Sans", sans-serif;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 18px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 15px;
+    font-weight: 400;
+    -webkit-transition: color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
+  }
+
+  #header__connection_modal a:hover {
+    color: white;
+  }
+
+  .comment ul.children li {
+    padding-top: calc(3rem + 1.8rem);
+    margin-top: -3rem;
+  }
+
+.existing-account {
+  text-align: center;
+}
+
+.form-color-picker-title {
+  margin-top: 20px;
+  color: #919191;
+  font-size: 1.6rem;
+}
+
+.form-color-picker {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  margin-top: 15px;
+  padding: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-color-picker li {
+  width: 39px;
+  height: 39px;
+  display: block;
+  margin: 2px;
+  padding: 0;
+  display: block;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.form-color-picker li:hover {
+  border: 2px solid black;
+}
+
+.form-color-picker .border {
+  border: 2px solid black;
+}
+
+
+
+  @media only screen and (max-width:600px) {
+
+    .header__search-trigger {
+        right: 70px;
+      }
+          
+  }
+  
+  @media only screen and (max-width:400px) {
+
+    .header__sign-in-trigger {
+        right: 20px;
+      }
+    
+    .header__search-trigger {
+        right: 50px;
+      }
+          
+  }

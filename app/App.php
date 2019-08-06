@@ -92,7 +92,10 @@ class App
         }
                 
         $this->setContent('mainContent', $this->getController($this->pageName)->getView());
-        if($this->zoneName != 'backend') {
+        if($this->zoneName == 'backend') {
+            $this->setContent('topbar', $this->getController('Topbar')->getView());
+            $this->setContent('navbar', $this->getController('Navbar')->getView());
+        } else {
             $this->setContent('header', $this->getController('Header')->getView());
             $this->setContent('footer', $this->getController('Footer')->getView());
         }
