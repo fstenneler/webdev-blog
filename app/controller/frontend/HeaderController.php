@@ -10,6 +10,11 @@ class HeaderController extends ControllerApp
     public function getView()
     {
 
+        //Deconnexion
+        if($this->app()->HTTPRequest()->getData('action') == 'logout') {
+            $this->app()->user()->setDisconnection();
+        }
+
         return $this->app()->HTTPResponse()->generateView('header');
 
     }

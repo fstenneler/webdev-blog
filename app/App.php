@@ -82,9 +82,16 @@ class App
     }
 
     public function run() {
+
+        //enregistrement de la dernière page visitée
+        $this->route()->setLastRoute();
+
+
+        if($this->zoneName == 'backend') {
+            $this->route()->setBackendAccess();
+        }
                 
         $this->setContent('mainContent', $this->getController($this->pageName)->getView());
-
         if($this->zoneName != 'backend') {
             $this->setContent('header', $this->getController('Header')->getView());
             $this->setContent('footer', $this->getController('Footer')->getView());
