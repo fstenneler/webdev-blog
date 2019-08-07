@@ -16,6 +16,11 @@ class TopbarController extends ControllerApp
             exit();
         }
 
+        $this->app()->setData('avatar', array(
+            'firstLetter' => strtoupper(substr($this->app()->HTTPRequest()->getSession('user')->nickname,0,1)),
+            'color' => $this->app()->HTTPRequest()->getSession('user')->avatar
+        ));
+
         return $this->app()->HTTPResponse()->generateView('topbar');
 
     }

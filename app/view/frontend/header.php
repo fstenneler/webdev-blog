@@ -22,8 +22,11 @@
         </div>  <!-- end header__search -->
         
         <!-- custom login modal -->
-            <?php if($this->app()->user()->isAuthenticated() == true) { ?>
-                <i class="header__sign-in-trigger fas fa-user"></i>
+            <?php 
+            if($this->app()->user()->isAuthenticated() == true) {                
+                $avatar = $this->app()->getData('avatar');
+            ?>
+                <div class="header__sign-in-trigger" style="background-color: <?= $avatar['color']; ?>"><?= $avatar['firstLetter']; ?></div>
                 <ul id="header__connection_modal">
                     <li><a href="/index.php?page=account"><?= $this->app()->getData('user')->nickname; ?></a></li>
                     <li><a href="/index.php?action=logout">Se déconnecter</a></li>

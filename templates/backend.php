@@ -17,7 +17,10 @@
 
   <!-- Custom styles for this template-->
   <link href="../public/backend/css/sb-admin-2.min.css" rel="stylesheet">
-
+  <link href="../public/backend/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="../public/backend/css/custom.css" rel="stylesheet">
+  <link rel="stylesheet" href="../public/backend/css/richtext.min.css">
+ 
 </head>
 
 <body id="page-top">
@@ -100,8 +103,10 @@
   <script src="../public/backend/vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../public/backend/js/demo/chart-area-demo.js"></script>
-  <script src="../public/backend/js/demo/chart-pie-demo.js"></script>
+  <script src="../public/backend/js/jquery.dataTables.min.js"></script>
+  <script src="../public/backend/js/jquery.richtext.js"></script>
+  <script src="../public/backend/js/custom.js"></script>
+
 
 </body>
 

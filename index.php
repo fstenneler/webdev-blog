@@ -11,13 +11,18 @@ require('app/ClassAutoloader.php');
 app\ClassAutoloader::register();
 
 //routeur
-$page = 'Home'; //page par défaut
 $zone = 'frontend'; //zone par défaut
-if(isset($_GET['page'])) {
-    $page = ucfirst($_GET['page']);
-}
 if(isset($_GET['zone'])) {
     $zone = $_GET['zone'];
+}
+
+$page = 'home'; //page par défaut
+if($zone == 'backend') {
+    $page = 'post';
+}
+
+if(isset($_GET['page'])) {
+    $page = ucfirst($_GET['page']);
 }
 
 if( !file_exists('app/controller/' . $zone . '/' . $page . 'Controller.php') ) { //si le controleur n'existe pas, erreur 404

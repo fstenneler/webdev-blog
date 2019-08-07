@@ -9,12 +9,20 @@
  .header__search-trigger {
     right: 80px;
   }
+
   .header__sign-in-trigger {
+    width: 32px;
+    height: 32px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 19px;
+    color: white;
+    font-weight: 600;
     position: absolute;
-    top: 38%;
+    top: 31%;
     right: 30px;
     cursor: pointer;
-  }
+}
 
   #header__connection_modal {
       position: absolute;
@@ -95,6 +103,10 @@
 
   @media only screen and (max-width:600px) {
 
+    .header__sign-in-trigger {
+      right: 20px;
+    }
+
     .header__search-trigger {
         right: 70px;
       }
@@ -108,7 +120,7 @@
       }
     
     .header__search-trigger {
-        right: 50px;
+        right: 60px;
       }
           
   }
