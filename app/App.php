@@ -2,8 +2,8 @@
 
 namespace app;
 use app\lib\User;
-use app\lib\HTTPRequest;
-use app\lib\HTTPResponse;
+use app\lib\HttpRequest;
+use app\lib\HttpResponse;
 use app\lib\Route;
 
 class App
@@ -22,20 +22,20 @@ class App
         $this->zoneName = $zoneName;
         $this->pageName = $pageName;
         $this->user = new User($this);
-        $this->httpRequest = new HTTPRequest($this);
-        $this->httpResponse = new HTTPResponse($this);
+        $this->httpRequest = new HttpRequest($this);
+        $this->httpResponse = new HttpResponse($this);
         $this->route = new Route($this);
     }
 
-    public function User() {
+    public function user() {
         return $this->user;
     }
 
-    public function HTTPRequest() {
+    public function httpRequest() {
         return $this->httpRequest;
     }
 
-    public function HTTPResponse() {
+    public function httpResponse() {
         return $this->httpResponse;
     }
 
@@ -87,19 +87,29 @@ class App
         $this->route()->setLastRoute();
 
 
-        if($this->zoneName == 'backend') {
+        if($this->zoneName === 'backend') {
             $this->route()->setBackendAccess();
         }
-                
-        $this->setContent('mainContent', $this->getController($this->pageName)->getView());
-        if($this->zoneName == 'backend') {
-            $this->setContent('topbar', $this->getController('Topbar')->getView());
-            $this->setContent('navbar', $this->getController('Navbar')->getView());
-        } else {
-            $this->setContent('header', $this->getController('Header')->getView());
-            $this->setContent('footer', $this->getController('Footer')->getView());
+
+        $view = array($this->pageName);
+        if($this->zoneName === 'backend') {
+            $view[] = 'topbar';
+            $view[] = 'navbar';
+        } elseif($this->zoneName === 'frontend') {
+            $view[] = 'header';
+            $view[] = 'footer';
         }
-        $this->HTTPResponse()->sendHTTP();
+
+        foreach($view as $pageName) {
+            $getView = $this->getController($pageName)->getView();
+            if($getView) {
+                $this->setContent($pageName,  $getView);
+            } else {
+                return false;
+            }
+        }
+        
+        $this->httpResponse()->sendHttp();
 
     }
 

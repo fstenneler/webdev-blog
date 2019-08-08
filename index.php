@@ -17,7 +17,7 @@ if(isset($_GET['zone'])) {
 }
 
 $page = 'home'; //page par défaut
-if($zone == 'backend') {
+if($zone === 'backend') {
     $page = 'post';
 }
 

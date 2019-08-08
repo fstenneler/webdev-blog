@@ -5,7 +5,7 @@
     <!--- basic page needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Blog FS</title>
+    <title>WebDev Blog</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -50,7 +50,7 @@
 
     <!-- s-content
     ================================================== -->
-    <?= $this->app()->getContent('mainContent'); ?>
+    <?= $this->app()->getContent($this->app()->getPageName()); ?>
 
 
     <!-- s-footer

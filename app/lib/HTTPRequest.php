@@ -2,50 +2,88 @@
 
 namespace app\lib;
  
-class HTTPRequest extends ApplicationComponent
+class HttpRequest extends ApplicationComponent
 {
   public function cookieData($key)
   {
-    return isset($_COOKIE[$key]) ? $_COOKIE[$key] : null;
+    $cookie = null;
+    if(isset($_COOKIE[$key])) {
+      $cookie = $_COOKIE[$key];
+    }
+    return $cookie;
   }
  
   public function cookieExists($key)
   {
-    return isset($_COOKIE[$key]);
+    if(isset($_COOKIE[$key])) {
+      return true;
+    }
+    return false;
   }
  
   public function getData($key)
   {
-    return isset($_GET[$key]) ? $_GET[$key] : null;
+    $get = null;
+    if(isset($_GET[$key])) {
+      $get = $_GET[$key];
+    }
+    return $get;
   }
  
   public function getExists($key)
   {
-    return isset($_GET[$key]);
-  }
- 
-  public function method()
-  {
-    return $_SERVER['REQUEST_METHOD'];
+    if(isset($_GET[$key])) {
+      return true;
+    }
+    return false;
   }
  
   public function postData($key)
   {
-    return isset($_POST[$key]) ? $_POST[$key] : null;
+    $post = null;
+    if(isset($_POST[$key])) {
+      $post = $_POST[$key];
+    }
+    return $post;
   }
  
   public function postExists($key)
   {
-    return isset($_POST[$key]);
+    if(isset($_POST[$key])) {
+      return true;
+    }
+    return false;
   }
   
   public function getSession($key)
   {
-    return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
+    $session = null;
+    if(isset($_SESSION[$key])) {
+      $session = $_SESSION[$key];
+    }
+    return $session;
+  }
+  
+  public function sessionExists($key)
+  {
+    if(isset($_SESSION[$key])) {
+      return true;
+    }
+    return false;
+  }
+  
+  public function setSession($key, $value)
+  {
+    if($key === null) {
+      $_SESSION = $value;
+      return;
+    }
+    $_SESSION[$key] = $value;
   }
 
   public function requestURI()
   {
-    return $_SERVER['REQUEST_URI'];
+    $requestUri = $_SERVER['REQUEST_URI'];
+    return $requestUri;
   }
 }

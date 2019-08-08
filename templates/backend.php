@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Dashboard</title>
+  <title>WebDev Blog - Admin</title>
 
   <!-- Custom fonts for this template-->
   <link href="../public/backend/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -43,7 +43,7 @@
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        <?= $this->app()->getContent('mainContent'); ?>
+        <?= $this->app()->getContent($this->app()->getPageName()); ?>
         <!-- /.container-fluid -->
 
       </div>

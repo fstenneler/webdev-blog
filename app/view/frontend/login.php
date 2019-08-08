@@ -13,7 +13,7 @@
                 <fieldset>
 
                     <div>
-                        <input name="cEmail" id="cEmail" class="full-width" placeholder="Your Email*" value="<?= $this->app()->getData('email'); ?>" type="email">
+                        <input name="cEmail" id="cEmail" class="full-width" placeholder="Your Email*" value="<?= htmlspecialchars($this->app()->getData('email')); ?>" type="email">
                     </div>
 
                     <div class="form-field">

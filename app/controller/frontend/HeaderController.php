@@ -11,19 +11,21 @@ class HeaderController extends ControllerApp
     {
 
         //infos user
-        $this->app()->setData('user', $this->app()->HTTPRequest()->getSession('user'));
+        if($this->app()->user()->isAuthenticated()) {
+            $this->app()->setData('user', $this->app()->httpRequest()->getSession('user'));
 
-        $this->app()->setData('avatar', array(
-            'firstLetter' => strtoupper(substr($this->app()->HTTPRequest()->getSession('user')->nickname,0,1)),
-            'color' => $this->app()->HTTPRequest()->getSession('user')->avatar
-        ));
+            $this->app()->setData('avatar', array(
+                'firstLetter' => strtoupper(substr($this->app()->httpRequest()->getSession('user')->nickname,0,1)),
+                'color' => $this->app()->httpRequest()->getSession('user')->avatar
+            ));
+        }
 
         //Deconnexion
-        if($this->app()->HTTPRequest()->getData('action') == 'logout') {
+        if($this->app()->httpRequest()->getData('action') === 'logout') {
             $this->app()->user()->setDisconnection();
         }
 
-        return $this->app()->HTTPResponse()->generateView('header');
+        return $this->app()->httpResponse()->generateView('header');
 
     }
           

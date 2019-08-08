@@ -10,12 +10,12 @@ namespace app;
 class ClassAutoloader 
 {
 
-    static function register() 
+    public static function register() 
     {
         spl_autoload_register(array(__CLASS__,'autoload'));
     }
     
-    static function autoload($className) 
+    private static function autoload($className) 
     {
         $file = str_replace('\\', '/', $className). '.php'; //on remplace le namespace par le chemin de la classe
 

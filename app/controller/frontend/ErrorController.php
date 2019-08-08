@@ -7,10 +7,10 @@ use app\ControllerApp;
 class ErrorController extends ControllerApp
 {
 
-    public function getView($error = '404')
+    public function getView()
     {
 
-        return $this->app()->HTTPResponse()->generateView();
+        return $this->app()->httpResponse()->generateView();
         
     }
 

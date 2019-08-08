@@ -10,7 +10,7 @@ class FooterController extends ControllerApp
     public function getView()
     {
 
-        return $this->app()->HTTPResponse()->generateView('footer');
+        return $this->app()->httpResponse()->generateView('footer');
 
     }
           

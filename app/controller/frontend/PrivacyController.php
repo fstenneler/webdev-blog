@@ -10,7 +10,7 @@ class PrivacyController extends ControllerApp
     public function getView()
     {
 
-        return $this->app()->HTTPResponse()->generateView();
+        return $this->app()->httpResponse()->generateView();
 
     }
           

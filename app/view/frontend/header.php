@@ -23,16 +23,16 @@
         
         <!-- custom login modal -->
             <?php 
-            if($this->app()->user()->isAuthenticated() == true) {                
+            if($this->app()->user()->isAuthenticated()) {                
                 $avatar = $this->app()->getData('avatar');
             ?>
-                <div class="header__sign-in-trigger" style="background-color: <?= $avatar['color']; ?>"><?= $avatar['firstLetter']; ?></div>
+                <div class="header__sign-in-trigger header__sign-in-trigger-avatar" style="background-color: <?= $avatar['color']; ?>"><?= $avatar['firstLetter']; ?></div>
                 <ul id="header__connection_modal">
                     <li><a href="/index.php?page=account"><?= $this->app()->getData('user')->nickname; ?></a></li>
                     <li><a href="/index.php?action=logout">Se déconnecter</a></li>
                 </ul>
             <?php } else { ?>
-                <i class="header__sign-in-trigger fas fa-sign-in-alt"></i>
+                <i class="header__sign-in-trigger header__sign-in-trigger-normal fas fa-sign-in-alt"></i>
                 <ul id="header__connection_modal">
                     <li><a href="/index.php?page=login">Se connecter</a><br/><a href="/index.php?page=signup">S'inscrire</a></li>
                 </ul>

@@ -1,7 +1,7 @@
 <?php
 
 namespace app\model;
-use app\Database;
+use app\lib\Database;
 
 class UserModel 
 {

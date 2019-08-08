@@ -10,7 +10,7 @@ class NavbarController extends ControllerApp
     public function getView()
     {
 
-        return $this->app()->HTTPResponse()->generateView('navbar');
+        return $this->app()->httpResponse()->generateView('navbar');
 
     }
           

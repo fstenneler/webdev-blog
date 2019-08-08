@@ -10,14 +10,15 @@ class User extends ApplicationComponent
     public function setAuthentification($email = null, $password = null)
     {
 
-        if($email != null && $password != null) {
+        if($email !== null && $password !== null) {
 
             if(UserModel::getPassword($email) === $password) {
-                $_SESSION['authenticated'] = true;
-                $_SESSION['user'] = UserModel::getUser($email);
-                if($this->app()->HTTPRequest()->getSession('lastUrl')) {
-                    header('Location: ' . $this->app()->HTTPRequest()->getSession('lastUrl'));
-                    exit();
+                $this->app()->httpRequest()->setSession('authenticated', true);
+                $this->app()->httpRequest()->setSession('user', UserModel::getUser($email));
+                if($this->app()->httpRequest()->getSession('lastUrl')) {
+                    return $this->app()->route()->setRoute($this->app()->httpRequest()->getSession('lastUrl'));
+                } else{
+                    return $this->app()->route()->setRoute('/index.php?page=account');
                 }
             } else {
                 return false;
@@ -31,20 +32,17 @@ class User extends ApplicationComponent
     }
 
     public function setDisconnection() {
-        $lastUrl = $this->app()->HTTPRequest()->getSession('lastUrl');
-        $_SESSION = array();
-        $_SESSION['authenticated'] = false;
-        if($lastUrl != null) { echo $lastUrl;
-            header('Location: ' . $lastUrl);
-            exit();
-        }
+        $lastUrl = $this->app()->httpRequest()->getSession('lastUrl');
+        $this->app()->httpRequest()->setSession(null, array());
+        $this->app()->httpRequest()->setSession('authenticated', false);
+       return  $this->app()->route()->setRoute($lastUrl);
     }
 
     public function isAuthenticated() {
-        if(!isset($_SESSION['authenticated'])) {
-            $_SESSION['authenticated'] = false;
+        if($this->app()->httpRequest()->sessionExists('authenticated') === false) {
+            $this->app()->httpRequest()->setSession('authenticated', false);
         }
-        return $_SESSION['authenticated'];
+        return  $this->app()->httpRequest()->getSession('authenticated');
     }
 
 }
