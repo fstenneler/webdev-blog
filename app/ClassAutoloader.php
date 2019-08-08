@@ -13,11 +13,16 @@ class ClassAutoloader
     public static function register() 
     {
         spl_autoload_register(array(__CLASS__,'autoload'));
+        self::autoload();
     }
     
-    private static function autoload($className) 
+    private static function autoload($className = null) 
     {
-        $file = str_replace('\\', '/', $className). '.php'; //on remplace le namespace par le chemin de la classe
+        if($className === null) {
+            return false;
+        }
+
+        $file = str_replace('\\', '/', $className). '.php';
 
         if(file_exists($file)) {
             require $file; //on charge la classe
