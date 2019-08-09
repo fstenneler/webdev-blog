@@ -3,6 +3,7 @@
 namespace app\controller\frontend;
 
 use app\ControllerApp;
+use app\model\PostModel;
 
 class HeaderController extends ControllerApp
 {
@@ -13,17 +14,25 @@ class HeaderController extends ControllerApp
         //infos user
         if($this->app()->user()->isAuthenticated()) {
             $this->app()->setData('user', $this->app()->httpRequest()->getSession('user'));
-
-            $this->app()->setData('avatar', array(
-                'firstLetter' => strtoupper(substr($this->app()->httpRequest()->getSession('user')->nickname,0,1)),
-                'color' => $this->app()->httpRequest()->getSession('user')->avatar
-            ));
+            $this->app()->setData('avatarIcon', 
+                $this->generateAvatarIcon(
+                    $this->app()->httpRequest()->getSession('user')->avatar, 
+                    $this->app()->httpRequest()->getSession('user')->nickname
+                )
+            );
         }
 
         //Deconnexion
         if($this->app()->httpRequest()->getData('action') === 'logout') {
             $this->app()->user()->setDisconnection();
         }
+
+        //categoryList
+        $categoryList = PostModel::getCategoryList();
+        foreach($categoryList as $key => $category) {
+            $categoryList[$key]->url = $this->generatePostsUrl('posts', $category->id, 1, null);
+        }
+        $this->app()->setData('categoryList', $categoryList);
 
         return $this->app()->httpResponse()->generateView('header');
 

@@ -22,11 +22,8 @@
         </div>  <!-- end header__search -->
         
         <!-- custom login modal -->
-            <?php 
-            if($this->app()->user()->isAuthenticated()) {                
-                $avatar = $this->app()->getData('avatar');
-            ?>
-                <div class="header__sign-in-trigger header__sign-in-trigger-avatar" style="background-color: <?= $avatar['color']; ?>"><?= $avatar['firstLetter']; ?></div>
+            <?php if($this->app()->user()->isAuthenticated()) { ?>
+                <div class="header__sign-in-trigger header__sign-in-trigger-avatar"><?= $this->app()->getData('avatarIcon'); ?></div>
                 <ul id="header__connection_modal">
                     <li><a href="/index.php?page=account"><?= $this->app()->getData('user')->nickname; ?></a></li>
                     <li><a href="/index.php?action=logout">Se déconnecter</a></li>
@@ -49,12 +46,9 @@
                 <li class="has-children">
                     <a href="#0" title="">Categories</a>
                     <ul class="sub-menu">
-                        <li><a href="index.php?page=posts">Lifestyle</a></li>
-                        <li><a href="index.php?page=posts">Health</a></li>
-                        <li><a href="index.php?page=posts">Family</a></li>
-                        <li><a href="index.php?page=posts">Management</a></li>
-                        <li><a href="index.php?page=posts">Travel</a></li>
-                        <li><a href="index.php?page=posts">Work</a></li>
+                        <?php foreach($this->app()->getData('categoryList') as $category) { ?>
+                        <li><a href="<?= htmlspecialchars($category->url); ?>"><?= $category->name; ?></a></li>
+                        <?php } ?>
                     </ul>
                 </li>
                 <li><a href="/index.php?page=about" title="">&Agrave; propos</a></li>

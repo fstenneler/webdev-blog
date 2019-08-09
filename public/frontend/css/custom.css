@@ -18,6 +18,13 @@
 }
 
 .header__sign-in-trigger-avatar {
+  position: absolute;
+  top: 31%;
+  right: 30px;
+  cursor: pointer;
+}
+
+.user-avatar-icon {
   width: 32px;
   height: 32px;
   border-radius: 3px;
@@ -25,12 +32,7 @@
   font-size: 19px;
   color: white;
   font-weight: 600;
-  position: absolute;
-  top: 31%;
-  right: 30px;
-  cursor: pointer;
 }
-
 
 @media only screen and (max-width:600px) {
 
@@ -94,10 +96,27 @@
     color: white;
   }
 
-  .comment ul.children li {
-    padding-top: calc(3rem + 1.8rem);
-    margin-top: -3rem;
+  .commentlist .depth-1 {
+    margin-top: 1rem;
   }
+
+  .comment ul.children li {
+    margin-top: 3rem;
+  }
+
+.comment-reply-link {
+  font-size: 1.3rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .2rem;
+  color: #000000;
+  cursor: pointer;
+}
+
+.comment-reply-form {
+  display: auto;
+}
 
 .existing-account {
   text-align: center;
@@ -139,3 +158,12 @@
   border: 2px solid black;
 }
 
+.entry__author-icon {
+  margin: 0 !important;
+  width: 6.9rem;
+  height: 6.9rem;
+  border-radius: 50%;
+  position: absolute;
+  left: 6.5rem;
+  top: 5.2rem;
+}

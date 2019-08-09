@@ -28,4 +28,9 @@
         }
     });
 
+    $('.comment-reply-link').click(function() {
+        var commentId = $(this).data('commentId');
+        $('#comment-reply-form-' + commentId).toggle('fast');
+    });
+
 })(jQuery);
