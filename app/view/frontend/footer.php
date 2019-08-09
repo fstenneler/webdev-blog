@@ -41,11 +41,11 @@
                         <h3>Plan du site</h3>
         
                         <ul class="linklist">
-                            <li><a href="/">Accueil</a></li>
-                            <li><a href="/index.php?page=about">&Agrave; propos</a></li>
-                            <li><a href="/index.php?page=contact">Contact</a></li>
-                            <li><a href="/index.php?page=privacy">Protection des données</a></li>
-                            <li><a href="/admin/">Admin</a></li>
+                            <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'home')); ?>">Accueil</a></li>
+                            <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'about')); ?>">&Agrave; propos</a></li>
+                            <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'contact')); ?>">Contact</a></li>
+                            <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'privacy')); ?>">Protection des données</a></li>
+                            <li><a href="<?= $this->app()->route()->setUrl(array('zone' => 'backend')); ?>">Admin</a></li>
                         </ul>
                     </div> <!-- end sitelinks -->
                 </div>

@@ -12,7 +12,7 @@ class TopbarController extends ControllerApp
         
         if($this->app()->httpRequest()->getData('logout') === 'true') {
             $this->app()->user()->setDisconnection();
-            return $this->app()->route()->setRoute('/index.php?page=login');
+            return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('zone' => 'frontend', 'page' => 'login')));
         }
 
         $this->app()->setData('avatar', array(

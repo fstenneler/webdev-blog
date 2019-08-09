@@ -29,7 +29,7 @@
     });
 
     $('.comment-reply-link').click(function() {
-        var commentId = $(this).data('commentId');
+        var commentId = $(this).data('comment-id');
         $('#comment-reply-form-' + commentId).toggle('fast');
     });
 

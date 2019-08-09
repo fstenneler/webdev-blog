@@ -18,7 +18,7 @@
                     <li class="date"><?= $this->app()->getData('post')->creation_date; ?></li>
                     <li class="byline">par <?= $this->app()->getData('post')->user_nickname; ?></li>
                     <?php if($this->app()->getData('post')->last_modification_date !== null) { ?>
-                        <li class="date">modifié le <?= $this->app()->getData('post')->last_modification_date; ?></li>
+                        <li class="date">modifiÃ© le <?= $this->app()->getData('post')->last_modification_date; ?></li>
                     <?php } ?>
                 </ul>
             </div>
@@ -41,7 +41,7 @@
 
                     <div class="entry__author-about">
                         <h5 class="entry__author-name">
-                            <span>Posté par</span>
+                            <span>PostÃ© par</span>
                             <?= $this->app()->getData('post')->user_nickname; ?>
                         </h5>
 
@@ -65,12 +65,21 @@
                     <h3 class="h2"><?= $this->app()->getData('CommentNumberText'); ?></h3>
 
                     <!-- START commentlist -->
+                    <?php 
+                    if(count($this->app()->getData('commentList')) > 0) { 
+                        $commentList = $this->app()->getData('commentList');
+                    ?>
+
+                    <!-- liste des commentaires -->
                     <ol class="commentlist">
 
-                        <?php foreach($this->app()->getData('commentList')[0] as $commentLevel1) { ?>
+                        <?php foreach($commentList[0] as $commentLevel1) { ?>
+                            
 
+                            <!-- bloc commentaire level 1 (index 0) -->
                             <li class="thread-alt depth-1 comment">
-
+                                
+                                <!-- commentaire -->
                                 <div class="comment__avatar">
                                     <?= $commentLevel1->user_avatar_icon; ?>
                                 </div>
@@ -82,9 +91,9 @@
 
                                         <div class="comment__meta">
                                             <div class="comment__time"><?= $commentLevel1->comment_date; ?></div>
-                                            <?php if(!isset($this->app()->getData('commentList')[$commentLevel1->id])) { ?>
+                                            <?php if(!isset($commentList[$commentLevel1->id])) { ?>
                                             <div class="comment__reply">
-                                                <span class="comment-reply-link">Reply</span>
+                                                <span class="comment-reply-link" data-comment-id="<?= $commentLevel1->id; ?>">Répondre</span>
                                             </div>
                                             <?php } ?>
                                         </div>
@@ -95,14 +104,17 @@
                                     </div>
 
                                 </div>
+                                <!-- fin commentaire -->
 
+                                <!-- liste des réponses au commentaire -->
                                 <ul class="children">
 
                                     <?php 
-                                    if(isset($this->app()->getData('commentList')[$commentLevel1->id])) {
-                                        foreach($this->app()->getData('commentList')[$commentLevel1->id] as $key => $commentLevel2) { 
+                                    if(isset($commentList[$commentLevel1->id])) {
+                                        foreach($commentList[$commentLevel1->id] as $key => $commentLevel2) { 
                                     ?>
 
+                                    <!-- réponse au commentaire -->
                                     <li class="depth-2 comment">
 
                                         <div class="comment__avatar">
@@ -116,9 +128,9 @@
 
                                                 <div class="comment__meta">
                                                     <div class="comment__time"><?= $commentLevel2->comment_date; ?></div>
-                                                    <?php if(!isset($this->app()->getData('commentList')[$commentLevel1->id][$key + 1])) { ?>
+                                                    <?php if(!isset($commentList[$commentLevel1->id][$key + 1])) { ?>
                                                     <div class="comment__reply">
-                                                        <span class="comment-reply-link" data-commentId="<?= $commentLevel1->id; ?>">Reply</span>
+                                                        <span class="comment-reply-link" data-comment-id="<?= $commentLevel1->id; ?>">Répondre</span>
                                                     </div>
                                                     <?php } ?>
                                                 </div>
@@ -131,64 +143,81 @@
                                         </div>
 
                                     </li>
+                                    <!-- fin réponse -->
 
                                     <?php 
                                         }                                    
                                     } 
                                     ?>
 
+                                    <!-- formulaire de réponse au commentaire -->
                                     <li class="comment-reply-form" id="comment-reply-form-<?= $commentLevel1->id; ?>">
                                         <div class="comment__content">
                                             <div class="comment__info">
-                                                <div class="comment__author">Your Reply :</div>
+                                                <div class="comment__author">Votre réponse :</div>
                                             </div>
-                                            <form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
+
+                                            <?php if($this->app()->user()->isAuthenticated()) { ?>
+                                            <form name="contactForm" method="post" action="" autocomplete="off">
                                                 <fieldset>
 
                                                     <div class="message form-field">
-                                                        <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Message*"></textarea>
+                                                        <textarea name="cMessage" class="full-width" placeholder="Message*"></textarea>
                                                     </div>
 
-                                                    <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Add Comment" type="submit">
+                                                    <input name="submit" class="btn btn--primary btn-wide btn--large full-width" value="Répondre" type="submit">
 
                                                 </fieldset>
-                                            </form> <!-- end form -->
+                                            </form>
+                                            <?php } else { ?>
+                                                <div class="message-comment-connected-reply">Vous devez être <a href="/index.php?page=login">connecté</a> pour répondre.</div>
+                                            <?php } ?>
                                         </div>
                                     </li>
+                                    <!-- fin formulaire de réponse au commentaire -->
                                         
                                 </ul>
+                                <!-- fin liste des réponses -->
 
-                            </li> <!-- end comment level 1 -->
+                            </li>
+                            <!-- fin bloc commentaire level 1 (index 0) -->
 
                         <?php } ?>
 
                     </ol>
-                    <!-- END commentlist -->           
+                    <!-- fin liste des commentaires -->
+
+                    <?php } ?>
 
                 </div> <!-- end col-full -->
             </div> <!-- end comments -->
 
             <div class="row comment-respond">
 
-                <!-- START respond -->
+                <!-- Ajouter un nouveau commentaire -->
+                
                 <div id="respond" class="col-full">
 
-                    <h3 class="h2">Add Comment</h3>
-
+                    <h3 class="h2">Laisser un commentaire</h3>
+                    
+                    <?php if($this->app()->user()->isAuthenticated()) { ?>
                     <form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
                         <fieldset>
 
                             <div class="message form-field">
-                                <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Your Message*"></textarea>
+                                <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Message*"></textarea>
                             </div>
 
-                            <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Add Comment" type="submit">
+                            <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Laisser un commentaire" type="submit">
 
                         </fieldset>
                     </form> <!-- end form -->
-
+                    <?php } else { ?>
+                        <div class="message-comment-connected">Vous devez être <a href="/index.php?page=login">connecté</a> pour laisser un commentaire.</div>
+                    <?php } ?>
                 </div>
-                <!-- END respond-->
+                
+                <!-- Fin ajouter un nouveau commentaire-->
 
             </div> <!-- end comment-respond -->
 

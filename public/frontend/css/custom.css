@@ -167,3 +167,16 @@
   left: 6.5rem;
   top: 5.2rem;
 }
+
+.comment-reply-form {
+  display: none;
+}
+
+.message-comment-connected-reply {
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.message-comment-connected {
+  text-align: center;
+}

@@ -29,7 +29,7 @@
                 </fieldset>
             </form>
 
-            <div class='existing-account'>Pas encore inscrit ? <a href="/index.php?page=signup">Cliquez ici</a> pour créer un nouveau compte</div>
+            <div class='existing-account'>Pas encore inscrit ? <a href="<?= $this->app()->route()->setUrl(array('page' => 'signup')); ?>">Cliquez ici</a> pour créer un nouveau compte</div>
 
         </div>
     </div>

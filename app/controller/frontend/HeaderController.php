@@ -30,7 +30,7 @@ class HeaderController extends ControllerApp
         //categoryList
         $categoryList = PostModel::getCategoryList();
         foreach($categoryList as $key => $category) {
-            $categoryList[$key]->url = $this->generatePostsUrl('posts', $category->id, 1, null);
+            $categoryList[$key]->url = $this->app()->route()->setUrl(array('page' => 'posts', 'categoryid' => $category->id));
         }
         $this->app()->setData('categoryList', $categoryList);
 

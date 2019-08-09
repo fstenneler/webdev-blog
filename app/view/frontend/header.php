@@ -25,13 +25,16 @@
             <?php if($this->app()->user()->isAuthenticated()) { ?>
                 <div class="header__sign-in-trigger header__sign-in-trigger-avatar"><?= $this->app()->getData('avatarIcon'); ?></div>
                 <ul id="header__connection_modal">
-                    <li><a href="/index.php?page=account"><?= $this->app()->getData('user')->nickname; ?></a></li>
-                    <li><a href="/index.php?action=logout">Se déconnecter</a></li>
+                    <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'account')); ?>"><?= $this->app()->getData('user')->nickname; ?></a></li>
+                    <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'account', 'action' => 'logout')); ?>">Se déconnecter</a></li>
                 </ul>
             <?php } else { ?>
                 <i class="header__sign-in-trigger header__sign-in-trigger-normal fas fa-sign-in-alt"></i>
                 <ul id="header__connection_modal">
-                    <li><a href="/index.php?page=login">Se connecter</a><br/><a href="/index.php?page=signup">S'inscrire</a></li>
+                    <li>
+                    <a href="<?= $this->app()->route()->setUrl(array('page' => 'login')); ?>">Se connecter</a><br/>
+                    <a href="<?= $this->app()->route()->setUrl(array('page' => 'signup')); ?>">S'inscrire</a>
+                    </li>
                 </ul>
            <?php } ?>
          <!-- end custom login modal -->
@@ -42,7 +45,7 @@
             <h2 class="header__nav-heading h6">Navigate to</h2>
 
             <ul class="header__nav">
-                <li class="current"><a href="/" title="">Accueil</a></li>
+                <li class="current"><a href="<?= $this->app()->route()->setUrl(array('page' => 'home')); ?>" title="">Accueil</a></li>
                 <li class="has-children">
                     <a href="#0" title="">Categories</a>
                     <ul class="sub-menu">
@@ -51,9 +54,9 @@
                         <?php } ?>
                     </ul>
                 </li>
-                <li><a href="/index.php?page=about" title="">&Agrave; propos</a></li>
-                <li><a href="/index.php?page=contact" title="">Contact</a></li>
-                <li><a href="cv.pdf" title="">MON CV</a></li>
+                <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'about')); ?>" title="">&Agrave; propos</a></li>
+                <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'contact')); ?>" title="">Contact</a></li>
+                <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'cv')); ?>" title="">MON CV</a></li>
             </ul> <!-- end header__nav -->
 
             <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>

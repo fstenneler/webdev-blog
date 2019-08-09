@@ -16,7 +16,7 @@ class ViewpostController extends ControllerApp
 
         //redirection
         if($postList === false) {
-            return $this->app()->route()->setRoute('index.php?page=error');
+            return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'error')));
         }
 
         //post infos
@@ -30,7 +30,7 @@ class ViewpostController extends ControllerApp
         } elseif(count($commentList) == 1) {
             $CommentNumberText = '1 commentaire';
         } else {
-            $CommentNumberText = 'Aucun commentaire déposé pour le moment.';
+            $CommentNumberText = 'Aucun commentaire dÃ©posÃ© pour le moment.';
         }
         foreach($commentList as $i => $comment) {
             $commentList[$i]->comment_date = $this->generateFrenchDate($comment->comment_date);
@@ -44,6 +44,8 @@ class ViewpostController extends ControllerApp
     
         $this->app()->setData('CommentNumberText', $CommentNumberText);
         $this->app()->setData('commentList', $commentListGroup);
+
+        //var_dump( $commentListGroup); die();
 
         return $this->app()->httpResponse()->generateView();
 

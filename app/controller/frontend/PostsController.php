@@ -14,7 +14,7 @@ class PostsController extends ControllerApp
 
         //Test existance catégorie
         if(PostModel::categoryExists($this->app()->httpRequest()->getData('categoryId')) === false) {
-            return $this->app()->route()->setRoute('index.php?page=error');
+            return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'error')));
         }
 
         //categoryName
