@@ -6,30 +6,19 @@ use app\lib\Database;
 class PostModel 
 {
 
+    public static function getParam($param, $key, $default) {
+        return isset($param[$key]) ? $param[$key] : $default;
+    }
+
+
     public static function getPost($param)
     {
 
-        $postId = 0;
-        $start = 0;
-        $number = POST_NUMBER;
-        $categoryId = 0;
-        $isHero = 0;
-
-        if(isset($param['postId'])) {
-            $postId = $param['postId'];
-        }
-        if(isset($param['start'])) {
-            $start = $param['start'];
-        }
-        if(isset($param['number'])) {
-            $number = $param['number'];
-        }
-        if(isset($param['categoryId'])) {
-            $categoryId = $param['categoryId'];
-        }
-        if(isset($param['isHero'])) {
-            $isHero = $param['isHero'];
-        }
+        $postId = self::getParam($param, 'postId', 0);
+        $categoryId = self::getParam($param, 'categoryId', 0);
+        $isHero = self::getParam($param, 'isHero', 0);
+        $start = self::getParam($param, 'start', 0);
+        $number = self::getParam($param, 'number', POST_NUMBER);
 
         $db = new Database();
 
@@ -57,7 +46,7 @@ class PostModel
         
         if($postId > 0) {
             $query .= '
-        WHERE post.id = ?';
+        WHERE post.id = :post_id';
         } else {
             $query .= '
         WHERE post.id > 0';
@@ -65,7 +54,7 @@ class PostModel
 
         if($categoryId > 0) {
             $query .= '
-        AND post.category_id = ?';
+        AND post.category_id = :category_id';
         }
 
         if($isHero === 1) {
@@ -78,20 +67,22 @@ class PostModel
 
         if($number > 0 && $postId == 0) {
             $query .= '
-        LIMIT ' . $start . ', ' . $number;
+        LIMIT :start, :number';
         }
 
-        //echo "<pre>"; print_r($query); echo "</pre>"; exit();
-
-        $values = array();
+        $attributes = array();
         if($postId > 0) {
-            $values[] = $postId;
+            $attributes['post_id'] = $postId;
         }
         if($categoryId > 0) {
-            $values[] = $categoryId;
+            $attributes['category_id'] = $categoryId;
+        }
+        if($number > 0 && $postId == 0) {
+            $attributes['start'] = $start;
+            $attributes['number'] = $number;
         }
 
-        $result = $db->prepare($query, $values);
+        $result = $db->prepare($query, $attributes, true);
 
         if(count($result) > 0) {
             return $result;
@@ -189,6 +180,29 @@ class PostModel
             return $result[0]->value;
         }
         return false;
+
+    }
+
+    public static function getCategoryByName($categoryName)
+    {
+
+        $db = new Database();
+
+        $query = '
+        SELECT 
+
+        id
+
+        FROM category
+
+        WHERE id = ?';
+
+        $result = $db->prepare($query, array($categoryName));
+
+        if($result[0]->value > 0) {
+            return $result[0]->value;
+        }
+        return 0;
 
     }
 

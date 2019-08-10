@@ -23,11 +23,20 @@ class Database
 
     }
 
-    public function prepare($query, $attributes) 
+    public function prepare($query, $attributes, $bindValue = false) 
     {
 
         $req = $this->getPDO()->prepare($query);
-        $req->execute($attributes);
+
+        if($bindValue) {
+            foreach($attributes as $key => $value) {
+                $req->bindValue(':' .$key, $value, PDO::PARAM_INT);
+            }
+            $req->execute();
+        } else {
+            $req->execute($attributes);
+        }
+
         $req->setFetchMode(PDO::FETCH_OBJ);
         return $req->fetchAll();
 

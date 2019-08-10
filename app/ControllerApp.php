@@ -75,7 +75,7 @@ class ControllerApp
          $pagination['nextPageUrl'] = $this->app()->route()->setUrl($parameters);
       } else {
          $parameters['currentPage'] = $pagination['pageNumber'];
-         $pagination['nextPageUrl'] = $this->app()->route()->setUrl($parameter);
+         $pagination['nextPageUrl'] = $this->app()->route()->setUrl($parameters);
       }
 
       return $pagination;
