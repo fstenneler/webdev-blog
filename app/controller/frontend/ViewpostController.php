@@ -45,8 +45,6 @@ class ViewpostController extends ControllerApp
         $this->app()->setData('CommentNumberText', $CommentNumberText);
         $this->app()->setData('commentList', $commentListGroup);
 
-        //var_dump( $commentListGroup); die();
-
         return $this->app()->httpResponse()->generateView();
 
     }

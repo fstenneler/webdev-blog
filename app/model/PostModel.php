@@ -160,7 +160,7 @@ class PostModel
 
     }
 
-    public static function CategoryExists($categoryId = 0)
+    public static function categoryExists($categoryId = 0)
     {
 
         $db = new Database();
