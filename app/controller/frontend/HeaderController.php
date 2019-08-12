@@ -3,7 +3,7 @@
 namespace app\controller\frontend;
 
 use app\ControllerApp;
-use app\model\PostModel;
+use app\model\CategoryModel;
 
 class HeaderController extends ControllerApp
 {
@@ -28,7 +28,7 @@ class HeaderController extends ControllerApp
         }
 
         //categoryList
-        $categoryList = PostModel::getCategoryList();
+        $categoryList = CategoryModel::getCategoryList();
         foreach($categoryList as $key => $category) {
             $categoryList[$key]->url = $this->app()->route()->setUrl(array('page' => 'posts', 'categoryId' => $category->id));
         }

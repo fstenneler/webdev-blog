@@ -1,4 +1,4 @@
-.avatar-icon {
+.user-avatar-icon {
     width: 32px;
     height: 30px;
     border-radius: 3px;
@@ -8,6 +8,8 @@
     color: white;
     font-family: "Nunito Sans", sans-serif;
     padding-top: 2px;
+    display: inline-block;
+    margin-right: 10px;
 }
 
 .stripe a {
@@ -31,7 +33,11 @@ form.user .form-control-image {
 }
  
 form.user .form-control-image-thumb {
-    width: 100%;
+    max-width: 100%;
+}
+
+.form-control-image-label {
+    display: block;
 }
 
 form.user select.form-control-user {
@@ -74,15 +80,15 @@ form.user .btn-user {
     border: 2px solid black !important;
   }
 
-.comment-status-waiting {
+.comment-status-att {
     color: #17a2b8 !important;
 }
 
-.comment-status-validated {
+.comment-status-val {
     color: #28a745 !important;
 }
 
-.comment-status-refused {
+.comment-status-ref {
     color: #dc3545 !important;
 }
 
@@ -116,6 +122,10 @@ form.user .btn-user {
     margin-right: 0.5rem;
 }
 
+.postlist-comment-link {
+    color: #4e73df !important;
+}
+
 
 /* richtext custom style */
 .richText {
@@ -124,4 +134,8 @@ form.user .btn-user {
 
 .richText .richText-editor {
     height: 30rem !important;
+}
+
+.topbar .dropdown-list .dropdown-item {
+    line-height: inherit !important;
 }

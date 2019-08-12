@@ -5,6 +5,7 @@ namespace app\controller\frontend;
 use app\ControllerApp;
 use app\controller\frontend\ErrorController;
 use app\model\PostModel;
+use app\model\CategoryModel;
 
 class PostsController extends ControllerApp
 {
@@ -13,12 +14,12 @@ class PostsController extends ControllerApp
     {
 
         //Test existance catégorie
-        if(PostModel::categoryExists($this->app()->httpRequest()->getData('categoryId')) === false) {
+        if(CategoryModel::categoryExists($this->app()->httpRequest()->getData('categoryId')) === false) {
             return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'error')));
         }
 
         //categoryName
-        $this->app()->setData('categoryName', PostModel::getCategoryName($this->app()->httpRequest()->getData('categoryId')));
+        $this->app()->setData('categoryName', CategoryModel::getCategoryName($this->app()->httpRequest()->getData('categoryId')));
 
         //postList
         $pagination = $this->generatePagination($this->app()->httpRequest()->getData('categoryId'));

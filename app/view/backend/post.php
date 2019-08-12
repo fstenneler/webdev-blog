@@ -16,6 +16,7 @@
                   <thead>
                     <tr>
                       <th></th>
+                      <th>Id</th>
                       <th>Titre</th>
                       <th>Création</th>
                       <th>Dernière modification</th>
@@ -28,6 +29,7 @@
                   <tfoot>
                     <tr>
                       <th></th>
+                      <th>Id</th>
                       <th>Titre</th>
                       <th>Création</th>
                       <th>Dernière modification</th>
@@ -38,86 +40,27 @@
                     </tr>
                   </tfoot>
                   <tbody>
+                    <?php foreach($this->app()->getData('postList') as $post) { ?>
                     <tr>
                       <td><input type="checkbox"></td>
-                      <td><a href="index.php?page=post&action=update&postId=1"><a href="index.php?page=post&action=update&postId=1">3 Benefits of Minimalism In Interior Design</a></a></td>
-                      <td>2019-04-09</td>
-                      <td>2019-04-10</td>
-                      <td>FabienS</td>
-                      <td></td>
-                      <td>Actualités</td>
-                      <td>5</td>
+                      <td><?= $post->post_id; ?></td>
+                      <td><a href="index.php?page=post&action=update&postId=<?= htmlspecialchars($post->post_id); ?>"><?= $post->title; ?></a></td>
+                      <td><?= $post->creation_date; ?></td>
+                      <td><?= $post->last_modification_date; ?></td>
+                      <td><?= $post->user_nickname; ?></td>
+                      <td>
+                        <?php if($post->is_hero > 0) { ?>oui<?php } ?>
+                      </td>
+                      <td><?= $post->category_name; ?></td>
+                      <td>
+                        <?php if($post->comment_number > 0) { ?>
+                          <a class="postlist-comment-link" href="index.php?page=comment&action=view&postId=<?= $post->post_id; ?>"><?= $post->comment_number; ?></a>
+                        <?php } else { ?>
+                          <?= $post->comment_number; ?>
+                        <?php } ?>
+                      </td>
                     </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                      <td><a href="index.php?page=post&action=update&postId=1">3 Benefits of Minimalism In Interior Design</a></td>
-                      <td>2019-04-09</td>
-                      <td>2019-04-10</td>
-                      <td>FabienS</td>
-                      <td></td>
-                      <td>Actualités</td>
-                      <td>5</td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                      <td><a href="index.php?page=post&action=update&postId=1">3 Benefits of Minimalism In Interior Design</a></td>
-                      <td>2019-04-09</td>
-                      <td>2019-04-10</td>
-                      <td>FabienS</td>
-                      <td></td>
-                      <td>Actualités</td>
-                      <td>5</td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                      <td><a href="index.php?page=post&action=update&postId=1">3 Benefits of Minimalism In Interior Design</a></td>
-                      <td>2019-04-09</td>
-                      <td>2019-04-10</td>
-                      <td>FabienS</td>
-                      <td><i class="fas fa-check-square"></i></td>
-                      <td>Actualités</td>
-                      <td>5</td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                      <td><a href="index.php?page=post&action=update&postId=1">3 Benefits of Minimalism In Interior Design</a></td>
-                      <td>2019-04-09</td>
-                      <td>2019-04-10</td>
-                      <td>FabienS</td>
-                      <td></td>
-                      <td>Actualités</td>
-                      <td>5</td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                      <td><a href="index.php?page=post&action=update&postId=1">3 Benefits of Minimalism In Interior Design</a></td>
-                      <td>2019-04-09</td>
-                      <td>2019-04-10</td>
-                      <td>FabienS</td>
-                      <td><i class="fas fa-check-square"></i></td>
-                      <td>Actualités</td>
-                      <td>5</td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                      <td><a href="index.php?page=post&action=update&postId=1">3 Benefits of Minimalism In Interior Design</a></td>
-                      <td>2019-04-09</td>
-                      <td>2019-04-10</td>
-                      <td>FabienS</td>
-                      <td><i class="fas fa-check-square"></i></td>
-                      <td>Actualités</td>
-                      <td>5</td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                      <td><a href="index.php?page=post&action=update&postId=1">3 Benefits of Minimalism In Interior Design</a></td>
-                      <td>2019-04-09</td>
-                      <td>2019-04-10</td>
-                      <td>FabienS</td>
-                      <td></td>
-                      <td>Actualités</td>
-                      <td>5</td>
-                    </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
                 Lignes sélectionnées : <button type="button" class="btn btn-secondary">Supprimer</button>

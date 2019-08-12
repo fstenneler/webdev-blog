@@ -35,33 +35,18 @@
                     </tr>
                   </tfoot>
                   <tbody>
+
+                    <?php foreach($this->app()->getData('contactList') as $contact) { ?>
                     <tr>
                       <td><input type="checkbox"></td>
-                      <td><i class="fas fa-circle comment-status-waiting"></i></td>
-                      <td>visitor@orlinstreet.rocks</td>
-                      <td>Smith</td>
-                      <td>John</td>
-                      <td>2019-06-28</td>
-                      <td><a href="index.php?page=contact&action=view&contactId=1" class="comment-status-waiting">Alias aperiam at debitis deserunt dignissimos dolorem doloribus</a></td>
+                      <td><?php if($contact->message_read == 0) { ?><i class="fas fa-circle comment-status-att"></i><?php } ?></td>
+                      <td><?= $contact->email; ?></td>
+                      <td><?= $contact->name; ?></td>
+                      <td><?= $contact->first_name; ?></td>
+                      <td><?= $contact->date; ?></td>
+                      <td><a href="index.php?page=contact&action=view&contactId=<?= $contact->id; ?>" class="comment-status-waiting"><?= $contact->subject; ?></a></td>
                     </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                      <td></td>
-                      <td>visitor@orlinstreet.rocks</td>
-                      <td>Smith</td>
-                      <td>John</td>
-                      <td>2019-06-28</td>
-                      <td><a href="index.php?page=contact&action=view&contactId=1">Alias aperiam at debitis deserunt dignissimos dolorem doloribus</a></td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                      <td></td>
-                      <td>visitor@orlinstreet.rocks</td>
-                      <td>Smith</td>
-                      <td>John</td>
-                      <td>2019-06-28</td>
-                      <td><a href="index.php?page=contact&action=view&contactId=1">Alias aperiam at debitis deserunt dignissimos dolorem doloribus</a></td>
-                    </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
                 Lignes sélectionnées : <button type="button" class="btn btn-secondary">Supprimer</button>

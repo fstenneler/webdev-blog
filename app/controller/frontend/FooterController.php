@@ -4,6 +4,7 @@ namespace app\controller\frontend;
 
 use app\ControllerApp;
 use app\model\PostModel;
+use app\model\CategoryModel;
 
 class FooterController extends ControllerApp
 {
@@ -16,7 +17,7 @@ class FooterController extends ControllerApp
         $this->app()->setData('popularPostList', $postList);
 
         //categoryList
-        $categoryList = PostModel::getCategoryList();
+        $categoryList = CategoryModel::getCategoryList();
         foreach($categoryList as $key => $category) {
             $categoryList[$key]->url = $this->app()->route()->setUrl(array('page' => 'posts', 'categoryId' => $category->id));
         }

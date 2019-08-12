@@ -16,58 +16,41 @@
                   <thead>
                     <tr>
                       <th></th>
+                      <th>Id</th>
                       <th>Pseudo</th>
                       <th>Nom</th>
                       <th>Prénom</th>
                       <th>E-mail</th>
                       <th>Rôle</th>
-                      <th>Avatar</th>
                       <th>Date d'inscription</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th></th>
+                      <th>Id</th>
                       <th>Pseudo</th>
                       <th>Nom</th>
                       <th>Prénom</th>
                       <th>E-mail</th>
                       <th>Rôle</th>
-                      <th>Avatar</th>
                       <th>Date d'inscription</th>
                     </tr>
                   </tfoot>
                   <tbody>
+
+                    <?php foreach($this->app()->getData('userList') as $user) { ?>
                     <tr>
                       <td><input type="checkbox"></td>
-                      <td><a href="index.php?page=user&action=update&userId=1">FabienS</a></td>
-                      <td>Stenneler</td>
-                      <td>Fabien</td>
-                      <td>fabien.stenneler@gmail.com</td>
-                      <td>Administrateur</td>
-                      <td><div class="avatar-icon" style="background-color: #7D3C98;">F</div></td>
-                      <td>2019-07-09</td>
+                      <td><?= $user->id; ?></td>
+                      <td><a href="index.php?page=user&action=update&userId=<?= htmlspecialchars($user->id); ?>"><?= $user->avatarIcon; ?><?= $user->nickname; ?></a></td>
+                      <td><?= $user->name; ?></td>
+                      <td><?= $user->first_name; ?></td>
+                      <td><?= $user->email; ?></td>
+                      <td><?= $user->role; ?></td>
+                      <td><?= $user->registration_date; ?></td>
                     </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                      <td><a href="index.php?page=user&action=update&userId=1">FabienS</a></td>
-                      <td>Stenneler</td>
-                      <td>Fabien</td>
-                      <td>fabien.stenneler@gmail.com</td>
-                      <td>Administrateur</td>
-                      <td><div class="avatar-icon" style="background-color: #7D3C98;">F</div></td>
-                      <td>2019-07-09</td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                      <td><a href="index.php?page=user&action=update&userId=1">FabienS</a></td>
-                      <td>Stenneler</td>
-                      <td>Fabien</td>
-                      <td>fabien.stenneler@gmail.com</td>
-                      <td>Administrateur</td>
-                      <td><div class="avatar-icon" style="background-color: #7D3C98;">F</div></td>
-                      <td>2019-07-09</td>
-                    </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
                 Lignes sélectionnées : <button type="button" class="btn btn-secondary">Supprimer</button>

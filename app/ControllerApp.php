@@ -82,5 +82,35 @@ class ControllerApp
 
    }
 
-   
+   protected function generateCommentListDetails($commentList)
+   {
+      $commentListGroup = array();
+
+      foreach($commentList as $i => $comment) {
+          $commentList[$i]->date = $this->generateFrenchDate($comment->date);
+          $commentList[$i]->user_avatar_icon = $this->generateAvatarIcon($comment->user_avatar, $comment->user_nickname);
+      }
+
+      foreach($commentList as $comment) {
+          $commentListGroup[$comment->parent_comment_id][] = $comment;
+      }
+  
+     return $commentListGroup;
+
+   }
+
+   protected function generateCommentNumberText($commentList)
+   {
+      $CommentNumberText = 'Aucun commentaire déposé pour le moment.';
+
+      if(count($commentList) > 0) {
+          $CommentNumberText = count($commentList). ' commentaires';
+      } elseif(count($commentList) == 1) {
+          $CommentNumberText = '1 commentaire';
+      }
+  
+     return $CommentNumberText;
+
+   }
+
 }

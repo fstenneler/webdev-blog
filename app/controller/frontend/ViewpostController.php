@@ -4,6 +4,7 @@ namespace app\controller\frontend;
 
 use app\ControllerApp;
 use app\model\PostModel;
+use app\model\CommentModel;
 
 class ViewpostController extends ControllerApp
 {
@@ -24,26 +25,9 @@ class ViewpostController extends ControllerApp
         $this->app()->setData('post', $postList[0]);
 
         //commentList
-        $commentList = PostModel::getCommentList($this->app()->httpRequest()->getData('postId'));
-        if(count($commentList) > 0) {
-            $CommentNumberText = count($commentList). ' commentaires';
-        } elseif(count($commentList) == 1) {
-            $CommentNumberText = '1 commentaire';
-        } else {
-            $CommentNumberText = 'Aucun commentaire dÃ©posÃ© pour le moment.';
-        }
-        foreach($commentList as $i => $comment) {
-            $commentList[$i]->comment_date = $this->generateFrenchDate($comment->comment_date);
-            $commentList[$i]->user_avatar_icon = $this->generateAvatarIcon($comment->user_avatar, $comment->user_nickname);
-        }
-
-        $commentListGroup = array();
-        foreach($commentList as $comment) {
-            $commentListGroup[$comment->parent_comment_id][] = $comment;
-        }
-    
-        $this->app()->setData('CommentNumberText', $CommentNumberText);
-        $this->app()->setData('commentList', $commentListGroup);
+        $commentList = CommentModel::getCommentList($this->app()->httpRequest()->getData('postId'));
+        $this->app()->setData('commentList', $this->generateCommentListDetails($commentList));
+        $this->app()->setData('CommentNumberText', $this->generateCommentNumberText($commentList));
 
         return $this->app()->httpResponse()->generateView();
 

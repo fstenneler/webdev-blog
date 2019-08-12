@@ -18,7 +18,7 @@
                     <li class="date"><?= $this->app()->getData('post')->creation_date; ?></li>
                     <li class="byline">par <?= $this->app()->getData('post')->user_nickname; ?></li>
                     <?php if($this->app()->getData('post')->last_modification_date !== null) { ?>
-                        <li class="date">modifiÃ© le <?= $this->app()->getData('post')->last_modification_date; ?></li>
+                        <li class="date">modifié le <?= $this->app()->getData('post')->last_modification_date; ?></li>
                     <?php } ?>
                 </ul>
             </div>
@@ -41,7 +41,7 @@
 
                     <div class="entry__author-about">
                         <h5 class="entry__author-name">
-                            <span>PostÃ© par</span>
+                            <span>Posté par</span>
                             <?= $this->app()->getData('post')->user_nickname; ?>
                         </h5>
 
@@ -90,7 +90,7 @@
                                         <div class="comment__author"><?= $commentLevel1->user_nickname; ?></div>
 
                                         <div class="comment__meta">
-                                            <div class="comment__time"><?= $commentLevel1->comment_date; ?></div>
+                                            <div class="comment__time"><?= $commentLevel1->date; ?></div>
                                             <?php if(!isset($commentList[$commentLevel1->id])) { ?>
                                             <div class="comment__reply">
                                                 <span class="comment-reply-link" data-comment-id="<?= $commentLevel1->id; ?>">Répondre</span>
@@ -127,7 +127,7 @@
                                                 <div class="comment__author"><?= $commentLevel2->user_nickname; ?></div>
 
                                                 <div class="comment__meta">
-                                                    <div class="comment__time"><?= $commentLevel2->comment_date; ?></div>
+                                                    <div class="comment__time"><?= $commentLevel2->date; ?></div>
                                                     <?php if(!isset($commentList[$commentLevel1->id][$key + 1])) { ?>
                                                     <div class="comment__reply">
                                                         <span class="comment-reply-link" data-comment-id="<?= $commentLevel1->id; ?>">Répondre</span>

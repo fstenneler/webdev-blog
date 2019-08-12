@@ -33,30 +33,25 @@
                     </tr>
                   </tfoot>
                   <tbody>
+
+                    <?php 
+                    foreach($this->app()->getData('commentList') as $commentGroup) {
+                      foreach($commentGroup as $comment) {
+                      ?>
+
                     <tr>
-                      <td><i class="fas fa-circle comment-status-waiting"></i></td>
-                      <td>2019-07-10</td>
-                      <td><a href="index.php?page=comment&action=view" class="comment-status-waiting">Alias aperiam at debitis deserunt dignissimos...</a></td>
-                      <td><a href="index.php?page=user&action=update&userId=1">FabienS</a></td>
-                      <td><a href="index.php?page=post&action=update&postId=1">3 Benefits of Minimalism In Interior Design</a></td>
-                      <td><a href="" class="comment-status-waiting">Attente</a></td>
+                      <td><?php if($comment->status === 'Attente') { echo '<i class="fas fa-circle comment-status-att"></i>'; } ?></td>
+                      <td><?= $comment->date; ?></td>
+                      <td><a href="index.php?page=comment&action=view&postId=<?= $comment->post_id; ?>"<?php if($comment->status === 'Attente') { echo ' class="comment-status-att"'; } ?>><?= substr($comment->content,0,50); ?> ...</a></td>
+                      <td><a href="index.php?page=user&action=update&userId=<?= $comment->user_id; ?>"><?= $comment->user_avatar_icon; ?><?= $comment->user_nickname; ?></a></td>
+                      <td><a href="index.php?page=post&action=update&postId=<?= $comment->post_id; ?>"><?= $comment->post_title; ?></a></td>
+                      <td><a href="" class="comment-status-<?= strtolower(substr($comment->status,0,3)); ?>"><?= $comment->status; ?></a></td>
                     </tr>
-                    <tr>
-                      <td></td>
-                      <td>2019-07-08</td>
-                      <td><a href="index.php?page=comment&action=view">Alias aperiam at debitis deserunt dignissimos...</a></td>
-                      <td><a href="index.php?page=user&action=update&userId=1">FabienS</a></td>
-                      <td><a href="index.php?page=post&action=update&postId=1">3 Benefits of Minimalism In Interior Design</a></td>
-                      <td><a href="" class="comment-status-validated">Validé</a></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td>2019-07-01</td>
-                      <td><a href="index.php?page=comment&action=view">Alias aperiam at debitis deserunt dignissimos...</a></td>
-                      <td><a href="index.php?page=user&action=update&userId=1">FabienS</a></td>
-                      <td><a href="index.php?page=post&action=update&postId=1">3 Benefits of Minimalism In Interior Design</a></td>
-                      <td><a href="" class="comment-status-refused">Refusé</a></td>
-                    </tr>
+
+                    <?php
+                      }            
+                    }
+                    ?>
                   </tbody>
                 </table>
                 Lignes sélectionnées : <button type="button" class="btn btn-secondary">Supprimer</button>

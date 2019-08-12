@@ -34,31 +34,33 @@
     <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="fas fa-bell fa-fw"></i>
       <!-- Counter - Alerts -->
-      <span class="badge badge-danger badge-counter">3+</span>
+      <span class="badge badge-danger badge-counter"><?= $this->app()->getData('CommentNumber'); ?></span>
     </a>
     <!-- Dropdown - Alerts -->
     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
       <h6 class="dropdown-header">
-        Nouveaux commentaires
+      Nouveaux commentaires
       </h6>
-      <a class="dropdown-item d-flex align-items-center" href="index.php?page=comment">
+
+      <?php 
+      foreach($this->app()->getData('commentList') as $commentGroup) { 
+        foreach($commentGroup as $comment) {
+      ?>
+
+      <a class="dropdown-item d-flex align-items-center" href="index.php?page=comment&action=view&postId=<?= htmlspecialchars($comment->post_id); ?>">
         <div class="mr-3">
-        <div class="avatar-icon" style="background-color: #7D3C98;">F</div>
+        <?= $comment->user_avatar_icon; ?>
         </div>
         <div>
-          <div class="small text-gray-500">December 7, 2019</div>
-          Alias aperiam at debitis deserunt dignissimos dolorem doloribus, fuga fugiat impedit laudantium magni maxime...
+          <div class="small text-gray-500"><?= $comment->date; ?></div>
+          <?= substr($comment->content,0,50); ?>...
         </div>
       </a>
-      <a class="dropdown-item d-flex align-items-center" href="index.php?page=comment">
-        <div class="mr-3">
-        <div class="avatar-icon" style="background-color: #7D3C98;">F</div>
-        </div>
-        <div>
-          <div class="small text-gray-500">December 2, 2019</div>
-          Alias aperiam at debitis deserunt dignissimos dolorem doloribus, fuga fugiat impedit laudantium magni maxime...
-        </div>
-      </a>
+
+      <?php 
+        }
+      } 
+      ?> 
       <a class="dropdown-item text-center small text-gray-500" href="index.php?page=comment">Voir tous les commentaires</a>
     </div>
   </li>
@@ -68,54 +70,30 @@
     <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="fas fa-envelope fa-fw"></i>
       <!-- Counter - Messages -->
-      <span class="badge badge-danger badge-counter">7</span>
+      <span class="badge badge-danger badge-counter"><?= count($this->app()->getData('contactList')); ?></span>
     </a>
     <!-- Dropdown - Messages -->
     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
       <h6 class="dropdown-header">
         Nouveaux messages
       </h6>
-      <a class="dropdown-item d-flex align-items-center" href="#">
+
+      <?php foreach($this->app()->getData('contactList') as $contact) { ?>
+
+      <a class="dropdown-item d-flex align-items-center" href="index.php?page=contact&action=view&contactId=<?= $contact->id; ?>">
         <div class="dropdown-list-image mr-3">
           <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
           <div class="status-indicator bg-success"></div>
         </div>
         <div class="font-weight-bold">
-          <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-          <div class="small text-gray-500">Emily Fowler · 58m</div>
+          <div class="text-truncate"><?= $contact->subject; ?></div>
+          <div class="small text-gray-500"><?= $contact->first_name; ?> <?= $contact->name; ?> · <?= $contact->date; ?></div>
         </div>
       </a>
-      <a class="dropdown-item d-flex align-items-center" href="#">
-        <div class="dropdown-list-image mr-3">
-          <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
-          <div class="status-indicator"></div>
-        </div>
-        <div>
-          <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
-          <div class="small text-gray-500">Jae Chun · 1d</div>
-        </div>
-      </a>
-      <a class="dropdown-item d-flex align-items-center" href="#">
-        <div class="dropdown-list-image mr-3">
-          <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
-          <div class="status-indicator bg-warning"></div>
-        </div>
-        <div>
-          <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-          <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-        </div>
-      </a>
-      <a class="dropdown-item d-flex align-items-center" href="#">
-        <div class="dropdown-list-image mr-3">
-          <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
-          <div class="status-indicator bg-success"></div>
-        </div>
-        <div>
-          <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
-          <div class="small text-gray-500">Chicken the Dog · 2w</div>
-        </div>
-      </a>
-      <a class="dropdown-item text-center small text-gray-500" href="index.php?page=contact&action=view&contactId=1">Voir tous les messages</a>
+
+      <?php } ?>
+
+      <a class="dropdown-item text-center small text-gray-500" href="index.php?page=contact">Voir tous les messages</a>
     </div>
   </li>
 
@@ -124,9 +102,8 @@
   <!-- Nav Item - User Information -->
   <li class="nav-item dropdown no-arrow">
     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <?= $this->app()->getData('avatarIcon'); ?>
       <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $this->app()->httpRequest()->getSession('user')->nickname; ?></span>
-      <?php $avatar = $this->app()->getData('avatar'); ?>
-      <div class="avatar-icon" style="background-color: <?= $avatar['color']; ?>"><?= $avatar['firstLetter']; ?></div>
     </a>
     <!-- Dropdown - User Information -->
     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
