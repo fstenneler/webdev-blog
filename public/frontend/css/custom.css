@@ -3,6 +3,11 @@
     margin-top: 40px;
 }
 
+.form-success {
+  color: #28B463;
+  margin-top: 40px;
+}
+
 /* -------------------------------------------------------------------
  * ## header search trigger
  * ------------------------------------------------------------------- */
@@ -71,12 +76,28 @@
       right: 10px;
       top: 100%;
       margin: 0;
-      padding: 1.8rem;
       background: #151515;
       border-radius: 0 0 3px 3px;
       text-align: left;
       z-index: 500;
       display: none;
+      list-style-type: none;
+      padding-bottom: 1.8rem;
+}
+
+  #header__connection_modal li {
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+  }
+
+  #header__connection_modal .normal {
+    padding: 1.8rem 1.8rem 0rem 1.8rem;
+  }
+
+  #header__connection_modal .nickname {
+    color: white;
+    font-size: 15px;
+    padding: 0.5rem 1.8rem 0.5rem 1.8rem;
   }
 
   #header__connection_modal a {

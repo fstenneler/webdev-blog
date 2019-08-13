@@ -45,7 +45,7 @@
 
                     <input type="hidden" id="cAvatarColor" name="avatar" value="<?= $this->app()->getData('form')->getField('avatar')->getValue(); ?>">
 
-                    <?php if($this->app()->getData('form')->getField('avatar')->getError() !== null && $this->app()->httpRequest()->postData('account_creation') !== null) { ?>
+                    <?php if($this->app()->getData('form')->getField('avatar')->getError() !== null && $this->app()->getData('form')->isSubmited()) { ?>
                         <div class="error"><?= $this->app()->getData('form')->getField('avatar')->getError(); ?></div>
                     <?php } ?>
 
@@ -59,7 +59,7 @@
                         </div>
                     <?php } ?>
 
-                    <button type="submit" class="submit btn btn--primary btn--large full-width" name="account_creation">Créer un compte</button>
+                    <button type="submit" class="submit btn btn--primary btn--large full-width" name="submit">Créer un compte</button>
 
                 </fieldset>
             </form>

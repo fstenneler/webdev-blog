@@ -25,16 +25,15 @@
             <?php if($this->app()->user()->isAuthenticated()) { ?>
                 <div class="header__sign-in-trigger header__sign-in-trigger-avatar"><?= $this->app()->getData('avatarIcon'); ?></div>
                 <ul id="header__connection_modal">
-                    <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'user', 'action' => 'account')); ?>"><?= $this->app()->getData('user')->nickname; ?></a></li>
+                    <li class="nickname" style="background-color: <?= $this->app()->httpRequest()->getSession('user')->avatar; ?>;"><?= $this->app()->getData('user')->nickname; ?></li>
+                    <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'user', 'action' => 'account')); ?>">Mon compte</a></li>
                     <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'user', 'action' => 'logout')); ?>">Se déconnecter</a></li>
                 </ul>
             <?php } else { ?>
                 <i class="header__sign-in-trigger header__sign-in-trigger-normal fas fa-sign-in-alt"></i>
                 <ul id="header__connection_modal">
-                    <li>
-                    <a href="<?= $this->app()->route()->setUrl(array('page' => 'user', 'action' => 'login')); ?>">Se connecter</a><br/>
-                    <a href="<?= $this->app()->route()->setUrl(array('page' => 'user', 'action' => 'signup')); ?>">S'inscrire</a>
-                    </li>
+                    <li class="normal"><a href="<?= $this->app()->route()->setUrl(array('page' => 'user', 'action' => 'login')); ?>">Se connecter</a></li>
+                    <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'user', 'action' => 'signup')); ?>">S'inscrire</a></li>
                 </ul>
            <?php } ?>
          <!-- end custom login modal -->

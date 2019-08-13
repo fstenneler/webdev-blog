@@ -30,27 +30,71 @@ class Form
         $this->mode = $mode;
     }
 
+    public function setFields()
+    {
+        $this->setField('first_name', 'Votre prénom', 0, 50, true);
+        $this->setField('name', 'Votre nom', 0, 50, true);
+        $this->setField('email', 'Votre adresse e-mail', 0, 100, true);
+        $this->setField('nickname', 'Votre pseudo', 0, 50, true);
+        $this->setField('password', 'Votre mot de passe', 6, 20, true);
+        $this->setField('avatar', null, 0, 7, true);
+    }
+
+    public function getEmailFieldError($field)
+    {
+        if(!preg_match ("/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,6}$/", $field->getValue())) {
+            return 'L\'adresse e-mail saisie est erronée';
+        }
+        if($this->mode === 'insert') {
+            if(UserModel::userExists($field->getValue())) {
+                return 'Cette adresse e-mail existe déjà';
+            }
+        } elseif($field->getValue() !== $this->app->httpRequest()->getSession('user')->email) {
+            if(UserModel::userExists($field->getValue())) {
+                return 'Cette adresse e-mail existe déjà';
+            }
+        }
+        return $field->getError();
+    }
+
+    public function getNicknameFieldError($field)
+    {
+        if($this->mode === 'insert') {
+            if(UserModel::nicknameExists($field->getValue())) {
+                return 'Ce pseudo est déjà utilisé par un autre utilisateur';
+            }
+        } elseif($field->getValue() !== $this->app->httpRequest()->getSession('user')->nickname) {
+            if(UserModel::nicknameExists($field->getValue())) {
+                return 'Ce pseudo est déjà utilisé par un autre utilisateur';
+            }
+        }
+        return $field->getError();
+    }
+
+    public function getGenericFieldError($field)
+    {
+        if($field->getMinLength() > 0 && strlen($field->getValue()) < $field->getMinLength()) {
+            return 'Le nombre minimum de caractères est de ' .$field->getMinLength();
+        }
+        if(strlen($field->getValue()) > $field->getMaxLength()) {
+            return 'Le nombre maximum de caractères est de ' .$field->getMaxLength();
+        }
+        if($field->isMandatory() && $field->getValue() == '') {
+            return 'Le champ est obligatoire';
+        }
+        return $field->getError();
+    }
+
     public function setErrors()
     {
         foreach($this->field as $fieldName => $field) {
-            if($fieldName === 'email' && !preg_match ("/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,6}$/", $field->getValue())) {
-                $field->setError('L\'adresse e-mail saisie est erronée');
+            if($fieldName === 'email') {
+                $field->setError($this->getEmailFieldError($field));
             }
-            if($fieldName === 'email' && UserModel::userExists($field->getValue())) {
-                $field->setError('Cette adresse e-mail existe déjà');
+            if($fieldName === 'nickname') {
+                $field->setError($this->getNicknameFieldError($field));
             }
-            if($fieldName === 'nickname' && UserModel::nicknameExists($field->getValue())) {
-                $field->setError('Ce pseudo est déjà utilisé');
-            }
-            if($fieldName === 'password' && strlen($field->getValue()) < 6) {
-                $field->setError('Le nombre de caractères minimum est de ' .$field->getMinLength());
-            }
-            if($field->isMandatory() && $field->getValue() == '') {
-                $field->setError('Le champ est obligatoire');
-            }
-            if(strlen($field->getValue()) > $field->getMaxLength()) {
-                $field->setError('Le nombre de caractères maximum est de ' .$field->getMaxLength());
-            }
+            $field->setError($this->getGenericFieldError($field));
         }
     }
 
@@ -64,7 +108,7 @@ class Form
         return true;
     }
 
-    public function setValues($postData)
+    public function setFieldValues($postData)
     {
         foreach($this->field as $fieldName => $field) {
             if(isset($postData[$fieldName])) {
@@ -90,7 +134,7 @@ class Form
 
         $html = '<div><input name="' . htmlspecialchars($field->getName()) . '" id="c' . htmlspecialchars(ucfirst($field->getName())) . '" class="full-width" placeholder="' . htmlspecialchars($field->getPlaceHolder()) . '*" value="' . htmlspecialchars($field->getValue()) . '" type="' . $type . '" minlength="' . htmlspecialchars($field->getMinlength()) . '" maxlength="' . htmlspecialchars($field->getMaxlength()) . '"'. $required . '></div>';
 
-        if($field->getError() !== null && $this->app->httpRequest()->postData('account_creation') !== null) {
+        if($field->getError() !== null && $this->isSubmited()) {
             $html .= '<div class="error">' . $field->getError() . '</div>';
         }
 
@@ -107,8 +151,58 @@ class Form
             $attributes['description'] = null;
             $attributes['role'] = 'Visiteur';
             $userId = 0;
+        } else {
+            $attributes['description'] = $this->app->httpRequest()->getSession('user')->description;
+            $attributes['role'] = $this->app->httpRequest()->getSession('user')->role;
+            $userId = $this->app->httpRequest()->getSession('user')->id;
         }
-        return UserModel::setuser($attributes, $userId);
+        return UserModel::setUser($attributes, $userId);
+    }
+
+    public function setForm()
+    {
+        $this->setFields();
+
+        //chargement de la bdd
+        if($this->mode === 'update') {
+            $this->getAccountData();
+        }
+
+        //hydratation et test des erreurs
+        $this->setFieldValues($this->app->httpRequest()->postData());
+        $this->setErrors();
+    }
+
+    public function setFormSubmit()
+    {       
+        //enregistrement et redirection
+        if($this->isSubmited()) {
+            if($this->isValid()) {
+                if($this->save()) {
+                    $this->app->httpRequest()->setSession('updateSuccess', true);
+                    $user = UserModel::getUser($this->getField('email')->getValue());
+                    return $this->app->user()->setAuthentification($user->email, $user->password);
+                }
+            }
+        }
+        return false;
+    }
+
+    public function getAccountData()
+    {
+        $sessionData = array();
+        foreach($this->field as $fieldName => $field) {
+            $sessionData[$fieldName] = $this->app->httpRequest()->getSession('user')->$fieldName;
+        }
+        $this->setFieldValues($sessionData);
+    }
+
+    public function isSubmited()
+    {
+        if($this->app->httpRequest()->postData('submit') !== null) {
+            return true;
+        }
+        return false;
     }
  
 }

@@ -18,6 +18,7 @@ class Route extends ApplicationComponent
     {
         if(
             strtolower($this->app()->getPageName()) === 'home'
+            || (strtolower($this->app()->getPageName()) === 'user' && $this->app()->httpRequest()->getData('action') === 'account')
             || strtolower($this->app()->getPageName()) === 'posts'
             || strtolower($this->app()->getPageName()) === 'viewpost'
             || strtolower($this->app()->getPageName()) === 'contact'
