@@ -35,12 +35,16 @@ class UserController extends ControllerApp
 
                 $form = new Form($this);
                 $form->setMode('insert');
+                $form->setDestination('user');
                 $form->setForm();
-                $form->setFormSubmit();
+                if($form->setValidation()) {
+                    $user = UserModel::getUser($form->formBuilder()->getField('email')->getValue());
+                    return $this->app()->user()->setAuthentification($user->email, $user->password);
+                }
                 $this->app()->setData('form', $form);
                 break;
             
-            //signup
+            //account
             case 'account':
 
                 if($this->app()->user()->isAuthenticated() === false) {
@@ -48,9 +52,11 @@ class UserController extends ControllerApp
                 }
                 $form = new Form($this);
                 $form->setMode('update');
+                $form->setDestination('user');
                 $form->setForm();
-                if($form->setFormSubmit()) {
-                    $this->app()->setData('success', true);
+                if($form->setValidation()) {
+                    $user = UserModel::getUser($form->formBuilder()->getField('email')->getValue());
+                    return $this->app()->user()->setAuthentification($user->email, $user->password);
                 }
                 $this->app()->setData('form', $form);
                 break;

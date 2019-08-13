@@ -45,4 +45,13 @@ class User extends ApplicationComponent
         return  $this->app()->httpRequest()->getSession('authenticated');
     }
 
+    public function getUserId()
+    {
+        $userId = 0;
+        if(isset($this->app()->httpRequest()->getSession('user')->id)) {
+            $userId = $this->app()->httpRequest()->getSession('user')->id;
+        }
+        return $userId;
+    }
+
 }

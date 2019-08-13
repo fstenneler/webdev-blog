@@ -139,6 +139,10 @@
   display: auto;
 }
 
+.comment-waiting-validation {
+  color: grey !important;
+}
+
 .existing-account {
   text-align: center;
 }

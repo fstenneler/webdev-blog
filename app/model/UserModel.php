@@ -11,7 +11,10 @@ class UserModel
         $db = new Database();
         $query = 'SELECT password FROM user WHERE email = ?';
         $result = $db->prepare($query, array($email));
-        return $result[0]->password;
+        if(count($result) > 0) {
+            return $result[0]->password;
+        } 
+        return null;
     }
 
     public static function userExists($email)

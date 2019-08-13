@@ -63,6 +63,7 @@
                 <div class="col-full">
 
                     <h3 class="h2"><?= $this->app()->getData('CommentNumberText'); ?></h3>
+                    <a name='#comments'></a>
 
                     <!-- START commentlist -->
                     <?php 
@@ -102,6 +103,10 @@
                                     <div class="comment__text">
                                         <?= $commentLevel1->content; ?>
                                     </div>
+
+                                    <?php if($commentLevel1->status === 'Attente' && $commentLevel1->user_id === $this->app()->httpRequest()->getSession('user')->id) { ?>
+                                        <i class="comment-waiting-validation">Commentaire en attente de validation</i>
+                                    <?php } ?>
 
                                 </div>
                                 <!-- fin commentaire -->
@@ -158,19 +163,19 @@
                                             </div>
 
                                             <?php if($this->app()->user()->isAuthenticated()) { ?>
-                                            <form name="contactForm" method="post" action="" autocomplete="off">
+                                            <form name="contactForm" method="post" action="#comments" autocomplete="off">
                                                 <fieldset>
 
                                                     <div class="message form-field">
-                                                        <textarea name="cMessage" class="full-width" placeholder="Message*"></textarea>
+                                                        <textarea name="content" class="full-width" placeholder="Message*" required></textarea>
                                                     </div>
-
+                                                    <input name="parent_comment_id" value="<?= $commentLevel1->id; ?>" type="hidden">
                                                     <input name="submit" class="btn btn--primary btn-wide btn--large full-width" value="Répondre" type="submit">
 
                                                 </fieldset>
                                             </form>
                                             <?php } else { ?>
-                                                <div class="message-comment-connected-reply">Vous devez être <a href="/index.php?page=login">connecté</a> pour répondre.</div>
+                                                <div class="message-comment-connected-reply">Vous devez être <a href="<?= $this->app()->route()->setUrl(array('page' => 'user', 'action' => 'login')); ?>">connecté</a> pour répondre.</div>
                                             <?php } ?>
                                         </div>
                                     </li>
@@ -189,8 +194,16 @@
 
                     <?php } ?>
 
+                    <?php if($this->app()->getData('formError')) { ?>
+                        <div class='form-error'>
+                            <?= $this->app()->getData('formError'); ?>
+                        </div>
+                    <?php } ?>
+
                 </div> <!-- end col-full -->
             </div> <!-- end comments -->
+                    
+
 
             <div class="row comment-respond">
 
@@ -201,19 +214,19 @@
                     <h3 class="h2">Laisser un commentaire</h3>
                     
                     <?php if($this->app()->user()->isAuthenticated()) { ?>
-                    <form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
+                    <form name="contactForm" id="contactForm" method="post" action="#comments" autocomplete="off">
                         <fieldset>
 
                             <div class="message form-field">
-                                <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Message*"></textarea>
+                                <textarea name="content" id="cMessage" class="full-width" placeholder="Message*" required></textarea>
                             </div>
-
+                            <input name="parent_comment_id" value="0" type="hidden">
                             <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Laisser un commentaire" type="submit">
 
                         </fieldset>
                     </form> <!-- end form -->
                     <?php } else { ?>
-                        <div class="message-comment-connected">Vous devez être <a href="/index.php?page=login">connecté</a> pour laisser un commentaire.</div>
+                        <div class="message-comment-connected">Vous devez être <a href="<?= $this->app()->route()->setUrl(array('page' => 'user', 'action' => 'login')); ?>">connecté</a> pour laisser un commentaire.</div>
                     <?php } ?>
                 </div>
                 

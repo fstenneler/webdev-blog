@@ -7,10 +7,10 @@ class Route extends ApplicationComponent
 
     public function setRoute($url)
     {
-        if($url !== $this->app()->httpRequest()->requestURI() && $url !== null) {
+        //if($url !== $this->app()->httpRequest()->requestURI() && $url !== null) {
             header('Location: ' . $url);
             return true;
-        }
+        //}
         return false;
     }
 

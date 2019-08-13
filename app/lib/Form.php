@@ -1,123 +1,12 @@
 <?php
 
 namespace app\lib;
-use app\controller\frontend\UserController;
-use app\lib\Field;
-use app\model\UserModel;
+use app\lib\FormClassBuilder;
 
-class Form
+class Form extends FormClassBuilder
 {
-    private $field = array();
-    private $mode;
 
-    public function __construct(UserController $user)
-    {
-        $this->app = $user->app;
-    }
-    
-    public function setField($fieldName, $placeHolder, $minLength, $maxLength, $isMandatory)
-    {
-        $this->field[$fieldName] = new Field($fieldName, $placeHolder, $minLength, $maxLength, $isMandatory);
-    }
-
-    public function getField($fieldName)
-    {
-        return $this->field[$fieldName];
-    }
-
-    public function setMode($mode)
-    {
-        $this->mode = $mode;
-    }
-
-    public function setFields()
-    {
-        $this->setField('first_name', 'Votre prénom', 0, 50, true);
-        $this->setField('name', 'Votre nom', 0, 50, true);
-        $this->setField('email', 'Votre adresse e-mail', 0, 100, true);
-        $this->setField('nickname', 'Votre pseudo', 0, 50, true);
-        $this->setField('password', 'Votre mot de passe', 6, 20, true);
-        $this->setField('avatar', null, 0, 7, true);
-    }
-
-    public function getEmailFieldError($field)
-    {
-        if(!preg_match ("/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,6}$/", $field->getValue())) {
-            return 'L\'adresse e-mail saisie est erronée';
-        }
-        if($this->mode === 'insert') {
-            if(UserModel::userExists($field->getValue())) {
-                return 'Cette adresse e-mail existe déjà';
-            }
-        } elseif($field->getValue() !== $this->app->httpRequest()->getSession('user')->email) {
-            if(UserModel::userExists($field->getValue())) {
-                return 'Cette adresse e-mail existe déjà';
-            }
-        }
-        return $field->getError();
-    }
-
-    public function getNicknameFieldError($field)
-    {
-        if($this->mode === 'insert') {
-            if(UserModel::nicknameExists($field->getValue())) {
-                return 'Ce pseudo est déjà utilisé par un autre utilisateur';
-            }
-        } elseif($field->getValue() !== $this->app->httpRequest()->getSession('user')->nickname) {
-            if(UserModel::nicknameExists($field->getValue())) {
-                return 'Ce pseudo est déjà utilisé par un autre utilisateur';
-            }
-        }
-        return $field->getError();
-    }
-
-    public function getGenericFieldError($field)
-    {
-        if($field->getMinLength() > 0 && strlen($field->getValue()) < $field->getMinLength()) {
-            return 'Le nombre minimum de caractères est de ' .$field->getMinLength();
-        }
-        if(strlen($field->getValue()) > $field->getMaxLength()) {
-            return 'Le nombre maximum de caractères est de ' .$field->getMaxLength();
-        }
-        if($field->isMandatory() && $field->getValue() == '') {
-            return 'Le champ est obligatoire';
-        }
-        return $field->getError();
-    }
-
-    public function setErrors()
-    {
-        foreach($this->field as $fieldName => $field) {
-            if($fieldName === 'email') {
-                $field->setError($this->getEmailFieldError($field));
-            }
-            if($fieldName === 'nickname') {
-                $field->setError($this->getNicknameFieldError($field));
-            }
-            $field->setError($this->getGenericFieldError($field));
-        }
-    }
-
-    public function isValid()
-    {
-        foreach($this->field as $field) {
-            if($field->getError() !== null) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public function setFieldValues($postData)
-    {
-        foreach($this->field as $fieldName => $field) {
-            if(isset($postData[$fieldName])) {
-                $this->field[$fieldName]->setValue($postData[$fieldName]);
-            }
-        }
-    }
-
-    public function generateFormField(Field $field)
+    public function generateHtmlField(Field $field)
     {
         $required = null;
         $type = 'text';
@@ -141,68 +30,61 @@ class Form
         return $html;
     }
 
-    public function save()
-    {
-        $attributes = array();
-        foreach($this->field as $fieldName => $field) {
-            $attributes[$fieldName] = $field->getValue();
-        }
-        if($this->mode === 'insert') {
-            $attributes['description'] = null;
-            $attributes['role'] = 'Visiteur';
-            $userId = 0;
-        } else {
-            $attributes['description'] = $this->app->httpRequest()->getSession('user')->description;
-            $attributes['role'] = $this->app->httpRequest()->getSession('user')->role;
-            $userId = $this->app->httpRequest()->getSession('user')->id;
-        }
-        return UserModel::setUser($attributes, $userId);
-    }
-
     public function setForm()
     {
-        $this->setFields();
+        //création des champs du formulaire
+        $this->formBuilder()->setFields();
 
-        //chargement de la bdd
-        if($this->mode === 'update') {
-            $this->getAccountData();
+        //chargement de la bdd et hydratation
+        if($this->getMode() === 'update' && $this->getDestination() === 'user') {
+            $data = $this->formManager()->loadData();
+            $this->formBuilder()->setFieldValues($data);
         }
 
-        //hydratation et test des erreurs
-        $this->setFieldValues($this->app->httpRequest()->postData());
-        $this->setErrors();
+        //chargement des variables post, hydratation et test des erreurs
+        if($this->isSubmited()) {
+            $data = $this->app()->httpRequest()->postData();
+            $this->formBuilder()->setFieldValues($data);
+            $this->formHandler()->setErrors();
+        }
+
     }
 
-    public function setFormSubmit()
+    public function setValidation()
     {       
         //enregistrement et redirection
-        if($this->isSubmited()) {
-            if($this->isValid()) {
-                if($this->save()) {
-                    $this->app->httpRequest()->setSession('updateSuccess', true);
-                    $user = UserModel::getUser($this->getField('email')->getValue());
-                    return $this->app->user()->setAuthentification($user->email, $user->password);
+        if($this->isSubmited()) { 
+            if($this->formHandler()->isValid()) {
+                if($this->formManager()->save()) {
+                    $this->setSuccess(true);
+                    return true;
                 }
             }
         }
         return false;
     }
 
-    public function getAccountData()
-    {
-        $sessionData = array();
-        foreach($this->field as $fieldName => $field) {
-            $sessionData[$fieldName] = $this->app->httpRequest()->getSession('user')->$fieldName;
-        }
-        $this->setFieldValues($sessionData);
-    }
-
     public function isSubmited()
     {
-        if($this->app->httpRequest()->postData('submit') !== null) {
+        if($this->app()->httpRequest()->postData('submit') !== null) {
             return true;
         }
         return false;
+    }
+
+    public function setSuccess($success)
+    {
+        $this->app()->httpRequest()->setSession('formUpdate', array('destination' => $this->getDestination(), 'success' => $success));
+    }
+
+    public function getSuccess()
+    {
+        $formUpdate = $this->app()->httpRequest()->getSession('formUpdate');
+        if(isset($formUpdate['destination']) && isset($formUpdate['success'])) { 
+            if($formUpdate['destination'] === $this->getDestination()) {
+                return $formUpdate['success'];
+            }
+        }
     }
  
 }

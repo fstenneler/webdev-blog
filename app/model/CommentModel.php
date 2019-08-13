@@ -6,7 +6,7 @@ use app\lib\Database;
 class CommentModel 
 {
 
-    public static function getCommentList($postId = 0, $status = null)
+    public static function getCommentList($postId = 0, $status = null, $userId = 0)
     {
 
         $db = new Database();
@@ -36,9 +36,18 @@ class CommentModel
         AND comment.post_id = ?';
         }
 
-        if($status !== null) {
+        if($status !== null && $userId === 0) {
             $query .= '
         AND comment.status = ?';
+        } elseif($userId > 0) {
+            $query .= '
+        AND (
+            comment.status = ?
+            OR (
+                comment.status = \'Attente\'
+                AND comment.user_id = ?
+            )
+        )';
         }
 
         $query .= '
@@ -48,11 +57,35 @@ class CommentModel
         if($postId > 0 && $postId !== null) {
             $attributes[] = $postId;
         }
-        if($status !== null) {
+        if($status !== null && $userId === 0) {
             $attributes[] = $status;
+        } elseif($userId > 0) {
+            $attributes[] = $status;
+            $attributes[] = $userId;
         }
 
         return $db->prepare($query, $attributes);
+
+    }
+
+
+    public static function setComment($attributes)
+    {
+
+        $db = new Database();
+
+        $query = '
+        INSERT INTO        
+        comment
+        SET
+        parent_comment_id = :parent_comment_id,
+        content = :content,
+        date = NOW(),
+        status = :status,
+        post_id = :post_id,
+        user_id = :user_id';
+
+        return $db->prepare($query, $attributes, true);
 
     }
 

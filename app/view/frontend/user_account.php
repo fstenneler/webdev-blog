@@ -12,11 +12,11 @@
             <form name="cForm" id="cForm" class="contact-form" method="post" action="">
                 <fieldset>
 
-                    <?= $this->app()->getData('form')->generateFormField($this->app()->getData('form')->getField('first_name')); ?>
-                    <?= $this->app()->getData('form')->generateFormField($this->app()->getData('form')->getField('name')); ?>
-                    <?= $this->app()->getData('form')->generateFormField($this->app()->getData('form')->getField('email')); ?>
-                    <?= $this->app()->getData('form')->generateFormField($this->app()->getData('form')->getField('nickname')); ?>
-                    <?= $this->app()->getData('form')->generateFormField($this->app()->getData('form')->getField('password')); ?>
+                    <?= $this->app()->getData('form')->generateHtmlField($this->app()->getData('form')->formBuilder()->getField('first_name')); ?>
+                    <?= $this->app()->getData('form')->generateHtmlField($this->app()->getData('form')->formBuilder()->getField('name')); ?>
+                    <?= $this->app()->getData('form')->generateHtmlField($this->app()->getData('form')->formBuilder()->getField('email')); ?>
+                    <?= $this->app()->getData('form')->generateHtmlField($this->app()->getData('form')->formBuilder()->getField('nickname')); ?>
+                    <?= $this->app()->getData('form')->generateHtmlField($this->app()->getData('form')->formBuilder()->getField('password')); ?>
 
                     <div class="form-color-picker-title">Choissez une couleur pour votre avatar*</div>
 
@@ -43,10 +43,10 @@
                         <li data-color="#273746" style="background-color: #273746;"></li>
                     </ul>
 
-                    <input type="hidden" id="cAvatarColor" name="avatar" value="<?= $this->app()->getData('form')->getField('avatar')->getValue(); ?>">
+                    <input type="hidden" id="cAvatarColor" name="avatar" value="<?= $this->app()->getData('form')->formBuilder()->getField('avatar')->getValue(); ?>">
 
-                    <?php if($this->app()->getData('form')->getField('avatar')->getError() !== null && $this->app()->getData('form')->isSubmited()) { ?>
-                        <div class="error"><?= $this->app()->getData('form')->getField('avatar')->getError(); ?></div>
+                    <?php if($this->app()->getData('form')->formBuilder()->getField('avatar')->getError() !== null && $this->app()->getData('form')->isSubmited()) { ?>
+                        <div class="error"><?= $this->app()->getData('form')->formBuilder()->getField('avatar')->getError(); ?></div>
                     <?php } ?>
 
                     <input type="hidden" name="page" value="user">
@@ -59,12 +59,12 @@
                         </div>
                     <?php } ?>
 
-                    <?php if($this->app()->httpRequest()->getSession('updateSuccess')) { ?>
+                    <?php if($this->app()->getData('form')->getSuccess()) { ?>
                         <div class='form-success'>
                             Les modifications ont bien été enregistrées
                         </div>
                     <?php 
-                        $this->app()->httpRequest()->setSession('updateSuccess', false);
+                        $this->app()->getData('form')->setSuccess(false);
                     } ?>
                     
 

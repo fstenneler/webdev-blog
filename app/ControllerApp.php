@@ -103,10 +103,10 @@ class ControllerApp
    {
       $CommentNumberText = 'Aucun commentaire déposé pour le moment.';
 
-      if(count($commentList) > 0) {
-          $CommentNumberText = count($commentList). ' commentaires';
-      } elseif(count($commentList) == 1) {
+      if(count($commentList) === 1) {
           $CommentNumberText = '1 commentaire';
+      } elseif(count($commentList) > 0) {
+         $CommentNumberText = count($commentList). ' commentaires';
       }
   
      return $CommentNumberText;
