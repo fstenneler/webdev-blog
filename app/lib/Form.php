@@ -1,6 +1,7 @@
 <?php
 
 namespace app\lib;
+use app\controller\frontend\UserController;
 use app\lib\Field;
 use app\model\UserModel;
 
@@ -9,9 +10,9 @@ class Form
     private $field = array();
     private $mode;
 
-    public function __construct($app)
+    public function __construct(UserController $user)
     {
-        $this->app = $app->app;
+        $this->app = $user->app;
     }
     
     public function setField($fieldName, $placeHolder, $minLength, $maxLength, $isMandatory)
@@ -44,7 +45,7 @@ class Form
             if($fieldName === 'password' && strlen($field->getValue()) < 6) {
                 $field->setError('Le nombre de caractères minimum est de ' .$field->getMinLength());
             }
-            if($field->isMandatory() && $field->getValue() == null) {
+            if($field->isMandatory() && $field->getValue() == '') {
                 $field->setError('Le champ est obligatoire');
             }
             if(strlen($field->getValue()) > $field->getMaxLength()) {
@@ -72,7 +73,7 @@ class Form
         }
     }
 
-    public function generateFormField($field)
+    public function generateFormField(Field $field)
     {
         $required = null;
         $type = 'text';
