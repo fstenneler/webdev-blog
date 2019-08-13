@@ -20,6 +20,10 @@
                         <input name="cPassword" id="cPassword" class="full-width" placeholder="Your Password*" value="" type="password">
                     </div>
 
+                    <div class="password-forgotten">
+                        J'ai oublié mon mot de passe
+                    </div>
+
                     <div class='form-error'>
                         <?= $this->app()->getData('formError'); ?>
                     </div>
@@ -29,7 +33,7 @@
                 </fieldset>
             </form>
 
-            <div class='existing-account'>Pas encore inscrit ? <a href="<?= $this->app()->route()->setUrl(array('page' => 'signup')); ?>">Cliquez ici</a> pour créer un nouveau compte</div>
+            <div class='existing-account'>Pas encore inscrit ? <a href="<?= $this->app()->route()->setUrl(array('page' => 'user', 'action' => 'signup')); ?>">Cliquez ici</a> pour créer un nouveau compte</div>
 
         </div>
     </div>

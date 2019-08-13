@@ -15,7 +15,7 @@ class TopbarController extends ControllerApp
         //Deconnexion
         if($this->app()->httpRequest()->getData('logout') === 'true') {
             $this->app()->user()->setDisconnection();
-            return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('zone' => 'frontend', 'page' => 'login')));
+            return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('zone' => 'frontend', 'page' => 'user', 'action' => 'login')));
         }
         
         //Avatar

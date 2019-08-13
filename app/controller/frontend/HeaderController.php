@@ -22,11 +22,6 @@ class HeaderController extends ControllerApp
             );
         }
 
-        //Deconnexion
-        if($this->app()->httpRequest()->getData('action') === 'logout') {
-            $this->app()->user()->setDisconnection();
-        }
-
         //categoryList
         $categoryList = CategoryModel::getCategoryList();
         foreach($categoryList as $key => $category) {

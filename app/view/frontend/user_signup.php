@@ -49,7 +49,8 @@
                         <div class="error"><?= $this->app()->getData('form')->getField('avatar')->getError(); ?></div>
                     <?php } ?>
 
-                    <input type="hidden" name="page" value="signup">
+                    <input type="hidden" name="page" value="user">
+                    <input type="hidden" name="action" value="signup">
                     
 
                     <?php if($this->app()->getData('formError')) { ?>
@@ -63,7 +64,7 @@
                 </fieldset>
             </form>
 
-            <div class='existing-account'>Déjà inscrit ? <a href="/index.php?page=login">Cliquez ici</a> pour vous identifier</div>
+            <div class='existing-account'>Déjà inscrit ? <a href="<?= $this->app()->route()->setUrl(array('page' => 'user', 'action' => 'login')); ?>">Cliquez ici</a> pour vous identifier</div>
 
         </div>
     </div>
