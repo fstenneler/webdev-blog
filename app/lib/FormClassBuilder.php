@@ -1,6 +1,7 @@
 <?php
 
 namespace app\lib;
+use app\App;
 use app\lib\FormBuilder;
 use app\lib\FormHandler;
 use app\lib\formManager;
@@ -13,9 +14,9 @@ abstract class FormClassBuilder
     private $formHandler;
     private $formManager;
 
-    public function __construct($user)
+    public function __construct(App $app)
     {
-        $this->app = $user->app;
+        $this->app = $app;
         $this->formBuilder = new FormBuilder($this);
         $this->formHandler = new FormHandler($this);
         $this->formManager = new formManager($this);

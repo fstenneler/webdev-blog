@@ -33,7 +33,7 @@ class UserController extends ControllerApp
             //signup
             case 'signup':
 
-                $form = new Form($this);
+                $form = new Form($this->app());
                 $form->setMode('insert');
                 $form->setDestination('user');
                 $form->setForm();
@@ -50,7 +50,7 @@ class UserController extends ControllerApp
                 if($this->app()->user()->isAuthenticated() === false) {
                     return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'user', 'action' => 'login')));
                 }
-                $form = new Form($this);
+                $form = new Form($this->app());
                 $form->setMode('update');
                 $form->setDestination('user');
                 $form->setForm();

@@ -27,7 +27,7 @@ class ViewpostController extends ControllerApp
 
         //commentForm
         if($this->app()->user()->isAuthenticated()) {
-            $form = new Form($this);
+            $form = new Form($this->app());
             $form->setMode('insert');
             $form->setDestination('comment');
             $form->setForm();

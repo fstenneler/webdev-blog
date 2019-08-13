@@ -33,7 +33,6 @@ class FormManager Extends FormComponent
             $attributes['status'] = 'Attente';
             $attributes['post_id'] = (int) $this->app()->httpRequest()->getData('postId');
             $attributes['user_id'] = (int) $this->app()->httpRequest()->getSession('user')->id;
-            $postId = $this->app()->httpRequest()->getData('postId');
             return CommentModel::setComment($attributes);
             
         }
