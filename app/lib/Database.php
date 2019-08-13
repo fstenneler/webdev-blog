@@ -30,15 +30,25 @@ class Database
 
         if($bindValue) {
             foreach($attributes as $key => $value) {
-                $req->bindValue(':' .$key, $value, PDO::PARAM_INT);
+                if(is_int($value)) {
+                    $req->bindValue(':' .$key, $value, PDO::PARAM_INT);
+                } else {
+                    $req->bindValue(':' .$key, $value);
+                }
             }
-            $req->execute();
+            $result = $req->execute();
         } else {
-            $req->execute($attributes);
+            $result = $req->execute($attributes);
         }
 
-        $req->setFetchMode(PDO::FETCH_OBJ);
-        return $req->fetchAll();
+        if(preg_match("#^SELECT#", trim($query))) {
+            $req->setFetchMode(PDO::FETCH_OBJ);
+            return $req->fetchAll();
+        } else {
+            return $result;
+        }
+
+        return false;
 
     }
 

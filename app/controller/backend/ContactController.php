@@ -14,6 +14,11 @@ class ContactController extends ControllerApp
         //Liste des messages
         $contactList = ContactModel::getContactList($this->app()->httpRequest()->getData('contactId'), 0);
 
+        //redirection
+        if($this->app()->httpRequest()->getData('contactId') > 0 && count($contactList) === 0) {
+            return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'error')));
+        }
+
         if($this->app()->httpRequest()->getData('contactId') > 0) {
             $this->app()->setData('contactList', $contactList[0]);
         } else {

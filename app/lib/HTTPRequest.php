@@ -21,16 +21,18 @@ class HttpRequest extends ApplicationComponent
     return false;
   }
  
-  public function getData($key)
+  public function getData($key = null)
   {
-    $get = null;
-    if(isset($_GET[$key])) {
-      $get = $_GET[$key];
+    if($key !== null) {
+      if(isset($_GET[$key])) {
+        return $_GET[$key];
+      }
+      return null;
     }
-    return $get;
+    return $_GET;
   }
  
-  public function getExists($key)
+  public function getExists($key = null)
   {
     if(isset($_GET[$key])) {
       return true;
@@ -38,13 +40,15 @@ class HttpRequest extends ApplicationComponent
     return false;
   }
  
-  public function postData($key)
+  public function postData($key = null)
   {
-    $post = null;
-    if(isset($_POST[$key])) {
-      $post = $_POST[$key];
+    if($key !== null) {
+      if(isset($_POST[$key])) {
+        return $_POST[$key];
+      }
+      return null;
     }
-    return $post;
+    return $_POST;
   }
  
   public function postExists($key)

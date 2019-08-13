@@ -16,7 +16,14 @@ class Route extends ApplicationComponent
 
     public function setLastRoute() 
     {
-        if(strtolower($this->app()->getPageName()) !== 'login' && strtolower($this->app()->getPageName()) !== 'signup' && strtolower($this->app()->getPageName()) !== 'account' && $this->app()->httpRequest()->getExists('action') === false) {
+        if(
+            strtolower($this->app()->getPageName()) === 'home'
+            || strtolower($this->app()->getPageName()) === 'posts'
+            || strtolower($this->app()->getPageName()) === 'viewpost'
+            || strtolower($this->app()->getPageName()) === 'contact'
+            || strtolower($this->app()->getPageName()) === 'privacy'
+            || strtolower($this->app()->getPageName()) === 'about'
+        ) {
             $this->app()->httpRequest()->setSession('lastZoneName', $this->app()->getZoneName());
             $this->app()->httpRequest()->setSession('lastUrl', $this->app()->httpRequest()->requestURI());
         } 

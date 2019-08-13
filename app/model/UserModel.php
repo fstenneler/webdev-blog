@@ -8,71 +8,53 @@ class UserModel
 
     public static function getPassword($email)
     {
-
         $db = new Database();
-
-        $query = '
-        SELECT 
-
-        password
-
-        FROM
-
-        user
-
-        WHERE email = ?';
-
-        $result = $db->prepare( $query, array($email) );
-
+        $query = 'SELECT password FROM user WHERE email = ?';
+        $result = $db->prepare($query, array($email));
         return $result[0]->password;
+    }
 
+    public static function userExists($email)
+    {
+        $db = new Database();
+        $query = 'SELECT COUNT(id) AS nb FROM user WHERE email = ?';
+        $result = $db->prepare($query, array($email));
+        if($result[0]->nb > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function nicknameExists($email)
+    {
+        $db = new Database();
+        $query = 'SELECT COUNT(id) AS nb FROM user WHERE LOWER(nickname) = ?';
+        $result = $db->prepare($query, array(strtolower($email)));
+        if($result[0]->nb > 0) {
+            return true;
+        }
+        return false;
     }
 
     public static function getUser($email)
     {
-
         $db = new Database();
-
-        $query = '
-        SELECT 
-
-        *
-
-        FROM
-
-        user
-
-        WHERE email = ?';
-
-        $result = $db->prepare( $query, array($email) );
-
+        $query = 'SELECT * FROM user WHERE email = ?';
+        $result = $db->prepare($query, array($email));
         return $result[0];
-
     }
 
     public static function getUserList($role = null, $userId = 0)
     {
 
         $db = new Database();
-
-        $query = '
-        SELECT 
-
-        *
-
-        FROM
-
-        user
-        WHERE id > 0';
+        $query = 'SELECT * FROM user WHERE id > 0';
 
         if($role !== null) {
-            $query .= '
-        AND role = ?';
+            $query .= ' AND role = ?';
         }
-
         if($userId > 0) {
-            $query .= '
-        AND id = ?';
+            $query .= ' AND id = ?';
         }
 
         $attributes = array();
@@ -84,6 +66,45 @@ class UserModel
         }
 
         return $db->prepare($query, $attributes);
+
+    }
+
+    public static function setUser($attributes, $userId = 0)
+    {
+
+        $db = new Database();
+
+        if($userId === 0) {
+            $query = '
+        INSERT INTO';
+        } else {
+            $query = '
+        UPDATE';
+        }
+
+        $query .= '
+        user
+        SET
+        email = :email,
+        password = :password,
+        name = :name,
+        first_name = :first_name,
+        nickname = :nickname,
+        avatar = :avatar,
+        description = :description,
+        registration_date = NOW(),
+        role = :role';
+
+        if($userId > 0) {
+            $query .= '
+        WHERE id = :id';
+        }
+
+        if($userId > 0) {
+            $attributes['id'] = $userId;
+        }
+
+        return $db->prepare($query, $attributes, true);
 
     }
 

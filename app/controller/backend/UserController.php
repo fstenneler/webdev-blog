@@ -13,6 +13,12 @@ class UserController extends ControllerApp
 
         //userList
         $userList = UserModel::getUserList(null, $this->app()->httpRequest()->getData('userId'));
+
+        //redirection
+        if($this->app()->httpRequest()->getData('userId') > 0 && count($userList) === 0) {
+            return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'error')));
+        }
+
         foreach($userList as $key => $user) {
             $userList[$key]->avatarIcon = $this->generateAvatarIcon($user->avatar, $user->nickname);
         }  

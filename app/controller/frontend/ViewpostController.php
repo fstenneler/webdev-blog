@@ -16,7 +16,7 @@ class ViewpostController extends ControllerApp
         $postList = PostModel::getPost(array('postId' => $this->app()->httpRequest()->getData('postId')));
 
         //redirection
-        if($postList === false) {
+        if(count($postList) === 0) {
             return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'error')));
         }
 

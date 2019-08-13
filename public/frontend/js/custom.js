@@ -13,20 +13,32 @@
         }
     });
 
-    $('.form-color-picker li').click(function() {
+    function selectColorPicker(color, firstLaunch) {
 
-        var element = $(this);
-        $('.form-color-picker li').each(function() {
-            $(this).removeClass('border');
-        });
+        if(color != '') {
+            $('.form-color-picker li').each(function() {
+                $(this).removeClass('border');
+            });
 
-        if($('#cAvatarColor').val() == element.data('color')) {
-            $('#cAvatarColor').val('');
-        } else {
-            element.addClass('border');
-            $('#cAvatarColor').val(element.data('color'));
+            if($('#cAvatarColor').val() == color && firstLaunch == false) {
+                $('#cAvatarColor').val('');
+            } else {
+                $('.form-color-picker li').each(function() {
+                    if($(this).data('color') == color) {
+                        $(this).addClass('border');
+                    }
+                });
+                $('#cAvatarColor').val(color);
+            }
         }
+
+    }
+
+    $('.form-color-picker li').click(function() {
+        selectColorPicker($(this).data('color'), false);
     });
+
+    selectColorPicker($('#cAvatarColor').val(), true);
 
     $('.comment-reply-link').click(function() {
         var commentId = $(this).data('comment-id');

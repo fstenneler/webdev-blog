@@ -77,7 +77,7 @@ class App
     }
 
     private function getController($pageName) {
-        $className = 'app\controller\\' . $this->zoneName . '\\' . $pageName . 'Controller';
+        $className = 'app\controller\\' . $this->zoneName . '\\' . ucfirst($pageName) . 'Controller';
         return new $className($this, $pageName);
     }
 

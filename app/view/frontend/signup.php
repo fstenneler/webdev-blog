@@ -12,21 +12,11 @@
             <form name="cForm" id="cForm" class="contact-form" method="post" action="">
                 <fieldset>
 
-                    <div>
-                        <input name="cName" id="cName" class="full-width" placeholder="Your name*" value="" type="text">
-                    </div>
-
-                    <div>
-                        <input name="cEmail" id="cEmail" class="full-width" placeholder="Your Email*" value="" type="email">
-                    </div>
-
-                    <div>
-                        <input name="cNickname" id="cNickname" class="full-width" placeholder="Choose a Nickname*" value="" type="email">
-                    </div>
-
-                    <div class="form-field">
-                        <input name="cPassword" id="cPassword" class="full-width" placeholder="Choose a Password*" value="" type="password">
-                    </div>
+                    <?= $this->app()->getData('form')->generateFormField($this->app()->getData('form')->getField('first_name')); ?>
+                    <?= $this->app()->getData('form')->generateFormField($this->app()->getData('form')->getField('name')); ?>
+                    <?= $this->app()->getData('form')->generateFormField($this->app()->getData('form')->getField('email')); ?>
+                    <?= $this->app()->getData('form')->generateFormField($this->app()->getData('form')->getField('nickname')); ?>
+                    <?= $this->app()->getData('form')->generateFormField($this->app()->getData('form')->getField('password')); ?>
 
                     <div class="form-color-picker-title">Choissez une couleur pour votre avatar*</div>
 
@@ -53,7 +43,14 @@
                         <li data-color="#273746" style="background-color: #273746;"></li>
                     </ul>
 
-                    <input type="hidden" id="cAvatarColor" name="cAvatarColor" value="">
+                    <input type="hidden" id="cAvatarColor" name="avatar" value="<?= $this->app()->getData('form')->getField('avatar')->getValue(); ?>">
+
+                    <?php if($this->app()->getData('form')->getField('avatar')->getError() !== null && $this->app()->httpRequest()->postData('account_creation') !== null) { ?>
+                        <div class="error"><?= $this->app()->getData('form')->getField('avatar')->getError(); ?></div>
+                    <?php } ?>
+
+                    <input type="hidden" name="page" value="signup">
+                    
 
                     <?php if($this->app()->getData('formError')) { ?>
                         <div class='form-error'>
@@ -61,7 +58,7 @@
                         </div>
                     <?php } ?>
 
-                    <button type="submit" class="submit btn btn--primary btn--large full-width">Créer un compte</button>
+                    <button type="submit" class="submit btn btn--primary btn--large full-width" name="account_creation">Créer un compte</button>
 
                 </fieldset>
             </form>

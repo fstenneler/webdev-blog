@@ -20,6 +20,13 @@ class PostController extends ControllerApp
         }
 
         $postList = PostModel::getPost($parameters);
+
+        //redirection
+        if($this->app()->httpRequest()->getData('postId') > 0 && count($postList) === 0) {
+            return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'error')));
+        }
+
+        //post infos
         $postList = $this->generatePostListDetails($postList);
 
         if($this->app()->httpRequest()->getData('postId') > 0) {

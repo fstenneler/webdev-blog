@@ -22,10 +22,13 @@ if($zone === 'backend') {
 }
 
 if(isset($_GET['page'])) {
-    $page = ucfirst($_GET['page']);
+    $page = $_GET['page'];
+}
+if(isset($_POST['page'])) {
+    $page = $_POST['page'];
 }
 
-if( !file_exists('app/controller/' . $zone . '/' . $page . 'Controller.php') ) { //si le controleur n'existe pas, erreur 404
+if( !file_exists('app/controller/' . $zone . '/' . ucfirst($page) . 'Controller.php') ) { //si le controleur n'existe pas, erreur 404
     $page = 'Error';
 }
 

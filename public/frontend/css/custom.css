@@ -180,3 +180,9 @@
 .message-comment-connected {
   text-align: center;
 }
+
+.contact-form .error {
+  color: #A93226;
+  margin-top: 1rem;
+  font-size: 1.6rem;
+}

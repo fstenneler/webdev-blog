@@ -99,16 +99,10 @@ class PostModel
 
         $db = new Database();
 
-        $query = '
-        SELECT 
-
-        COUNT(id) as value
-
-        FROM post';
+        $query = 'SELECT COUNT(id) as value FROM post';
 
         if( $categoryId > 0 ) {
-            $query .= '
-        WHERE category_id = ?';
+            $query .= ' WHERE category_id = ?';
         };
 
         $result = $db->prepare( $query, array($categoryId) );
