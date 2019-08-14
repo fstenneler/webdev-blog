@@ -21,10 +21,15 @@
                       <div class="comment-view-date"><?= $commentLevel1->date; ?></div>
                       <div class="comment-view-comment"><?= $commentLevel1->content; ?></div>
                       <?php if($commentLevel1->status === 'Attente') { ?>
-                      <form class="comment-view-choice" method="post" action="">
-                        <input type="hidden" name="id" value="<?= $commentLevel1->id; ?>">
-                        <input type="submit" name="submit" value="Valider" class="btn btn-success"><input type="submit" name="submit" value="Refuser" class="btn btn-danger">
-                      </form>
+                        <form class="comment-view-choice" method="post" action="">
+                          <input type="hidden" name="status" value="">
+                          <input type="hidden" name="id" value="<?= $commentLevel1->id; ?>">
+                          <input type="submit" name="submit" value="Valider" class="btn btn-success submit-button"><input type="submit" name="submit" value="Refuser" class="btn btn-danger submit-button">
+                        </form>
+                      <?php } elseif($commentLevel1->status === 'Validé') { ?>
+                        <div class='comment-status-validated'>Commentaire validé</div>
+                      <?php } elseif($commentLevel1->status === 'Refusé') { ?>
+                        <div class='comment-status-refused'>Commentaire refusé</div>
                       <?php } ?>
                   </div>
 
@@ -37,10 +42,15 @@
                       <div class="comment-view-date"><?= $commentLevel2->date; ?></div>
                       <div class="comment-view-comment"><?= $commentLevel2->content; ?></div>
                       <?php if($commentLevel2->status === 'Attente') { ?>
-                      <form class="comment-view-choice" method="post" action="">
-                        <input type="hidden" name="id" value="<?= $commentLevel2->id; ?>">
-                        <input type="submit" name="submit" value="Valider" class="btn btn-success"><input type="submit" name="submit" value="Refuser" class="btn btn-danger">
-                      </form>
+                        <form class="comment-view-choice" method="post" action="">
+                          <input type="hidden" name="status" value="">
+                          <input type="hidden" name="id" value="<?= $commentLevel2->id; ?>">
+                          <input type="submit" name="submit" value="Valider" class="btn btn-success submit-button"><input type="submit" name="submit" value="Refuser" class="btn btn-danger submit-button">
+                        </form>
+                      <?php } elseif($commentLevel2->status === 'Validé') { ?>
+                        <div class='comment-status-validated'>Commentaire validé</div>
+                      <?php } elseif($commentLevel2->status === 'Refusé') { ?>
+                        <div class='comment-status-refused'>Commentaire refusé</div>
                       <?php } ?>
                   </div>
 

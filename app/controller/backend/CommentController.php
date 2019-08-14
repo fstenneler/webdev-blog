@@ -29,9 +29,10 @@ class CommentController extends ControllerApp
                     $form[$comment->id] = new Form($this->app());
                     $form[$comment->id]->setMode('update');
                     $form[$comment->id]->setDestination('comment');
+                    $form[$comment->id]->setFormId($comment->id);
                     $form[$comment->id]->setForm();
                     if($form[$comment->id]->setValidation()) {
-                        return $this->app()->route()->setRoute($this->app()->route()->setUrl('index.php?page=comment&action=view&postId=' . $this->app()->httpRequest()->getData('postId')));
+                        return $this->app()->route()->setRoute('index.php?page=comment&action=view&postId=' . $this->app()->httpRequest()->getData('postId'));
                     }  
                 } 
             }

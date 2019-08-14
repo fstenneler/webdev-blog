@@ -38,12 +38,22 @@ class FormHandler Extends FormComponent
         return $field->getError();
     }
 
+    public function getEnumFieldError(Field $field, $enumValues)
+    {   
+        foreach($enumValues as $value) {
+            if($field->getValue() === $value) {
+                return $field->getError();
+            }
+        } echo "oui"; die();
+        return 'La valeur du champ est incorrecte';
+    }
+
     public function getGenericFieldError(Field $field)
     {
         if($field->getMinLength() > 0 && strlen($field->getValue()) < $field->getMinLength()) {
             return 'Le nombre minimum de caractères est de ' .$field->getMinLength();
         }
-        if(strlen($field->getValue()) > $field->getMaxLength()) {
+        if(strlen($field->getValue()) > $field->getMaxLength() && $field->getMaxLength() > 0) {
             return 'Le nombre maximum de caractères est de ' .$field->getMaxLength();
         }
         if($field->isMandatory() && $field->getValue() == '') {
@@ -60,6 +70,9 @@ class FormHandler Extends FormComponent
             }
             if($fieldName === 'nickname') {
                 $field->setError($this->getNicknameFieldError($field));
+            }
+            if(count($field->getEnumValues()) > 0) {
+                $field->setError($this->getEnumFieldError($field, $field->getEnumValues()));
             }
             $field->setError($this->getGenericFieldError($field));
         }

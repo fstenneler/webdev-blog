@@ -26,7 +26,12 @@ class CategoryModel
         $query .= '
         ORDER BY name ASC';
 
-        return $db->prepare($query, array($categoryId));
+        $attributes = array();
+        if($categoryId > 0) {
+            $attributes[] = $categoryId;
+        }        
+
+        return $db->prepare($query, $attributes);
 
     }
 

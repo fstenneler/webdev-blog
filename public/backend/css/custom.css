@@ -126,6 +126,14 @@ form.user .btn-user {
     color: #4e73df !important;
 }
 
+.comment-status-validated {
+  color: #1cc88a;
+}
+
+.comment-status-refused {
+  color: #e74a3b;
+}
+
 
 /* richtext custom style */
 .richText {

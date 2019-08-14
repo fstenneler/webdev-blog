@@ -140,7 +140,9 @@
 }
 
 .comment-waiting-validation {
-  color: grey !important;
+  color: rgba(0, 0, 0, 0.5) !important;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1.6rem;
 }
 
 .existing-account {

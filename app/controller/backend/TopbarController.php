@@ -22,7 +22,7 @@ class TopbarController extends ControllerApp
         $this->app()->setData('avatarIcon', $this->generateAvatarIcon($this->app()->httpRequest()->getSession('user')->avatar, $this->app()->httpRequest()->getSession('user')->nickname));
 
         //commentList
-        $commentList = CommentModel::getCommentList($this->app()->httpRequest()->getData('postId'), 'Attente'); 
+        $commentList = CommentModel::getCommentList(0, 'Attente'); 
         $commentListGroup = $this->generateCommentListDetails($commentList);
         $this->app()->setData('commentList', $commentListGroup);
         $this->app()->setData('CommentNumber', count($commentList));

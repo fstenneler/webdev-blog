@@ -77,12 +77,12 @@ class UserModel
 
         $db = new Database();
 
-        if($attributes['id'] === 0) {
-            $query = '
-        INSERT INTO';
-        } else {
+        if($attributes['id'] > 0) {
             $query = '
         UPDATE';
+        } else {
+            $query = '
+        INSERT INTO';
         }
 
         $query .= '
@@ -95,12 +95,14 @@ class UserModel
         nickname = :nickname,
         avatar = :avatar,
         description = :description,
-        registration_date = NOW(),
+        registration_date = :registration_date,
         role = :role';
 
         if($attributes['id'] > 0) {
             $query .= '
         WHERE id = :id';
+        } else {
+            unset($attributes['id']);
         }
 
         return $db->prepare($query, $attributes, true);

@@ -9,6 +9,7 @@ use app\lib\formManager;
 abstract class FormClassBuilder
 {
     private $mode;
+    private $formId;
     private $destination;
     private $formBuilder;
     private $formHandler;
@@ -20,6 +21,7 @@ abstract class FormClassBuilder
         $this->formBuilder = new FormBuilder($this);
         $this->formHandler = new FormHandler($this);
         $this->formManager = new formManager($this);
+        $this->formId = 0;
    }
 
     public function app()
@@ -50,6 +52,16 @@ abstract class FormClassBuilder
     public function getMode()
     {
         return $this->mode;
+    }
+
+    public function setFormId($formId)
+    {
+        $this->formId = $formId;
+    }
+
+    public function getFormId()
+    {
+        return $this->formId;
     }
 
     public function setDestination($destination)

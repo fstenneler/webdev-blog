@@ -24,5 +24,16 @@
 
     $('#post-content').richText();
 
+    $(".submit-button").click(function() {
+        var status = 'Attente';
+        if($(this).val() == 'Valider') {
+            var status = 'Validé';
+        } else if($(this).val() == 'Refuser') {
+            var status = 'Refusé';
+        }
+        $(this).parent().children("input[name='status']").val(status);
+        $("#form-16").submit();
+    });
+
   })(jQuery); // End of use strict
   

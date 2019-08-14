@@ -68,12 +68,12 @@ class CommentModel
 
     }
 
-    public static function getComment($commentId)
+    public static function getComment($commentId = 0)
     {
         $db = new Database();
         $query = 'SELECT * FROM comment WHERE id = ?';
         $result = $db->prepare($query, array($commentId));
-        if(isset($result[0])) {
+        if(isset($result[0])) { 
             return $result[0];
         }
         return false;
@@ -85,8 +85,15 @@ class CommentModel
 
         $db = new Database();
 
-        $query = '
-        INSERT INTO        
+        if($attributes['id'] > 0) {
+            $query = '
+        UPDATE';
+        } else {
+            $query = '
+        INSERT INTO';
+        }
+
+        $query .= '
         comment
         SET
         parent_comment_id = :parent_comment_id,
@@ -96,8 +103,12 @@ class CommentModel
         post_id = :post_id,
         user_id = :user_id';
 
-        echo "<pre>"; print_r($query); echo "</pre>";
-        var_dump($attributes);
+        if($attributes['id'] > 0) {
+            $query .= '
+        WHERE id = :id';
+        } else {
+            unset($attributes['id']);
+        }
 
         return $db->prepare($query, $attributes, true);
 

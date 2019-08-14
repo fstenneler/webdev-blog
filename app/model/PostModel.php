@@ -105,7 +105,12 @@ class PostModel
             $query .= ' WHERE category_id = ?';
         };
 
-        $result = $db->prepare( $query, array($categoryId) );
+        $attributes = array();
+        if($categoryId > 0) {
+            $attributes[] = $categoryId;
+        }        
+
+        $result = $db->prepare($query, $attributes);
         return $result[0]->value;
 
     }

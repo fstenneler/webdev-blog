@@ -32,19 +32,10 @@ class Form extends FormClassBuilder
 
     public function setForm()
     {
-        //création des champs du formulaire
         $this->formBuilder()->setFields();
-
-        //chargement de la bdd et hydratation
-        if($this->getMode() === 'update') {
-            $data = $this->formManager()->loadData();
-            $this->formBuilder()->setFieldValues($data);
-        }
-
-        //chargement des variables post, hydratation et test des erreurs
         if($this->isSubmited()) {
-            $data = $this->app()->httpRequest()->postData();
-            $this->formBuilder()->setFieldValues($data);
+            $this->formBuilder()->setFieldValues($this->app()->httpRequest()->postData());
+            $this->formBuilder()->setDefaultValues();
             $this->formHandler()->setErrors();
         }
 
@@ -52,8 +43,7 @@ class Form extends FormClassBuilder
 
     public function setValidation()
     {       
-        //enregistrement et redirection
-        if($this->isSubmited()) { 
+        if($this->isSubmited()) {
             if($this->formHandler()->isValid()) {
                 if($this->formManager()->save()) {
                     $this->setSuccess(true);
@@ -66,7 +56,10 @@ class Form extends FormClassBuilder
 
     public function isSubmited()
     {
-        if($this->app()->httpRequest()->postData('submit') !== null) {
+        if(
+            ($this->app()->httpRequest()->postData('submit') !== null && $this->getFormId() === 0)
+            || ($this->app()->httpRequest()->postData('submit') !== null && $this->getFormId() === (int) $this->app()->httpRequest()->postData('id'))
+        ) {
             return true;
         }
         return false;

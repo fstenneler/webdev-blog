@@ -145,6 +145,10 @@
                                                 <?= $commentLevel2->content; ?>
                                             </div>
 
+                                            <?php if($commentLevel2->status === 'Attente' && $commentLevel2->user_id === $this->app()->httpRequest()->getSession('user')->id) { ?>
+                                                <i class="comment-waiting-validation">Commentaire en attente de validation</i>
+                                            <?php } ?>
+
                                         </div>
 
                                     </li>

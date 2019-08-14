@@ -11,10 +11,11 @@ class Field
     private $type;
     private $isMandatory;
     private $placeHolder;
+    private $enumValues;
     private $value;
     private $error;
 
-    public function __construct($fieldName, $placeHolder, $minLength, $maxLength, $type, $isMandatory)
+    public function __construct($fieldName, $placeHolder, $minLength, $maxLength, $type, $isMandatory, $enumValues)
     {
         $this->fieldName = $fieldName;
         $this->maxLength = $maxLength;
@@ -22,8 +23,19 @@ class Field
         $this->type = $type;
         $this->isMandatory = $isMandatory;
         $this->placeHolder = $placeHolder;
+        $this->enumValues = $enumValues;
         $this->value = null;
         $this->error = null;
+    }
+
+    public function setAttributes($placeHolder, $minLength, $maxLength, $type, $isMandatory, $enumValues)
+    {
+        $this->maxLength = $maxLength;
+        $this->minLength = $minLength;
+        $this->type = $type;
+        $this->isMandatory = $isMandatory;
+        $this->placeHolder = $placeHolder;
+        $this->enumValues = $enumValues;
     }
 
     public function getName()
@@ -49,6 +61,11 @@ class Field
     public function getPlaceHolder()
     {
         return $this->placeHolder;
+    }
+
+    public function getEnumValues()
+    {
+        return $this->enumValues;
     }
 
     public function setValue($value)
