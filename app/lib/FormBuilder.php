@@ -68,6 +68,21 @@ class FormBuilder Extends FormComponent
             $this->createField('user_id', null, 0, 11, 'integer', false);
             $this->createField('post_id', null, 0, 11, 'integer', false);
 
+        } elseif($this->form()->getDestination() === 'post') {
+
+            $this->createField('id', null, 0, 11, 'integer', false);
+            $this->createField('title', 'Titre de l\'article', 0, 255, 'string', true);
+            $this->createField('header', 'Chapô', 0, 255, 'string', true);
+            $this->createField('content', 'Texte de l\'article', 0, 5000, 'string', true);
+            $this->createField('image_main', null, 0, 255, 'string', false);
+            $this->createField('image_medium', null, 0, 255, 'string', false);
+            $this->createField('image_small', null, 0, 255, 'string', false);
+            $this->createField('creation_date', null, 0, 10, 'string', false);
+            $this->createField('last_modification_date', null, 0, 10, 'integer', false);
+            $this->createField('is_hero', null, 0, 1, 'integer', true);
+            $this->createField('user_id', null, 0, 11, 'integer', true);
+            $this->createField('category_id', null, 0, 11, 'integer', true);
+
         }
         
     }
@@ -102,6 +117,16 @@ class FormBuilder Extends FormComponent
                 $this->setFieldValue('user_id', (int) $this->app()->httpRequest()->getSession('user')->id);
             }
             $this->setFieldValue('post_id', (int) $this->app()->httpRequest()->getData('postId'));
+            
+        } elseif($this->form()->getDestination() === 'post') {
+
+            if($this->form()->getMode() === 'insert') {
+                $this->setFieldValue('id', 0);
+                $this->setFieldValue('creation_date', date('Y-m-d'));
+                $this->setFieldValue('user_id', (int) $this->app()->httpRequest()->getSession('user')->id);
+            } else {
+                $this->setFieldValue('last_modification_date', date('Y-m-d'));
+            }
             
         }
 

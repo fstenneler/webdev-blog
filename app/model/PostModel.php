@@ -25,7 +25,7 @@ class PostModel
         $query = '
         SELECT 
 
-        post.id as post_id, 
+        post.id, 
         post.title, 
         post.header, 
         post.image_main, 
@@ -94,6 +94,20 @@ class PostModel
 
     }
 
+    public static function getFormPost($postId)
+    {
+
+        $db = new Database();
+        $query = 'SELECT * FROM post WHERE id = ?';
+        $result = $db->prepare($query, array($postId));
+
+        if(isset($result[0])) {
+            return $result[0];
+        }
+        return array();
+
+    }
+
     public static function getPostNumber($categoryId = 0)
     {
 
@@ -112,6 +126,45 @@ class PostModel
 
         $result = $db->prepare($query, $attributes);
         return $result[0]->value;
+
+    }
+
+    public static function setPost($attributes)
+    {
+
+        $db = new Database();
+
+        if($attributes['id'] > 0) {
+            $query = '
+        UPDATE';
+        } else {
+            $query = '
+        INSERT INTO';
+        }
+
+        $query .= '
+        post
+        SET
+        title = :title,
+        header = :header,
+        content = :content,
+        image_main = :image_main,
+        image_medium = :image_medium,
+        image_small = :image_small,
+        creation_date = :creation_date,
+        last_modification_date = :last_modification_date,
+        is_hero = :is_hero,
+        user_id = :user_id,
+        category_id = :category_id';
+
+        if($attributes['id'] > 0) {
+            $query .= '
+        WHERE id = :id';
+        } else {
+            unset($attributes['id']);
+        }
+
+        return $db->prepare($query, $attributes, true);
 
     }
 

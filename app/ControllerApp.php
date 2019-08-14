@@ -34,7 +34,7 @@ class ControllerApp
    {
       foreach($postList as $key => $post) {
          $postList[$key]->avatar_icon = $this->generateAvatarIcon($post->user_avatar, $post->user_nickname);
-         $postList[$key]->url = $this->app()->route()->setUrl(array('page' => 'viewpost', 'postId' => $post->post_id));
+         $postList[$key]->url = $this->app()->route()->setUrl(array('page' => 'viewpost', 'postId' => $post->id));
          $postList[$key]->creation_date = $this->generateFrenchDate($post->creation_date);
          $postList[$key]->last_modification_date = $this->generateFrenchDate($post->last_modification_date);
          $postList[$key]->last_modification_date = $this->generateFrenchDate($post->last_modification_date);

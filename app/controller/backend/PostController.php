@@ -3,6 +3,7 @@
 namespace app\controller\backend;
 
 use app\ControllerApp;
+use app\lib\Form;
 use app\model\PostModel;
 use app\model\UserModel;
 use app\model\CategoryModel;
@@ -40,6 +41,18 @@ class PostController extends ControllerApp
 
         //userList
         $this->app()->setData('userList', UserModel::getUserList('Administrateur'));
+
+        //postForm
+        if($this->app()->httpRequest()->getData('action') === 'update' && $this->app()->httpRequest()->getData('postId') > 0) {
+            $form = new Form($this->app());
+            $form->setMode('update');
+            $form->setDestination('post');
+            $form->setForm();
+            if($form->setValidation()) {
+                return $this->app()->route()->setRoute('index.php?page=post&action=update&postId=' . $this->app()->httpRequest()->getData('postId'));
+            }
+            $this->app()->setData('form', $form);
+        }
 
         $pageName = $this->app()->getPageName() . $this->app()->httpRequest()->getData('action');
         return $this->app()->httpResponse()->generateView($pageName);

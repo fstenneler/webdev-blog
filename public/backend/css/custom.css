@@ -22,6 +22,12 @@ form.user .form-control-user {
     padding: 1.5rem 1rem;
 }
  
+form.user .form-control-error {
+    font-size: 0.8rem;
+    color: red;
+    margin-top: 5px;
+}
+
 form.user textarea.user {
     height: 15rem;
 }
