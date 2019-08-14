@@ -44,7 +44,7 @@ class FormHandler Extends FormComponent
             if($field->getValue() === $value) {
                 return $field->getError();
             }
-        } echo "oui"; die();
+        }
         return 'La valeur du champ est incorrecte';
     }
 
