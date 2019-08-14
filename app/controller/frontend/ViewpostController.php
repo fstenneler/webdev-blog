@@ -38,7 +38,7 @@ class ViewpostController extends ControllerApp
         }
 
         //commentList
-        $commentList = CommentModel::getCommentList($this->app()->httpRequest()->getData('postId'), 'Validé', $this->app()->user()->getUserId());
+        $commentList = CommentModel::getCommentList($this->app()->httpRequest()->getData('postId'), 'Validé', $this->app()->user()->getUserId(), 0);
         $this->app()->setData('commentList', $this->generateCommentListDetails($commentList));
         $this->app()->setData('CommentNumberText', $this->generateCommentNumberText($commentList));
 

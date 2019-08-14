@@ -36,7 +36,7 @@ class Form extends FormClassBuilder
         $this->formBuilder()->setFields();
 
         //chargement de la bdd et hydratation
-        if($this->getMode() === 'update' && $this->getDestination() === 'user') {
+        if($this->getMode() === 'update') {
             $data = $this->formManager()->loadData();
             $this->formBuilder()->setFieldValues($data);
         }

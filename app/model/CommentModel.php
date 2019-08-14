@@ -68,6 +68,17 @@ class CommentModel
 
     }
 
+    public static function getComment($commentId)
+    {
+        $db = new Database();
+        $query = 'SELECT * FROM comment WHERE id = ?';
+        $result = $db->prepare($query, array($commentId));
+        if(isset($result[0])) {
+            return $result[0];
+        }
+        return false;
+    }
+
 
     public static function setComment($attributes)
     {
@@ -80,10 +91,13 @@ class CommentModel
         SET
         parent_comment_id = :parent_comment_id,
         content = :content,
-        date = NOW(),
+        date = :date,
         status = :status,
         post_id = :post_id,
         user_id = :user_id';
+
+        echo "<pre>"; print_r($query); echo "</pre>";
+        var_dump($attributes);
 
         return $db->prepare($query, $attributes, true);
 

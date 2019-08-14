@@ -43,8 +43,10 @@
       </h6>
 
       <?php 
+      $nb = 0;
       foreach($this->app()->getData('commentList') as $commentGroup) { 
         foreach($commentGroup as $comment) {
+          $nb ++;
       ?>
 
       <a class="dropdown-item d-flex align-items-center" href="index.php?page=comment&action=view&postId=<?= htmlspecialchars($comment->post_id); ?>">
@@ -58,6 +60,9 @@
       </a>
 
       <?php 
+          if($nb > 8) {
+            break;
+          }
         }
       } 
       ?> 

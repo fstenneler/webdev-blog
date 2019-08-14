@@ -72,12 +72,12 @@ class UserModel
 
     }
 
-    public static function setUser($attributes, $userId = 0)
+    public static function setUser($attributes)
     {
 
         $db = new Database();
 
-        if($userId === 0) {
+        if($attributes['id'] === 0) {
             $query = '
         INSERT INTO';
         } else {
@@ -98,13 +98,9 @@ class UserModel
         registration_date = NOW(),
         role = :role';
 
-        if($userId > 0) {
+        if($attributes['id'] > 0) {
             $query .= '
         WHERE id = :id';
-        }
-
-        if($userId > 0) {
-            $attributes['id'] = $userId;
         }
 
         return $db->prepare($query, $attributes, true);

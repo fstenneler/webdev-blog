@@ -8,16 +8,18 @@ class Field
     private $fieldName;
     private $minLength;
     private $maxLength;
+    private $type;
     private $isMandatory;
     private $placeHolder;
     private $value;
     private $error;
 
-    public function __construct($fieldName, $placeHolder, $minLength, $maxLength, $isMandatory)
+    public function __construct($fieldName, $placeHolder, $minLength, $maxLength, $type, $isMandatory)
     {
         $this->fieldName = $fieldName;
         $this->maxLength = $maxLength;
         $this->minLength = $minLength;
+        $this->type = $type;
         $this->isMandatory = $isMandatory;
         $this->placeHolder = $placeHolder;
         $this->value = null;
@@ -52,6 +54,11 @@ class Field
     public function setValue($value)
     {
         $this->value = $value;
+    }
+
+    public function getType()
+    {
+        return $this->type;
     }
 
     public function getValue()
