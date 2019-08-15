@@ -48,6 +48,17 @@ class FormHandler Extends FormComponent
         return 'La valeur du champ est incorrecte';
     }
 
+    public function getFileFieldError(Field $field)
+    {   
+        if(!preg_match('#image#', $_FILES[$field->getName()]['type'])) {
+            return 'Le type du fichier chargé n\'est pas pris en charge';
+        }
+        if(!preg_match('#image#', $_FILES[$field->getName()]['type'])) {
+            return 'Le fichier chargé dépasse la taille maximum autorisée';
+        }
+        return $field->getError();
+    }
+
     public function getGenericFieldError(Field $field)
     {
         if($field->getMinLength() > 0 && strlen($field->getValue()) < $field->getMinLength()) {
@@ -56,7 +67,7 @@ class FormHandler Extends FormComponent
         if(strlen($field->getValue()) > $field->getMaxLength() && $field->getMaxLength() > 0) {
             return 'Le nombre maximum de caractères est de ' .$field->getMaxLength();
         }
-        if($field->isMandatory() && $field->getValue() == '') {
+        if($field->isMandatory() && trim(strip_tags($field->getValue())) == '') {
             return 'Le champ est obligatoire';
         }
         return $field->getError();

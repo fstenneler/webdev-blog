@@ -42,7 +42,7 @@ class Database
             $result = $req->execute($attributes);
         }
 
-        if(preg_match("#^SELECT#", trim($query))) {
+        if(preg_match("#^SELECT#", trim($query)) || preg_match("#^SHOW#", trim($query))) {
             $req->setFetchMode(PDO::FETCH_OBJ);
             return $req->fetchAll();
         } else {

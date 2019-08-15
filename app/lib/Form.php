@@ -6,30 +6,6 @@ use app\lib\FormClassBuilder;
 class Form extends FormClassBuilder
 {
 
-    public function generateHtmlField(Field $field)
-    {
-        $required = null;
-        $type = 'text';
-
-        if($field->isMandatory()) {
-            $required = ' required';
-        }
-        if($field->getName() === 'email') {
-           $type = 'email';
-        }
-        if($field->getName() === 'password') {
-            $type = 'password';
-        }
-
-        $html = '<div><input name="' . htmlspecialchars($field->getName()) . '" id="c' . htmlspecialchars(ucfirst($field->getName())) . '" class="full-width" placeholder="' . htmlspecialchars($field->getPlaceHolder()) . '*" value="' . htmlspecialchars($field->getValue()) . '" type="' . $type . '" minlength="' . htmlspecialchars($field->getMinlength()) . '" maxlength="' . htmlspecialchars($field->getMaxlength()) . '"'. $required . '></div>';
-
-        if($field->getError() !== null && $this->isSubmited()) {
-            $html .= '<div class="error">' . $field->getError() . '</div>';
-        }
-
-        return $html;
-    }
-
     public function setForm()
     {
         $this->formBuilder()->setFields();

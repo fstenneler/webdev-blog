@@ -87,15 +87,15 @@ class App
         $this->route()->setLastRoute();
 
 
-        if($this->zoneName === 'backend') {
+        if($this->zoneName === 'admin') {
             $this->route()->setBackendAccess();
         }
 
         $view = array($this->pageName);
-        if($this->zoneName === 'backend') {
+        if($this->zoneName === 'admin') {
             $view[] = 'topbar';
             $view[] = 'navbar';
-        } elseif($this->zoneName === 'frontend') {
+        } elseif($this->zoneName === 'front') {
             $view[] = 'header';
             $view[] = 'footer';
         }

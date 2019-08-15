@@ -37,7 +37,6 @@ class ControllerApp
          $postList[$key]->url = $this->app()->route()->setUrl(array('page' => 'viewpost', 'postId' => $post->id));
          $postList[$key]->creation_date = $this->generateFrenchDate($post->creation_date);
          $postList[$key]->last_modification_date = $this->generateFrenchDate($post->last_modification_date);
-         $postList[$key]->last_modification_date = $this->generateFrenchDate($post->last_modification_date);
          $postList[$key]->category_url = $this->app()->route()->setUrl(array('page' => 'posts', 'categoryId' => $post->category_id));
       }
       return $postList;

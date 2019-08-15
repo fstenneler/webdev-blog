@@ -11,6 +11,8 @@ abstract class FormClassBuilder
     private $mode;
     private $formId;
     private $destination;
+    private $mandatoryFields = array();
+    private $defaultValues = array();
     private $formBuilder;
     private $formHandler;
     private $formManager;
@@ -72,6 +74,28 @@ abstract class FormClassBuilder
     public function getDestination()
     {
         return $this->destination;
+    }
+
+    public function setMandatoryFields($mandatoryFields)
+    {
+        $this->mandatoryFields = $mandatoryFields;
+
+    }
+
+    public function getMandatoryFields()
+    {
+        return $this->mandatoryFields;
+    }
+
+    public function setDefaultValues($defaultValues)
+    {
+        $this->defaultValues = $defaultValues;
+
+    }
+
+    public function getDefaultValues()
+    {
+        return $this->defaultValues;
     }
 
 }

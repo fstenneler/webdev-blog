@@ -11,13 +11,13 @@ require('app/ClassAutoloader.php');
 app\ClassAutoloader::register();
 
 //routeur
-$zone = 'frontend'; //zone par défaut
+$zone = 'front'; //zone par défaut
 if(isset($_GET['zone'])) {
     $zone = $_GET['zone'];
 }
 
 $page = 'home'; //page par défaut
-if($zone === 'backend') {
+if($zone === 'admin') {
     $page = 'post';
 }
 
