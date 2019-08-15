@@ -1,0 +1,239 @@
+.form-error {
+    color: #9d1111;
+    margin-top: 40px;
+}
+
+.form-success {
+  color: #28B463;
+  margin-top: 40px;
+}
+
+/* -------------------------------------------------------------------
+ * ## header search trigger
+ * ------------------------------------------------------------------- */
+ .header__search-trigger {
+    right: 80px;
+  }
+
+.header__sign-in-trigger-normal {
+    position: absolute;
+    top: 38%;
+    right: 40px;
+    cursor: pointer;
+}
+
+.header__sign-in-trigger-avatar {
+  position: absolute;
+  top: 31%;
+  right: 30px;
+  cursor: pointer;
+}
+
+.user-avatar-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 19px;
+  color: white;
+  font-weight: 600;
+}
+
+@media only screen and (max-width:600px) {
+
+  .header__sign-in-trigger-normal {
+    right: 30px;
+  }
+
+  .header__sign-in-trigger-avatar {
+    right: 20px;
+  }
+
+  .header__search-trigger {
+      right: 70px;
+    }
+        
+}
+
+@media only screen and (max-width:400px) {
+
+  .header__sign-in-trigger-normal {
+    right: 20px;
+  }
+
+  .header__sign-in-trigger-avatar {
+      right: 10px;
+    }
+  
+  .header__search-trigger {
+      right: 50px;
+    }
+        
+}
+
+  #header__connection_modal {
+      position: absolute;
+      right: 10px;
+      top: 100%;
+      margin: 0;
+      background: #151515;
+      border-radius: 0 0 3px 3px;
+      text-align: left;
+      z-index: 500;
+      display: none;
+      list-style-type: none;
+      padding-bottom: 1.8rem;
+}
+
+  #header__connection_modal li {
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+  }
+
+  #header__connection_modal .normal {
+    padding: 1.8rem 1.8rem 0rem 1.8rem;
+  }
+
+  #header__connection_modal .nickname {
+    color: white;
+    font-size: 15px;
+    padding: 0.5rem 1.8rem 0.5rem 1.8rem;
+  }
+
+  #header__connection_modal a {
+    white-space: nowrap;
+    font-family: "Nunito Sans", sans-serif;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 18px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 15px;
+    font-weight: 400;
+    -webkit-transition: color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
+  }
+
+  #header__connection_modal a:hover {
+    color: white;
+  }
+
+  .commentlist .depth-1 {
+    margin-top: 1rem;
+  }
+
+  .comment ul.children li {
+    margin-top: 3rem;
+  }
+
+.comment-reply-link {
+  font-size: 1.3rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .2rem;
+  color: #000000;
+  cursor: pointer;
+}
+
+.comment-reply-form {
+  display: auto;
+}
+
+.comment-waiting-validation {
+  color: rgba(0, 0, 0, 0.5) !important;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1.6rem;
+}
+
+.existing-account {
+  text-align: center;
+}
+
+.form-color-picker-title {
+  margin-top: 20px;
+  color: #919191;
+  font-size: 1.6rem;
+}
+
+.form-color-picker {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  margin-top: 15px;
+  padding: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-color-picker li {
+  width: 39px;
+  height: 39px;
+  display: block;
+  margin: 2px;
+  padding: 0;
+  display: block;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.form-color-picker li:hover {
+  border: 2px solid black;
+}
+
+.form-color-picker .border {
+  border: 2px solid black;
+}
+
+.entry__author-icon {
+  margin: 0 !important;
+  width: 6.9rem;
+  height: 6.9rem;
+  border-radius: 50%;
+  position: absolute;
+  left: 6.5rem;
+  top: 5.2rem;
+}
+
+.comment-reply-form {
+  display: none;
+}
+
+.message-comment-connected-reply {
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.message-comment-connected {
+  text-align: center;
+}
+
+.contact-form .error {
+  color: #A93226;
+  margin-top: 1rem;
+  font-size: 1.6rem;
+}
+
+.password-forgotten {
+  display: block;
+  margin: 2.8rem 0;
+  color: #1d28a1;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1.6rem;
+  line-height: 3rem;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.password-forgotten:hover {
+  color: #7B2890;
+}
+
+.form-privacy-consent {
+  margin-top: 3rem;
+}
+
+.privacy-consent {
+  margin-left: 1rem;
+}
