@@ -42,21 +42,21 @@ class ControllerApp
       return $postList;
    }
 
-   protected function generatePagination($categoryId = 0, $anchor = null)
+   protected function generatePagination($categoryId = 0, $search = null, $anchor = null)
    {
 
       $pagination = array();
       $pagination['dbStart'] = 0;
       $pagination['currentPage'] = 1;
       $pagination['pageList'] = array();
-      $pagination['pageNumber'] = ceil( (int) PostModel::getPostNumber($categoryId) / POST_NUMBER );
+      $pagination['pageNumber'] = ceil( (int) PostModel::getPostNumber($categoryId, $search) / POST_NUMBER );
 
       if($this->app()->httpRequest()->getData('currentPage') > 0 && $this->app()->httpRequest()->getData('currentPage') <= $pagination['pageNumber']) {
          $pagination['currentPage'] = $this->app()->httpRequest()->getData('currentPage');
          $pagination['dbStart'] = ($this->app()->httpRequest()->getData('currentPage') - 1) * POST_NUMBER;
       }
 
-      $parameters = array('page' => $this->app()->getPageName(), 'categoryId' => $categoryId, 'anchor' => $anchor);
+      $parameters = array('page' => $this->app()->getPageName(), 'categoryId' => $categoryId, 'search' => $search, 'anchor' => $anchor);
       $pagination['nextPageUrl'] = $this->app()->route()->setUrl($parameters);
       $pagination['previousPageUrl'] = $this->app()->route()->setUrl($parameters);
 

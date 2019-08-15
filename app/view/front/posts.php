@@ -2,16 +2,28 @@
     ================================================== -->
     <section class="s-content s-content--top-padding">
 
+        <?php if($this->app()->httpRequest()->getData('categoryId') > 0) { ?>
         <div class="row narrow">
             <div class="col-full s-content__header" data-aos="fade-up">
                 <h1 class="display-1 display-1--with-line-sep">Categorie : <?= $this->app()->getData('categoryName'); ?></h1>
             </div>
         </div>
+        <?php } ?>
+
+        <?php if($this->app()->httpRequest()->getData('search') !== '') { ?>
+        <div class="row narrow">
+            <div class="col-full s-content__header" data-aos="fade-up">
+                <h1 class="display-1 display-1--with-line-sep">Recherche : <?= $this->app()->httpRequest()->getData('search'); ?></h1>
+            </div>
+        </div>
+        <?php } ?>
         
         <div class="row entries-wrap add-top-padding wide">
         <div class="entries">
-                <a name="posts"></a>
+            <a name="posts"></a>
                 
+            <?php if(count($this->app()->getData('postList')) > 0) { ?>
+
                 <?php foreach($this->app()->getData('postList') as $post) { ?>
                 <article class="col-block">
                     
@@ -38,9 +50,16 @@
                 </article> <!-- end article -->
                 <?php } ?>
 
+            <?php } else { ?>
+                <div class="col-full s-content__header" data-aos="fade-up">
+                <h1 class="item-entry__title">Aucun article n'a été trouvé</h1>
+                </div>
+            <?php } ?>
+
             </div> <!-- end entries -->
         </div> <!-- end entries-wrap -->
-
+        
+        <?php if(count($this->app()->getData('postList')) > 0) { ?>
         <div class="row pagination-wrap">
             <div class="col-full">
                 <nav class="pgn" data-aos="fade-up">
@@ -57,5 +76,6 @@
                 </nav>
             </div>
         </div>
+        <?php } ?>
 
     </section> <!-- end s-content -->

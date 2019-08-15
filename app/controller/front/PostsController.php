@@ -14,16 +14,18 @@ class PostsController extends ControllerApp
     {
 
         //Test existance catégorie
-        if(CategoryModel::categoryExists($this->app()->httpRequest()->getData('categoryId')) === false) {
-            return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'error')));
+        if($this->app()->httpRequest()->getData('categoryId') > 0) {
+            if(CategoryModel::categoryExists($this->app()->httpRequest()->getData('categoryId')) === false) {
+                return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'error')));
+            }
         }
 
         //categoryName
         $this->app()->setData('categoryName', CategoryModel::getCategoryName($this->app()->httpRequest()->getData('categoryId')));
 
         //postList
-        $pagination = $this->generatePagination($this->app()->httpRequest()->getData('categoryId'));
-        $postList = PostModel::getPost(array('start' => $pagination['dbStart'], 'categoryId' => $this->app()->httpRequest()->getData('categoryId'), 'display' => 1));
+        $pagination = $this->generatePagination($this->app()->httpRequest()->getData('categoryId'), $this->app()->httpRequest()->getData('search'));
+        $postList = PostModel::getPost(array('start' => $pagination['dbStart'], 'categoryId' => $this->app()->httpRequest()->getData('categoryId'), 'search' => $this->app()->httpRequest()->getData('search'), 'display' => 1));
         $postList = $this->generatePostListDetails($postList);
         $this->app()->setData('pagination', $pagination);
         $this->app()->setData('postList', $postList);

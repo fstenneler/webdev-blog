@@ -20,6 +20,7 @@ class PostModel
         $start = self::getParam($param, 'start', 0);
         $number = self::getParam($param, 'number', POST_NUMBER);
         $display = self::getParam($param, 'display', 0);
+        $search = self::getParam($param, 'search', null);
 
         $db = new Database();
 
@@ -61,6 +62,11 @@ class PostModel
         AND post.category_id = :category_id';
         }
 
+        if($search !== '') {
+            $query .= '
+        AND (post.title LIKE :search1 OR post.header LIKE :search2 OR post.content LIKE :search3 OR category.name LIKE :search4)';
+        }
+
         if($isHero === 1) {
             $query .= '
         AND post.is_hero = 1';
@@ -85,6 +91,12 @@ class PostModel
         }
         if($categoryId > 0) {
             $attributes['category_id'] = $categoryId;
+        }
+        if($search !== '') {
+            $attributes['search1'] = '%' . $search . '%';
+            $attributes['search2'] = '%' . $search . '%';
+            $attributes['search3'] = '%' . $search . '%';
+            $attributes['search4'] = '%' . $search . '%';
         }
         if($number > 0 && $postId == 0) {
             $attributes['start'] = $start;
@@ -114,23 +126,39 @@ class PostModel
 
     }
 
-    public static function getPostNumber($categoryId = 0)
+    public static function getPostNumber($categoryId = 0, $search = null)
     {
 
         $db = new Database();
 
-        $query = 'SELECT COUNT(id) as value FROM post';
+        $query = '
+        SELECT        
+        COUNT(post.id) as value        
+        FROM post 
+        LEFT JOIN category ON category.id = post.category_id
+        WHERE post.id>0';
 
         if( $categoryId > 0 ) {
-            $query .= ' WHERE category_id = ?';
+            $query .= '
+        AND category_id = :category_id';
         };
+        if($search !== '') {
+            $query .= '
+        AND (post.title LIKE :search1 OR post.header LIKE :search2 OR post.content LIKE :search3 OR category.name LIKE :search4)';
+        }        
 
         $attributes = array();
         if($categoryId > 0) {
-            $attributes[] = $categoryId;
-        }        
+            $attributes['category_id'] = $categoryId;
+        }
+        if($search !== '') {
+            $attributes['search1'] = '%' . $search . '%';
+            $attributes['search2'] = '%' . $search . '%';
+            $attributes['search3'] = '%' . $search . '%';
+            $attributes['search4'] = '%' . $search . '%';
+        }
 
-        $result = $db->prepare($query, $attributes);
+        $result = $db->prepare($query, $attributes, true);
         return $result[0]->value;
 
     }

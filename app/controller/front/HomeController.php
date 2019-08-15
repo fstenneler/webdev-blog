@@ -17,7 +17,7 @@ class HomeController extends ControllerApp
         $this->app()->setData('heroPostList', $postList);
 
         //postList
-        $pagination = $this->generatePagination(0, 'posts');
+        $pagination = $this->generatePagination(0, null, 'posts');
         $postList = PostModel::getPost(array('start' => $pagination['dbStart']));
         $postList = $this->generatePostListDetails($postList);
         $this->app()->setData('pagination', $pagination);
