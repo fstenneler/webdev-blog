@@ -14,45 +14,66 @@
             </div>
             <div class="card-body">
 
-                <form class="user">
+                <?php $form = $this->app()->getData('form'); ?>
+
+                <form class="user" method="post" action="">
                   <div class="form-group row">
                         <div class="col-lg-4">
                             <label for="userRole">Rôle</label>
-                            <select class="form-control form-control-user" id="userRole" placeholder="Rôle">
-                                <option value="Administrateur"<?php if($user->role === 'Administrateur') { echo " selected"; } ?>>Administrateur</option>
-                                <option value="Visiteur"<?php if($user->role === 'Visiteur') { echo " selected"; } ?>>Visiteur</option>
+                            <select name="role" class="form-control form-control-user" id="userRole" placeholder="Rôle">
+                                <option></option>
+                                <option value="Administrateur"<?php if($form->formBuilder()->getField('role')->getValue() === 'Administrateur') { echo " selected"; } ?>>Administrateur</option>
+                                <option value="Visiteur"<?php if($form->formBuilder()->getField('role')->getValue() === 'Visiteur') { echo " selected"; } ?>>Visiteur</option>
                             </select>
+                            <?php if($form->formBuilder()->getField('role')->getError() !== null && $form->isSubmited()) { ?>
+                                <div class="form-control-error"><?= $form->formBuilder()->getField('role')->getError(); ?></div>
+                            <?php } ?>
                         </div>
                    </div>
                    <div class="form-group row">
                         <div class="col-sm-12 col-lg-4">
                             <label for="userNickname">Pseudo</label>
-                            <input type="text" class="form-control form-control-user" id="userNickname" placeholder="Pseudo" value="<?= htmlspecialchars($user->nickname); ?>">
+                            <input name="nickname" type="text" class="form-control form-control-user" id="userNickname" placeholder="Pseudo" value="<?= htmlspecialchars($form->formBuilder()->getField('nickname')->getValue()); ?>">
+                            <?php if($form->formBuilder()->getField('nickname')->getError() !== null && $form->isSubmited()) { ?>
+                                <div class="form-control-error"><?= $form->formBuilder()->getField('nickname')->getError(); ?></div>
+                            <?php } ?>
                         </div>
                         <div class="col-sm-12 col-lg-4">
                             <label for="userNickname">E-mail</label>
-                            <input type="text" class="form-control form-control-user" id="userNickname" placeholder="E-mail" value="<?= htmlspecialchars($user->email); ?>">
+                            <input name="email" type="text" class="form-control form-control-user" id="userNickname" placeholder="E-mail" value="<?= htmlspecialchars($form->formBuilder()->getField('email')->getValue()); ?>">
+                            <?php if($form->formBuilder()->getField('email')->getError() !== null && $form->isSubmited()) { ?>
+                                <div class="form-control-error"><?= $form->formBuilder()->getField('email')->getError(); ?></div>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-lg-4">
                             <label for="userFirstname">Prénom</label>
-                            <input type="text" class="form-control form-control-user" id="userFirstname" placeholder="Prénom" value="<?= htmlspecialchars($user->first_name); ?>">
+                            <input name="first_name" type="text" class="form-control form-control-user" id="userFirstname" placeholder="Prénom" value="<?= htmlspecialchars($form->formBuilder()->getField('first_name')->getValue()); ?>">
+                            <?php if($form->formBuilder()->getField('first_name')->getError() !== null && $form->isSubmited()) { ?>
+                                <div class="form-control-error"><?= $form->formBuilder()->getField('first_name')->getError(); ?></div>
+                            <?php } ?>
                         </div>
                         <div class="col-sm-12 col-lg-4">
                             <label for="userName">Nom</label>
-                            <input type="text" class="form-control form-control-user" id="userName" placeholder="Nom" value="<?= htmlspecialchars($user->name); ?>">
+                            <input name="name" type="text" class="form-control form-control-user" id="userName" placeholder="Nom" value="<?= htmlspecialchars($form->formBuilder()->getField('name')->getValue()); ?>">
+                            <?php if($form->formBuilder()->getField('name')->getError() !== null && $form->isSubmited()) { ?>
+                                <div class="form-control-error"><?= $form->formBuilder()->getField('name')->getError(); ?></div>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-lg-9">
                             <label for="userDescription">Description</label>
-                            <textarea class="form-control form-control-user" id="userDescription" placeholder="Description" style="height: 15em;"><?= $user->description; ?></textarea>
+                            <textarea name="description" class="form-control form-control-user" id="userDescription" placeholder="Description" style="height: 15em;"><?= $form->formBuilder()->getField('description')->getValue(); ?></textarea>
+                            <?php if($form->formBuilder()->getField('description')->getError() !== null && $form->isSubmited()) { ?>
+                                <div class="form-control-error"><?= $form->formBuilder()->getField('description')->getError(); ?></div>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-lg-9">
-                            <a href="login.html" class="btn btn-primary btn-user btn-block">Enregistrer les modifications</a>
+                            <input name='submit' type="submit" class="btn btn-primary btn-user btn-block" value="Enregistrer les modifications">
                         </div>
                     </div>
                 </form>

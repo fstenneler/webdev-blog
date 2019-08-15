@@ -40,7 +40,7 @@ class UserController extends ControllerApp
                 $form->setDefaultValues(array('id'=> 0, 'description' => null, 'registration_date' => date('Y-m-d'), 'role' => 'Visiteur'));
                 $form->setForm();
                 if($form->setValidation()) {
-                    $user = UserModel::getUser($form->formBuilder()->getField('email')->getValue());
+                    $user = UserModel::getUserByEmail($form->formBuilder()->getField('email')->getValue());
                     return $this->app()->user()->setAuthentification($user->email, $user->password);
                 }
                 $this->app()->setData('form', $form);
@@ -56,9 +56,10 @@ class UserController extends ControllerApp
                 $form->setMode('update');
                 $form->setDestination('user');
                 $form->setMandatoryFields(array('email', 'password', 'name', 'first_name', 'nickname', 'avatar'));
+                $form->setDbRowId($this->app()->user()->getUserId());
                 $form->setForm();
                 if($form->setValidation()) {
-                    $user = UserModel::getUser($form->formBuilder()->getField('email')->getValue());
+                    $user = UserModel::getUserByEmail($form->formBuilder()->getField('email')->getValue());
                     return $this->app()->user()->setAuthentification($user->email, $user->password);
                 }
                 $this->app()->setData('form', $form);

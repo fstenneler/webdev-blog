@@ -50,6 +50,7 @@ class PostController extends ControllerApp
             $form->setDestination('post');
             $form->setMandatoryFields(array('title', 'header', 'content', 'is_hero', 'user_id', 'category_id'));
             $form->setDefaultValues(array('last_modification_date' => date('Y-m-d')));
+            $form->setDbRowId($this->app()->httpRequest()->getData('postId'));
             $form->setForm();
             if($form->setValidation()) {
                 return $this->app()->route()->setRoute('index.php?page=post&action=update&postId=' . $this->app()->httpRequest()->getData('postId'));

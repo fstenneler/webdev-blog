@@ -82,13 +82,6 @@
 
                     <input type="hidden" name="page" value="user">
                     <input type="hidden" name="action" value="account">
-                    
-
-                    <?php if($this->app()->getData('formError')) { ?>
-                        <div class='form-error'>
-                            <?= $this->app()->getData('formError'); ?>
-                        </div>
-                    <?php } ?>
 
                     <?php if($form->getSuccess()) { ?>
                         <div class='form-success'>

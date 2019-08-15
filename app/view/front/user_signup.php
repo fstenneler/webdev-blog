@@ -82,13 +82,6 @@
 
                     <input type="hidden" name="page" value="user">
                     <input type="hidden" name="action" value="signup">
-                    
-
-                    <?php if($this->app()->getData('formError')) { ?>
-                        <div class='form-error'>
-                            <?= $this->app()->getData('formError'); ?>
-                        </div>
-                    <?php } ?>
 
                     <button type="submit" class="submit btn btn--primary btn--large full-width" name="submit">Créer un compte</button>
 

@@ -16,7 +16,7 @@ class FormHandler Extends FormComponent
             if(UserModel::userExists($field->getValue())) {
                 return 'Cette adresse e-mail existe déjà';
             }
-        } elseif($field->getValue() !== $this->app()->httpRequest()->getSession('user')->email) {
+        } elseif($field->getValue() !== UserModel::getEmail($this->form()->getDbRowId())) {
             if(UserModel::userExists($field->getValue())) {
                 return 'Cette adresse e-mail existe déjà';
             }
@@ -30,7 +30,7 @@ class FormHandler Extends FormComponent
             if(UserModel::nicknameExists($field->getValue())) {
                 return 'Ce pseudo est déjà utilisé par un autre utilisateur';
             }
-        } elseif($field->getValue() !== $this->app()->httpRequest()->getSession('user')->nickname) {
+        } elseif($field->getValue() !== UserModel::getNickname($this->form()->getDbRowId())) {
             if(UserModel::nicknameExists($field->getValue())) {
                 return 'Ce pseudo est déjà utilisé par un autre utilisateur';
             }
@@ -76,10 +76,10 @@ class FormHandler Extends FormComponent
     public function setErrors()
     {
         foreach($this->formBuilder()->getFields() as $fieldName => $field) {
-            if($fieldName === 'email') {
+            if($fieldName === 'email' && $this->form()->getDestination() === 'user') {
                 $field->setError($this->getEmailFieldError($field));
             }
-            if($fieldName === 'nickname') {
+            if($fieldName === 'nickname' && $this->form()->getDestination() === 'user') {
                 $field->setError($this->getNicknameFieldError($field));
             }
             if(count($field->getEnumValues()) > 0) {

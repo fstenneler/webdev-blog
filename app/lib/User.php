@@ -14,7 +14,7 @@ class User extends ApplicationComponent
 
             if(UserModel::getPassword($email) === $password) {
                 $this->app()->httpRequest()->setSession('authenticated', true);
-                $this->app()->httpRequest()->setSession('user', UserModel::getUser($email));
+                $this->app()->httpRequest()->setSession('user', UserModel::getUserByEmail($email));
                 if($this->app()->httpRequest()->getSession('lastUrl')) {
                     return $this->app()->route()->setRoute($this->app()->httpRequest()->getSession('lastUrl'));
                 } else{

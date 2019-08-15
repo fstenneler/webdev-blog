@@ -6,6 +6,7 @@ use app\lib\Database;
 use app\model\UserModel;
 use app\model\CommentModel;
 use app\model\PostModel;
+use app\model\ContactModel;
 
 class FormManager Extends FormComponent
 {
@@ -58,11 +59,13 @@ class FormManager Extends FormComponent
         $data = array();
 
         if($this->form()->getDestination() === 'user') {
-            $model = UserModel::getUser($this->app()->httpRequest()->getSession('user')->email);
+            $model = UserModel::getUser($this->form()->getDbRowId());
         } elseif($this->form()->getDestination() === 'comment') {
-            $model = CommentModel::getComment($this->form()->getFormId());
+            $model = CommentModel::getComment($this->form()->getDbRowId());
         } elseif($this->form()->getDestination() === 'post') {
-            $model = PostModel::getFormPost($this->app()->httpRequest()->getData('postId'));
+            $model = PostModel::getFormPost($this->form()->getDbRowId());
+        } elseif($this->form()->getDestination() === 'contact') {
+            $model = ContactModel::getContact($this->form()->getDbRowId());
         }
 
         foreach($model as $fieldName => $fieldValue) {
@@ -116,6 +119,8 @@ class FormManager Extends FormComponent
             return CommentModel::setComment($attributes);            
         } elseif($this->form()->getDestination() === 'post') {
             return PostModel::setPost($attributes);            
+        } elseif($this->form()->getDestination() === 'contact') {
+            return ContactModel::setContact($attributes);            
         }
         
     }

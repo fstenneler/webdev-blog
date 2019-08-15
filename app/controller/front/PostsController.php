@@ -23,7 +23,7 @@ class PostsController extends ControllerApp
 
         //postList
         $pagination = $this->generatePagination($this->app()->httpRequest()->getData('categoryId'));
-        $postList = PostModel::getPost(array('start' => $pagination['dbStart'], 'categoryId' => $this->app()->httpRequest()->getData('categoryId')));
+        $postList = PostModel::getPost(array('start' => $pagination['dbStart'], 'categoryId' => $this->app()->httpRequest()->getData('categoryId'), 'display' => 1));
         $postList = $this->generatePostListDetails($postList);
         $this->app()->setData('pagination', $pagination);
         $this->app()->setData('postList', $postList);

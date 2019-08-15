@@ -19,6 +19,7 @@ class PostModel
         $isHero = self::getParam($param, 'isHero', 0);
         $start = self::getParam($param, 'start', 0);
         $number = self::getParam($param, 'number', POST_NUMBER);
+        $display = self::getParam($param, 'display', 0);
 
         $db = new Database();
 
@@ -63,6 +64,11 @@ class PostModel
         if($isHero === 1) {
             $query .= '
         AND post.is_hero = 1';
+        }
+
+        if($display === 1) {
+            $query .= '
+        AND post.display = 1';
         }
 
         $query .= '
@@ -154,6 +160,7 @@ class PostModel
         creation_date = :creation_date,
         last_modification_date = :last_modification_date,
         is_hero = :is_hero,
+        display = :display,
         user_id = :user_id,
         category_id = :category_id';
 

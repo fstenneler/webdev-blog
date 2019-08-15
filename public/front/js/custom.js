@@ -45,4 +45,24 @@
         $('#comment-reply-form-' + commentId).toggle('fast');
     });
 
+    $('#checkbox-privacy-consent').click(function() {
+
+        var dateObj = new Date();
+        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+        if(month < 10) {
+            month = '0' + month;
+        }
+        var day = dateObj.getUTCDate();
+        var year = dateObj.getUTCFullYear();
+        
+        newdate = year + "-" + month + "-" + day;
+
+        if($("#privacy_consent_date").val() == '') {
+            $("#privacy_consent_date").val(newdate);
+        } else {
+            $("#privacy_consent_date").val('');
+        }
+
+        });
+
 })(jQuery);

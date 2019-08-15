@@ -229,3 +229,11 @@
 .password-forgotten:hover {
   color: #7B2890;
 }
+
+.form-privacy-consent {
+  margin-top: 3rem;
+}
+
+.privacy-consent {
+  margin-left: 1rem;
+}

@@ -35,5 +35,13 @@
         $("#form-16").submit();
     });
 
+    $("#checkbox-display").click(function() {
+        if($(this).is(':checked')) {
+           $("#form-display").val('1');
+        } else {
+            $("#form-display").val('0');
+        }
+    });
+
   })(jQuery); // End of use strict
   

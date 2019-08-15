@@ -31,19 +31,11 @@
   </div>
 </li>
 
-<!-- Nav Item - Liste des utilisateurs -->
+<!-- Nav Item - Utilisateurs -->
 <li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true" aria-controls="collapseUser">
+  <a class="nav-link" href="index.php?page=user">
     <i class="fas fa-user-cog"></i>
-    <span>Utilisateurs</span>
-  </a>
-  <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
-    <div class="bg-white py-2 collapse-inner rounded">
-      <h6 class="collapse-header">Gestion des utilisateurs :</h6>
-      <a class="collapse-item" href="index.php?page=user">Liste des utilisateurs</a>
-      <a class="collapse-item" href="index.php?page=user&action=add">Ajouter un utilisateur</a>
-    </div>
-  </div>
+    <span>Utilisateurs</span></a>
 </li>
 
 <!-- Nav Item - Commentaires -->

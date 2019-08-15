@@ -15,7 +15,6 @@
                 <table class="stripe" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th></th>
                       <th>Id</th>
                       <th>Titre</th>
                       <th>Création</th>
@@ -28,7 +27,6 @@
                   </thead>
                   <tfoot>
                     <tr>
-                      <th></th>
                       <th>Id</th>
                       <th>Titre</th>
                       <th>Création</th>
@@ -42,7 +40,6 @@
                   <tbody>
                     <?php foreach($this->app()->getData('postList') as $post) { ?>
                     <tr>
-                      <td><input type="checkbox"></td>
                       <td><?= $post->id; ?></td>
                       <td><a href="index.php?page=post&action=update&postId=<?= htmlspecialchars($post->id); ?>"><?= $post->title; ?></a></td>
                       <td><?= $post->creation_date; ?></td>
@@ -63,7 +60,6 @@
                     <?php } ?>
                   </tbody>
                 </table>
-                Lignes sélectionnées : <button type="button" class="btn btn-secondary">Supprimer</button>
               </div>
             </div>
           </div>

@@ -13,6 +13,7 @@ abstract class FormClassBuilder
     private $destination;
     private $mandatoryFields = array();
     private $defaultValues = array();
+    private $dbRowId;
     private $formBuilder;
     private $formHandler;
     private $formManager;
@@ -96,6 +97,17 @@ abstract class FormClassBuilder
     public function getDefaultValues()
     {
         return $this->defaultValues;
+    }
+
+    public function setDbRowId($dbRowId)
+    {
+        $this->dbRowId = $dbRowId;
+
+    }
+
+    public function getDbRowId()
+    {
+        return $this->dbRowId;
     }
 
 }

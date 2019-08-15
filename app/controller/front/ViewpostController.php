@@ -14,7 +14,7 @@ class ViewpostController extends ControllerApp
     {
 
         //post
-        $postList = PostModel::getPost(array('postId' => $this->app()->httpRequest()->getData('postId')));
+        $postList = PostModel::getPost(array('postId' => $this->app()->httpRequest()->getData('postId'), 'display' => 1));
 
         //redirection
         if(count($postList) === 0) {
