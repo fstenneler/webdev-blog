@@ -18,7 +18,7 @@ class User extends ApplicationComponent
                 if($this->app()->httpRequest()->getSession('lastUrl')) {
                     return $this->app()->route()->setRoute($this->app()->httpRequest()->getSession('lastUrl'));
                 } else{
-                    return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'account')));
+                    return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'user', 'action' => 'account')));
                 }
             } else {
                 return false;
