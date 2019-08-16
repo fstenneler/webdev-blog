@@ -86,13 +86,9 @@
       <?php foreach($this->app()->getData('contactList') as $contact) { ?>
 
       <a class="dropdown-item d-flex align-items-center" href="index.php?page=contact&action=view&contactId=<?= $contact->id; ?>">
-        <div class="dropdown-list-image mr-3">
-          <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
-          <div class="status-indicator bg-success"></div>
-        </div>
         <div class="font-weight-bold">
           <div class="text-truncate"><?= $contact->subject; ?></div>
-          <div class="small text-gray-500"><?= $contact->first_name; ?> <?= $contact->name; ?> · <?= $contact->date; ?></div>
+          <div class="small text-gray-500"><?= $contact->name; ?> · <?= $contact->date; ?></div>
         </div>
       </a>
 
@@ -112,7 +108,7 @@
     </a>
     <!-- Dropdown - User Information -->
     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-      <a class="dropdown-item" href="index.php?page=user&action=update&id=1">
+      <a class="dropdown-item" href="index.php?page=user&action=update&userId=1">
         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
         Profil
       </a>

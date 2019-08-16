@@ -4,7 +4,7 @@ namespace app\lib;
 use app\App;
 use app\lib\FormBuilder;
 use app\lib\FormHandler;
-use app\lib\formManager;
+use app\lib\FormManager;
 
 abstract class FormClassBuilder
 {
