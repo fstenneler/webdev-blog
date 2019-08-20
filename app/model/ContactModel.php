@@ -9,8 +9,6 @@ class ContactModel
     public static function getContactList($contactId = 0)
     {
 
-        $db = new Database();
-
         $query = '
         SELECT 
 
@@ -31,22 +29,19 @@ class ContactModel
             $attributes[] = $contactId;
         }
 
-        return $db->prepare($query, $attributes);
+        return Database::prepare($query, $attributes);
 
     }
 
     public static function getContact($id)
     {
-        $db = new Database();
         $query = 'SELECT * FROM contact WHERE id = ?';
-        $result = $db->prepare($query, array($id));
+        $result = Database::prepare($query, array($id));
         return $result[0];
     }
 
     public static function setContact($attributes)
     {
-
-        $db = new Database();
 
         if($attributes['id'] > 0) {
             $query = '
@@ -74,7 +69,7 @@ class ContactModel
             unset($attributes['id']);
         }
 
-        return $db->prepare($query, $attributes, true);
+        return Database::prepare($query, $attributes, true);
 
     }
 

@@ -4,6 +4,10 @@ namespace app\lib;
 use app\lib\FormComponent;
 use app\model\UserModel;
 
+/**
+* Gestion des erreurs du formulaire
+*
+*/
 class FormHandler Extends FormComponent
 {
 

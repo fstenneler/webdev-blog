@@ -2,6 +2,11 @@
 
 namespace app\lib;
  
+
+/**
+* Création des vues et envoi sur le template
+*
+*/
 class HttpResponse extends ApplicationComponent
 {
   

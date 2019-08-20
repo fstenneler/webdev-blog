@@ -1845,7 +1845,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
   text-transform: uppercase;
   letter-spacing: 2px;
   line-height: 18px;
-  content: "Search";
+  content: "Rechercher";
   display: block;
   color: #000000;
   float: left;
@@ -1885,7 +1885,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 .header__search-form::after {
-  content: "Press Enter to begin your search.";
+  content: "Appuyez sur la touche entrée pour lancer la recherche";
   display: block;
   letter-spacing: 0.6px;
   font-size: 1.6rem;
@@ -2224,7 +2224,7 @@ body.search-is-visible {
 
 }
 
-@media only screen and (max-width:900px) {
+@media only screen and (max-width:950px) {
   .header__logo {
     left: 50%;
     -webkit-transform: translate3d(-50%, 0, 0);
@@ -2736,7 +2736,7 @@ body.search-is-visible {
 
 }
 
-@media only screen and (max-width:900px) {
+@media only screen and (max-width:950px) {
   .s-featured {
     padding: 12.6rem 0 10.2rem;
   }
@@ -2898,7 +2898,7 @@ body.search-is-visible {
  * ------------------------------------------------------------------- */
 @media only screen and (max-width:1200px) {
   .s-content--narrow .row {
-    max-width: 900px;
+    max-width: 950px;
   }
 
   .s-content--top-padding {
@@ -2911,7 +2911,7 @@ body.search-is-visible {
   }
 
   .s-content__main img, .entry__main img {
-    max-width: 900px;
+    max-width: 950px;
     margin: 3rem 0 3rem -6rem;
   }
 
@@ -2934,7 +2934,7 @@ body.search-is-visible {
 
 }
 
-@media only screen and (max-width:900px) {
+@media only screen and (max-width:950px) {
   .s-content__main, .entry__main {
     padding-left: 15px;
     padding-right: 15px;
@@ -3787,7 +3787,7 @@ footer [class*="s-footer__"] > .row [class*="col-"]:last-child {
 
 }
 
-@media only screen and (max-width:900px) {
+@media only screen and (max-width:950px) {
   .entry__media, .entry__header {
     padding-left: 15px;
     padding-right: 15px;
@@ -3955,7 +3955,7 @@ footer [class*="s-footer__"] > .row [class*="col-"]:last-child {
 #comments {
   padding-top: 1.2rem;
   padding-bottom: 1.2rem;
-  max-width: 900px;
+  max-width: 950px;
 }
 
 #comments ol, #comments ul {

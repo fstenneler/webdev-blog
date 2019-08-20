@@ -5,7 +5,7 @@
   <div class="sidebar-brand-icon">
      <i class="fas fa-toolbox"></i>  
   </div>
-  <div class="sidebar-brand-text mx-3">WebDev<br />Blog admin</div>
+  <div class="sidebar-brand-text mx-3">MENU</div>
 </a>
 
 <!-- Divider -->

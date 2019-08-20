@@ -42,7 +42,7 @@
         
                         <ul class="linklist">
                             <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'home')); ?>">Accueil</a></li>
-                            <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'about')); ?>">&Agrave; propos</a></li>
+                            <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'about')); ?>">Qui suis-je</a></li>
                             <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'contact')); ?>">Contact</a></li>
                             <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'privacy')); ?>">Protection des données</a></li>
                             <li><a href="<?= $this->app()->route()->setUrl(array('zone' => 'admin')); ?>">Admin</a></li>
@@ -64,7 +64,7 @@
                 
                 <div class="col-12 tab-full s-footer__about">
                         
-                    <h4>About Wordsmith</h4>
+                    <h4>À propos de ce site</h4>
 
                     <p>Fugiat quas eveniet voluptatem natus. Placeat error temporibus magnam sunt optio aliquam. Ut ut occaecati placeat at. 
                     Fuga fugit ea autem. Dignissimos voluptate repellat occaecati minima dignissimos mollitia consequatur.

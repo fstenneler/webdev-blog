@@ -2,6 +2,10 @@
 
 namespace app\lib;
 
+/**
+* Crée un objet Field représentant un champ de formulaire
+*
+*/
 class Field
 {
 

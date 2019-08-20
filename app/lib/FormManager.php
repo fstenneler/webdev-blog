@@ -8,6 +8,10 @@ use app\model\CommentModel;
 use app\model\PostModel;
 use app\model\ContactModel;
 
+/**
+* Gestion de la base de données liée au formulaire (chargement et enregistrement des valeurs)
+*
+*/
 class FormManager Extends FormComponent
 {
 

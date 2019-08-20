@@ -8,9 +8,8 @@ class UserModel
 
     public static function getPassword($email)
     {
-        $db = new Database();
         $query = 'SELECT password FROM user WHERE email = ?';
-        $result = $db->prepare($query, array($email));
+        $result = Database::prepare($query, array($email));
         if(count($result) > 0) {
             return $result[0]->password;
         } 
@@ -19,9 +18,8 @@ class UserModel
 
     public static function userExists($email)
     {
-        $db = new Database();
         $query = 'SELECT COUNT(id) AS nb FROM user WHERE email = ?';
-        $result = $db->prepare($query, array($email));
+        $result = Database::prepare($query, array($email));
         if($result[0]->nb > 0) {
             return true;
         }
@@ -30,9 +28,8 @@ class UserModel
 
     public static function getEmail($id)
     {
-        $db = new Database();
         $query = 'SELECT email FROM user WHERE id = ?';
-        $result = $db->prepare($query, array($id));
+        $result = Database::prepare($query, array($id));
         if(isset($result[0])) {
             return $result[0]->email;
         }
@@ -41,9 +38,8 @@ class UserModel
 
     public static function getNickname($id)
     {
-        $db = new Database();
         $query = 'SELECT nickname FROM user WHERE id = ?';
-        $result = $db->prepare($query, array($id));
+        $result = Database::prepare($query, array($id));
         if(isset($result[0])) {
             return $result[0]->nickname;
         }
@@ -52,9 +48,8 @@ class UserModel
 
     public static function nicknameExists($nickname)
     {
-        $db = new Database();
         $query = 'SELECT COUNT(id) AS nb FROM user WHERE LOWER(nickname) = ?';
-        $result = $db->prepare($query, array(strtolower($nickname)));
+        $result = Database::prepare($query, array(strtolower($nickname)));
         if($result[0]->nb > 0) {
             return true;
         }
@@ -63,24 +58,21 @@ class UserModel
 
     public static function getUserByEmail($email)
     {
-        $db = new Database();
         $query = 'SELECT * FROM user WHERE email = ?';
-        $result = $db->prepare($query, array($email));
+        $result = Database::prepare($query, array($email));
         return $result[0];
     }
 
     public static function getUser($id)
     {
-        $db = new Database();
         $query = 'SELECT * FROM user WHERE id = ?';
-        $result = $db->prepare($query, array($id));
+        $result = Database::prepare($query, array($id));
         return $result[0];
     }
 
     public static function getUserList($role = null, $userId = 0)
     {
 
-        $db = new Database();
         $query = 'SELECT * FROM user WHERE id > 0';
 
         if($role !== null) {
@@ -98,14 +90,12 @@ class UserModel
             $attributes[] = $userId;
         }
 
-        return $db->prepare($query, $attributes);
+        return Database::prepare($query, $attributes);
 
     }
 
     public static function setUser($attributes)
     {
-
-        $db = new Database();
 
         if($attributes['id'] > 0) {
             $query = '
@@ -135,7 +125,7 @@ class UserModel
             unset($attributes['id']);
         }
 
-        return $db->prepare($query, $attributes, true);
+        return Database::prepare($query, $attributes, true);
 
     }
 

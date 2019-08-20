@@ -2,6 +2,10 @@
 
 namespace app\lib;
 
+/**
+* Gestion des routes
+*
+*/
 class Route extends ApplicationComponent
 {
 
