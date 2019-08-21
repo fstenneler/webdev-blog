@@ -43,7 +43,7 @@
             <h2 class="header__nav-heading h6">Navigate to</h2>
 
             <ul class="header__nav">
-                <li <?php if($this->app()->getPageName() === 'home') { echo 'class="current"'; } ?>><a href="<?= $this->app()->route()->setUrl(array('page' => 'home')); ?>" title="">Accueil</a></li>
+                <li <?php if($this->app()->getPageName() === 'home') { echo 'class="current"'; } ?>><a href="<?= $this->app()->route()->setUrl(array('page' => 'home')); ?>" title="Accueil">Accueil</a></li>
                 <li class="has-children<?php if($this->app()->getPageName() === 'posts') { echo ' current'; } ?>">
                     <a href="#0" title="">Blog</a>
                     <ul class="sub-menu">
@@ -52,9 +52,9 @@
                         <?php } ?>
                     </ul>
                 </li>
-                <li <?php if($this->app()->getPageName() === 'about') { echo 'class="current"'; } ?>><a href="<?= $this->app()->route()->setUrl(array('page' => 'about')); ?>" title="">Qui suis-je ?</a></li>
-                <li <?php if($this->app()->getPageName() === 'contact') { echo 'class="current"'; } ?>><a href="<?= $this->app()->route()->setUrl(array('page' => 'contact')); ?>" title="">Me contacter</a></li>
-                <li <?php if($this->app()->getPageName() === 'cv') { echo 'class="current"'; } ?>><a href="<?= $this->app()->route()->setUrl(array('page' => 'cv')); ?>" title="">MON CV</a></li>
+                <li <?php if($this->app()->getPageName() === 'about') { echo 'class="current"'; } ?>><a href="<?= $this->app()->route()->setUrl(array('page' => 'about')); ?>" title="Qui suis-je ?">Qui suis-je ?</a></li>
+                <li <?php if($this->app()->getPageName() === 'contact') { echo 'class="current"'; } ?>><a href="<?= $this->app()->route()->setUrl(array('page' => 'contact')); ?>" title="Me contacter">Me contacter</a></li>
+                <li <?php if($this->app()->getPageName() === 'cv') { echo 'class="current"'; } ?>><a href="public/front/cv.pdf" title="mon CV" target="_blank">Mon CV</a></li>
             </ul> <!-- end header__nav -->
 
             <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>

@@ -47,6 +47,15 @@
                             <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'privacy')); ?>">Protection des données</a></li>
                             <li><a href="<?= $this->app()->route()->setUrl(array('zone' => 'admin')); ?>">Admin</a></li>
                         </ul>
+                        <ul class="footer-social">
+                            <li>
+                                <a href="https://www.facebook.com/fabien.stenneler" target="_blank"><i class="fab fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/in/fabien-stenneler-755a7914/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+
                     </div> <!-- end sitelinks -->
                 </div>
             </div>
@@ -80,23 +89,6 @@
             <div class="row">
 
                 <div class="col-six">
-                    <ul class="footer-social">
-                        <li>
-                            <a href="#0"><i class="fab fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="#0"><i class="fab fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#0"><i class="fab fa-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="#0"><i class="fab fa-youtube"></i></a>
-                        </li>
-                        <li>
-                            <a href="#0"><i class="fab fa-pinterest"></i></a>
-                        </li>
-                    </ul>
                 </div>
 
                 <div class="col-six">

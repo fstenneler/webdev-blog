@@ -312,3 +312,19 @@
   margin: auto;
   max-width: 100%;
 }
+
+.linklist {
+  margin-bottom: 1rem;
+}
+
+.footer-social li {
+  margin-right: 1rem;
+}
+
+.footer-social li a {
+  color: #111860;
+}
+
+.footer-social li a:hover {
+  color: #000000;
+}
