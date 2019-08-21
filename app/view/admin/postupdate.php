@@ -70,7 +70,7 @@
                     <div class="form-group row">
                         <div class="col-sm-12 col-xl-9">
                             <label for="articleHeader">Chapô</label>
-                            <input name='header' type="text" class="form-control form-control-user" id="articleHeader" placeholder="Chapô" value="<?= htmlspecialchars($form->formBuilder()->getField('header')->getValue()); ?>">
+                            <textarea name="header" class="form-control form-control-user" id="articleHeader" placeholder="Chapô"><?= $form->formBuilder()->getField('header')->getValue(); ?></textarea>
                             <?php if($form->formBuilder()->getField('header')->getError() !== null && $form->isSubmited()) { ?>
                                 <div class="form-control-error"><?= $form->formBuilder()->getField('header')->getError(); ?></div>
                             <?php } ?>

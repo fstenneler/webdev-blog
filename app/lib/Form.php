@@ -3,6 +3,10 @@
 namespace app\lib;
 use app\lib\FormClassBuilder;
 
+/**
+* Permet la création d'un formulaire, la récupération, le traitement des erreurs et la sauvegarde des données
+*
+*/
 class Form extends FormClassBuilder
 {
 

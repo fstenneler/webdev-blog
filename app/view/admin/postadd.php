@@ -17,12 +17,6 @@
             <form class="user" method="post" action="" enctype="multipart/form-data">
                 <input type="hidden" name="MAX_FILE_SIZE" value="<?= MAX_FILE_SIZE; ?>" />
                     <div class="form-group row">
-                        <div class="col-sm-12 col-xl-9">
-                            <input id="checkbox-display" type="checkbox"<?php if($form->formBuilder()->getField('display')->getValue() === 1) { echo ' checked'; } ?>> Afficher l'article sur le blog
-                            <input id="form-display" type="hidden" name="display" value="<?= htmlspecialchars($form->formBuilder()->getField('display')->getValue()); ?>">
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <div class="col-xl-4">
                             <label for="articleCategory">Catégorie</label>
                             <select name='category_id' class="form-control form-control-user" id="articleCategory" placeholder="Catégorie">
@@ -67,7 +61,7 @@
                     <div class="form-group row">
                         <div class="col-sm-12 col-xl-9">
                             <label for="articleHeader">Chapô</label>
-                            <input name='header' type="text" class="form-control form-control-user" id="articleHeader" placeholder="Chapô" value="<?= htmlspecialchars($form->formBuilder()->getField('header')->getValue()); ?>">
+                            <textarea name="header" class="form-control form-control-user" id="articleHeader" placeholder="Chapô"><?= $form->formBuilder()->getField('header')->getValue(); ?></textarea>
                             <?php if($form->formBuilder()->getField('header')->getError() !== null && $form->isSubmited()) { ?>
                                 <div class="form-control-error"><?= $form->formBuilder()->getField('header')->getError(); ?></div>
                             <?php } ?>

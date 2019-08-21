@@ -5,6 +5,11 @@
   <i class="fa fa-bars"></i>
 </button>
 
+<!-- Topbar Search -->
+<div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+<div class="logo-website" ><span class='admin text-gray-800'>Admin</span><span class="blue">web</span>dev.fr</div>
+</div>
+
 
 <!-- Topbar Navbar -->
 <ul class="navbar-nav ml-auto">

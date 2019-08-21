@@ -10,7 +10,7 @@
         </div>
         <?php } ?>
 
-        <?php if($this->app()->httpRequest()->getData('search') !== '') { ?>
+        <?php if($this->app()->httpRequest()->getData('search') != '') { ?>
         <div class="row narrow">
             <div class="col-full s-content__header" data-aos="fade-up">
                 <h1 class="display-1 display-1--with-line-sep">Recherche : <?= $this->app()->httpRequest()->getData('search'); ?></h1>

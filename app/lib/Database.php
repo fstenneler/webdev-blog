@@ -3,31 +3,47 @@
 namespace app\lib;
 use \PDO;
 
+/**
+* Crée une connexion à la base de données et effectue les requetes
+*
+*/
 class Database 
 {
 
-    private $pdo = null;
+    private static $pdo = null;
 
-    public function getPDO() 
+	/**
+	 * Crée une instanciation de PDO et renvoie l'objet créé. Si il est déjà crée, renvoie l'objet déjà créé
+	 *
+	 * @return object PDO
+	 */
+    public static function getPDO() 
     {
 
-        if($this->pdo === null) {
+        if(self::$pdo === null) {
 
             $pdo = new PDO('mysql:dbname=' . DB_NAME . ';host=' . DB_SERVER, DB_USER, DB_PASSWORD);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, FALSE); //force int à renvoyer int
             $pdo->exec('SET NAMES utf8');
-            $this->pdo = $pdo;
+            self::$pdo = $pdo;
         }
 
-        return $this->pdo;
+        return self::$pdo;
 
     }
 
-    public function prepare($query, $attributes, $bindValue = false) 
+	/**
+     * Exécute une requete avec PDO après avoir créé une connexion
+     * Si $bindValue est à true, il s'agit d'une requete comprenant des attributs $attributes à binder
+     * Si la requete est de type SELECT ou SHOW, elle renvoie les résultats, sinon un booléen selon le succès ou l'échec de la requete
+	 *
+	 * @return mixed
+	 */
+    public static function prepare($query, $attributes, $bindValue = false) 
     {
 
-        $req = $this->getPDO()->prepare($query);
+        $req = self::getPDO()->prepare($query);
 
         if($bindValue) {
             foreach($attributes as $key => $value) {

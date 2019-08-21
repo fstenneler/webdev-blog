@@ -9,8 +9,6 @@ class CategoryModel
     public static function getCategoryList($categoryId = 0)
     {
 
-        $db = new Database();
-
         $query = '
         SELECT 
 
@@ -31,14 +29,12 @@ class CategoryModel
             $attributes[] = $categoryId;
         }        
 
-        return $db->prepare($query, $attributes);
+        return Database::prepare($query, $attributes);
 
     }
 
     public static function getCategoryName($categoryId = 0)
     {
-
-        $db = new Database();
 
         $query = '
         SELECT 
@@ -49,7 +45,7 @@ class CategoryModel
 
         WHERE id = ?';
 
-        $result = $db->prepare($query, array($categoryId));
+        $result = Database::prepare($query, array($categoryId));
 
         if(isset($result[0]->name)) {
             return $result[0]->name;
@@ -61,8 +57,6 @@ class CategoryModel
     public static function categoryExists($categoryId = 0)
     {
 
-        $db = new Database();
-
         $query = '
         SELECT 
 
@@ -72,7 +66,7 @@ class CategoryModel
 
         WHERE id = ?';
 
-        $result = $db->prepare($query, array($categoryId));
+        $result = Database::prepare($query, array($categoryId));
 
         if($result[0]->value > 0) {
             return $result[0]->value;
@@ -84,8 +78,6 @@ class CategoryModel
     public static function getCategoryByName($categoryName)
     {
 
-        $db = new Database();
-
         $query = '
         SELECT 
 
@@ -95,7 +87,7 @@ class CategoryModel
 
         WHERE id = ?';
 
-        $result = $db->prepare($query, array($categoryName));
+        $result = Database::prepare($query, array($categoryName));
 
         if($result[0]->value > 0) {
             return $result[0]->value;
