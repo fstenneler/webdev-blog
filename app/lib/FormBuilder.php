@@ -4,6 +4,10 @@ namespace app\lib;
 use app\lib\FormComponent;
 use app\lib\Field;
 
+/**
+* Gestion des champs du formulaire
+*
+*/
 class FormBuilder Extends FormComponent
 {
     private $field = array();

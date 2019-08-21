@@ -64,7 +64,7 @@ class PostController extends ControllerApp
             $form->setMode('insert');
             $form->setDestination('post');
             $form->setMandatoryFields(array('title', 'header', 'content', 'is_hero', 'user_id', 'category_id'));
-            $form->setDefaultValues(array('id' => 0, 'creation_date' => date('Y-m-d'), 'last_modification_date' => date('Y-m-d')));
+            $form->setDefaultValues(array('id' => 0, 'creation_date' => date('Y-m-d'), 'last_modification_date' => date('Y-m-d'), 'display' => 1));
             $form->setForm();
             if($form->setValidation()) {
                 return $this->app()->route()->setRoute('index.php?page=post');

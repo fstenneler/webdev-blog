@@ -6,23 +6,22 @@ use app\lib\Database;
 class PostModel 
 {
 
-    public static function getParam($param, $key, $default) {
-        return isset($param[$key]) ? $param[$key] : $default;
-    }
+    private static $postId = 0;
+    private static $categoryId = 0;
+    private static $isHero = 0;
+    private static $start = 0;
+    private static $number = POST_NUMBER;
+    private static $display = 0;
+    private static $search = null;
+    private static $param = array();
 
+    public static function getParam($key) {
+        return isset(self::$param[$key]) ? self::$param[$key] : self::$$key;
+    }
 
     public static function getPost($param = array())
     {
-
-        $postId = self::getParam($param, 'postId', 0);
-        $categoryId = self::getParam($param, 'categoryId', 0);
-        $isHero = self::getParam($param, 'isHero', 0);
-        $start = self::getParam($param, 'start', 0);
-        $number = self::getParam($param, 'number', POST_NUMBER);
-        $display = self::getParam($param, 'display', 0);
-        $search = self::getParam($param, 'search', null);
-
-        $db = new Database();
+        self::$param = $param;
 
         $query = '
         SELECT 
@@ -49,7 +48,7 @@ class PostModel
         LEFT JOIN user ON post.user_id = user.id
         LEFT JOIN category ON post.category_id = category.id';
         
-        if($postId > 0) {
+        if(self::getParam('postId') > 0) {
             $query .= '
         WHERE post.id = :post_id';
         } else {
@@ -57,22 +56,22 @@ class PostModel
         WHERE post.id > 0';
         }
 
-        if($categoryId > 0) {
+        if(self::getParam('categoryId') > 0) {
             $query .= '
         AND post.category_id = :category_id';
         }
 
-        if($search !== '') {
+        if(self::getParam('search') !== '') {
             $query .= '
         AND (post.title LIKE :search1 OR post.header LIKE :search2 OR post.content LIKE :search3 OR category.name LIKE :search4)';
         }
 
-        if($isHero === 1) {
+        if(self::getParam('isHero') === 1) {
             $query .= '
         AND post.is_hero = 1';
         }
 
-        if($display === 1) {
+        if(self::getParam('display') === 1) {
             $query .= '
         AND post.display = 1';
         }
@@ -80,30 +79,30 @@ class PostModel
         $query .= '
         ORDER BY post.id DESC';
 
-        if($number > 0 && $postId == 0) {
+        if(self::getParam('number') > 0 && self::getParam('postId') == 0) {
             $query .= '
         LIMIT :start, :number';
         }
 
         $attributes = array();
-        if($postId > 0) {
-            $attributes['post_id'] = $postId;
+        if(self::getParam('postId') > 0) {
+            $attributes['post_id'] = self::getParam('postId');
         }
-        if($categoryId > 0) {
-            $attributes['category_id'] = $categoryId;
+        if(self::getParam('categoryId') > 0) {
+            $attributes['category_id'] = self::getParam('categoryId');
         }
-        if($search !== '') {
-            $attributes['search1'] = '%' . $search . '%';
-            $attributes['search2'] = '%' . $search . '%';
-            $attributes['search3'] = '%' . $search . '%';
-            $attributes['search4'] = '%' . $search . '%';
+        if(self::getParam('search') !== '') {
+            $attributes['search1'] = '%' . self::getParam('search') . '%';
+            $attributes['search2'] = '%' . self::getParam('search') . '%';
+            $attributes['search3'] = '%' . self::getParam('search') . '%';
+            $attributes['search4'] = '%' . self::getParam('search') . '%';
         }
-        if($number > 0 && $postId == 0) {
-            $attributes['start'] = $start;
-            $attributes['number'] = $number;
+        if(self::getParam('number') > 0 && self::getParam('postId') == 0) {
+            $attributes['start'] = self::getParam('start');
+            $attributes['number'] = self::getParam('number');
         }
 
-        $result = $db->prepare($query, $attributes, true);
+        $result = Database::prepare($query, $attributes, true);
 
         if(count($result) > 0) {
             return $result;
@@ -115,9 +114,8 @@ class PostModel
     public static function getFormPost($postId)
     {
 
-        $db = new Database();
         $query = 'SELECT * FROM post WHERE id = ?';
-        $result = $db->prepare($query, array($postId));
+        $result = Database::prepare($query, array($postId));
 
         if(isset($result[0])) {
             return $result[0];
@@ -128,8 +126,6 @@ class PostModel
 
     public static function getPostNumber($categoryId = 0, $search = null)
     {
-
-        $db = new Database();
 
         $query = '
         SELECT        
@@ -158,15 +154,13 @@ class PostModel
             $attributes['search4'] = '%' . $search . '%';
         }
 
-        $result = $db->prepare($query, $attributes, true);
+        $result = Database::prepare($query, $attributes, true);
         return $result[0]->value;
 
     }
 
     public static function setPost($attributes)
     {
-
-        $db = new Database();
 
         if($attributes['id'] > 0) {
             $query = '
@@ -199,7 +193,7 @@ class PostModel
             unset($attributes['id']);
         }
 
-        return $db->prepare($query, $attributes, true);
+        return Database::prepare($query, $attributes, true);
 
     }
 

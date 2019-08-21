@@ -4,6 +4,10 @@ namespace app\lib;
 
 use app\model\UserModel;
 
+/**
+* Gestion des utilisateurs (authentification, deconnexion, infos)
+*
+*/
 class User extends ApplicationComponent
 {
 

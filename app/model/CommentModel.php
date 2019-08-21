@@ -9,8 +9,6 @@ class CommentModel
     public static function getCommentList($postId = 0, $status = null, $userId = 0)
     {
 
-        $db = new Database();
-
         $query = '
         SELECT 
 
@@ -64,15 +62,14 @@ class CommentModel
             $attributes[] = $userId;
         }
 
-        return $db->prepare($query, $attributes);
+        return Database::prepare($query, $attributes);
 
     }
 
     public static function getComment($commentId = 0)
     {
-        $db = new Database();
         $query = 'SELECT * FROM comment WHERE id = ?';
-        $result = $db->prepare($query, array($commentId));
+        $result = Database::prepare($query, array($commentId));
         if(isset($result[0])) { 
             return $result[0];
         }
@@ -82,8 +79,6 @@ class CommentModel
 
     public static function setComment($attributes)
     {
-
-        $db = new Database();
 
         if($attributes['id'] > 0) {
             $query = '
@@ -110,7 +105,7 @@ class CommentModel
             unset($attributes['id']);
         }
 
-        return $db->prepare($query, $attributes, true);
+        return Database::prepare($query, $attributes, true);
 
     }
 

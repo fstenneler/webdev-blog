@@ -6,10 +6,11 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="Backoffice d'administration du blog WebDev.fr">
+  <meta name="author" content="Fabien Stenneler">
+  <meta name="robots" content="noindex,nofollow"/>
 
-  <title>WebDev Blog - Admin</title>
+  <title>Admin WebDev.fr</title>
 
   <!-- Custom fonts for this template-->
   <link href="../public/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -17,9 +18,14 @@
 
   <!-- Custom styles for this template-->
   <link href="../public/admin/css/sb-admin-2.min.css" rel="stylesheet">
-  <link href="../public/admin/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="../public/admin/vendor/jquery.datatables/css/jquery.dataTables.min.css" rel="stylesheet">
   <link href="../public/admin/css/custom.css" rel="stylesheet">
-  <link rel="stylesheet" href="../public/admin/css/richtext.min.css">
+  <link href="../public/admin/vendor/jquery.richtext/jquery.richtext.min.css" rel="stylesheet">
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="../public/admin/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../public/admin/favicon.ico" type="image/x-icon">
  
 </head>
 
@@ -103,8 +109,8 @@
   <script src="../public/admin/vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../public/admin/js/jquery.dataTables.min.js"></script>
-  <script src="../public/admin/js/jquery.richtext.js"></script>
+  <script src="../public/admin/vendor/jquery.dataTables/js/jquery.dataTables.min.js"></script>
+  <script src="../public/admin/vendor/jquery.richtext/jquery.richtext.js"></script>
   <script src="../public/admin/js/custom.js"></script>
 
 

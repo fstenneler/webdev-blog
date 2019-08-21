@@ -2,11 +2,9 @@
 
 <div class="row narrow">
     <div class="col-full s-content__header">
-        <h1 class="display-1 display-1--with-line-sep">Contactez nous</h1>
+        <h1 class="display-1 display-1--with-line-sep">Me contacter</h1>
         <p class="lead">
-        Duis ex ad cupidatat tempor Excepteur cillum cupidatat fugiat nostrud cupidatat dolor 
-        sunt sint sit nisi est eu exercitation incididunt adipisicing veniam velit id fugiat enim 
-        mollit amet anim veniam dolor dolor irure velit commodo.</p>
+        Pour toute question concernant le blog, un des articles, un projet web à réaliser, vous pouvez m'envoyer un message en utilisant le formulaire ci-dessous. </p>
     </div>
 </div>
 
@@ -23,15 +21,7 @@
         <h2>Formulaire de contact</h2>
 
         <p>
-        Odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti 
-        dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique 
-        sunt in culpa. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis 
-        
-        <p>
-        Duis ex ad cupidatat tempor Excepteur cillum cupidatat fugiat nostrud cupidatat dolor 
-        sunt sint sit nisi est eu exercitation incididunt adipisicing veniam velit id fugiat enim 
-        mollit amet anim veniam dolor dolor irure velit commodo cillum sit nulla ullamco. Lorem 
-        ipsum Nisi amet fugiat eiusmod et aliqua ad qui ut nisi Ut aute anim mollit fugiat aute.
+        Veuillez renseigner vos coordonnées ainsi que votre message, je vous apporterai une réponse sous 48h.
         </p>
 
 

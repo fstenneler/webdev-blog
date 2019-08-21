@@ -2,6 +2,10 @@
 
 namespace app\lib;
  
+/**
+* Récupération des valeurs envoyées sur la page
+*
+*/
 class HttpRequest extends ApplicationComponent
 {
   public function cookieData($key)
