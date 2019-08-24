@@ -27,26 +27,46 @@ abstract class FormClassBuilder
         $this->formId = 0;
    }
 
+	/**
+     * Méthode pour retourner l'instanciation de la classe App
+	 *
+	 */
     public function app()
     {
         return $this->app;
     }
 
+	/**
+     * Méthode pour retourner l'instanciation de la classe FormBuilder
+	 *
+	 */
     public function formBuilder()
     {
         return $this->formBuilder;
     }
 
+	/**
+     * Méthode pour retourner l'instanciation de la classe FormHandler
+	 *
+	 */
     public function formHandler()
     {
         return $this->formHandler;
     }
 
+	/**
+     * Méthode pour retourner l'instanciation de la classe FormManager
+	 *
+	 */
     public function formManager()
     {
         return $this->formManager;
     }
 
+	/**
+     * Méthode pour définir si on fait de l'insert ou de l'update
+	 *
+	 */
     public function setMode($mode)
     {
         $this->mode = $mode;
@@ -57,6 +77,10 @@ abstract class FormClassBuilder
         return $this->mode;
     }
 
+	/**
+     * Méthode pour définir l'identifiant du formulaire, si plusieurs formulaires sur la meme page
+	 *
+	 */
     public function setFormId($formId)
     {
         $this->formId = $formId;
@@ -67,6 +91,10 @@ abstract class FormClassBuilder
         return $this->formId;
     }
 
+	/**
+     * Méthode pour définir la table visée par le formulaire créé
+	 *
+	 */
     public function setDestination($destination)
     {
         $this->destination = $destination;
@@ -77,6 +105,10 @@ abstract class FormClassBuilder
         return $this->destination;
     }
 
+	/**
+     * Méthode pour définir les champs obligatoires du formulaire (tableau avec le nom des champs)
+	 *
+	 */
     public function setMandatoryFields($mandatoryFields)
     {
         $this->mandatoryFields = $mandatoryFields;
@@ -88,6 +120,10 @@ abstract class FormClassBuilder
         return $this->mandatoryFields;
     }
 
+	/**
+     * Méthode pour définir les valeurs par défaut des champs du formulaire (tableau avec le nom du champ et sa valeur par défaut)
+	 *
+	 */
     public function setDefaultValues($defaultValues)
     {
         $this->defaultValues = $defaultValues;
@@ -99,6 +135,10 @@ abstract class FormClassBuilder
         return $this->defaultValues;
     }
 
+	/**
+     * Méthode pour définir quelle ligne de la base est concernée par le formulaire (valeur de la colonne id)
+	 *
+	 */
     public function setDbRowId($dbRowId)
     {
         $this->dbRowId = $dbRowId;
