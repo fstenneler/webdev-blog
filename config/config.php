@@ -24,5 +24,3 @@
 
   //Dossier de stockage des images des articles
   define('GALLERY_DIR', '/public/front/images/gallery/');
-
-  
