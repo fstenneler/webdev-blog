@@ -1,5 +1,5 @@
 # webdev-blog
-### Blog PHP basé sur le pattern MVC
+## Blog PHP basé sur le pattern MVC
 
 Version en ligne du projet [ici](http://webdev-blog.orlinstreet.rocks/).
 
@@ -30,12 +30,12 @@ https://github.com/fstenneler/webdev-blog/archive/master.zip
     define('MAX_FILE_SIZE', 500000);
     define('GALLERY_DIR', '/public/front/images/gallery/');
     
- #### Paramètres à modifier :  
+#### Paramètres à modifier :  
   * DB_SERVER : adresse ou IP du serveur MySQL  
   * DB_USER : identifiant de connexion à la base de données  
   * DB_PASSWORD : mot de passe de connexion à la base de données
   
- #### Les autres paramètres sont déjà renseignés mais peuvent être modifiés en cas de besoin :  
+#### Les autres paramètres sont déjà renseignés mais peuvent être modifiés en cas de besoin :  
   * DB_NAME : nom de la base de données  
   * POST_NUMBER : nombre d'articles à afficher sur une page  
   * MAX_FILE_SIZE : taille maximale en octets des images à charger  
