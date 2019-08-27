@@ -14,7 +14,12 @@ class ViewpostController extends ControllerApp
     {
 
         //post
-        $postList = PostModel::getPost(array('postId' => $this->app()->httpRequest()->getData('postId'), 'display' => 1));
+        $postList = PostModel::getPost(
+            array(
+                'postId' => $this->app()->httpRequest()->getData('postId'),
+                'display' => 1
+            )
+        );
 
         //redirection
         if(count($postList) === 0) {
@@ -40,13 +45,26 @@ class ViewpostController extends ControllerApp
             ));
             $form->setForm();
             if($form->setValidation()) {
-                return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'viewpost', 'postId' => $this->app()->httpRequest()->getData('postId'), 'anchor' => 'comments')));
+                return $this->app()->route()->setRoute(
+                    $this->app()->route()->setUrl(
+                        array(
+                            'page' => 'viewpost',
+                            'postId' => $this->app()->httpRequest()->getData('postId'),
+                            'anchor' => 'comments'
+                        )
+                    )
+                );
             }
             $this->app()->setData('form', $form);
         }
 
         //commentList
-        $commentList = CommentModel::getCommentList($this->app()->httpRequest()->getData('postId'), 'Validé', $this->app()->user()->getUserId(), 0);
+        $commentList = CommentModel::getCommentList(
+            $this->app()->httpRequest()->getData('postId'),
+            'Validé',
+            $this->app()->user()->getUserId(),
+            0
+        );
         $this->app()->setData('commentList', $this->generateCommentListDetails($commentList));
         $this->app()->setData('CommentNumberText', $this->generateCommentNumberText($commentList));
 

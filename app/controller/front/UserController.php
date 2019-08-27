@@ -17,7 +17,10 @@ class UserController extends ControllerApp
             //login
             case 'login':
 
-                if($this->app()->user()->setAuthentification($this->app()->httpRequest()->postData('cEmail'), $this->app()->httpRequest()->postData('cPassword')) === false) {
+                if($this->app()->user()->setAuthentification(
+                    $this->app()->httpRequest()->postData('cEmail'),
+                    $this->app()->httpRequest()->postData('cPassword')) === false
+                ) {
                     $this->app()->setData('email', $this->app()->httpRequest()->postData('cEmail'));
                     $this->app()->setData('formError', 'L\'adresse e-mail ou le mot de passe saisis sont erronés.');
                 } 
@@ -36,8 +39,24 @@ class UserController extends ControllerApp
                 $form = new Form($this->app());
                 $form->setMode('insert');
                 $form->setDestination('user');
-                $form->setMandatoryFields(array('email', 'password', 'name', 'first_name', 'nickname', 'avatar'));
-                $form->setDefaultValues(array('id'=> 0, 'description' => null, 'registration_date' => date('Y-m-d'), 'role' => 'Visiteur'));
+                $form->setMandatoryFields(
+                    array(
+                        'email',
+                        'password',
+                        'name',
+                        'first_name',
+                        'nickname',
+                        'avatar'
+                    )
+                );
+                $form->setDefaultValues(
+                    array (
+                        'id'=> 0,
+                        'description' => null,
+                        'registration_date' => date('Y-m-d'),
+                        'role' => 'Visiteur'
+                    )
+                );
                 $form->setForm();
                 if($form->setValidation()) {
                     $user = UserModel::getUserByEmail($form->formBuilder()->getField('email')->getValue());
@@ -50,7 +69,14 @@ class UserController extends ControllerApp
             case 'account':
 
                 if($this->app()->user()->isAuthenticated() === false) {
-                    return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('page' => 'user', 'action' => 'login')));
+                    return $this->app()->route()->setRoute(
+                        $this->app()->route()->setUrl(
+                            array(
+                                'page' => 'user',
+                                'action' => 'login'
+                            )
+                        )
+                    );
                 }
                 $form = new Form($this->app());
                 $form->setMode('update');

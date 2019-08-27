@@ -42,8 +42,34 @@ class ControllerApp
 	 */   
    protected function generateFrenchDate($date)
    {
-      $englishMonths = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-      $frenchMonths = array('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
+      $englishMonths = array(
+         'January',
+         'February',
+         'March',
+         'April',
+         'May',
+         'June',
+         'July',
+         'August',
+         'September',
+         'October',
+         'November',
+         'December'
+      );
+      $frenchMonths = array(
+         'janvier',
+         'février',
+         'mars',
+         'avril',
+         'mai',
+         'juin',
+         'juillet',
+         'août',
+         'septembre',
+         'octobre',
+         'novembre',
+         'décembre'
+      );
       return str_replace($englishMonths, $frenchMonths, date('j F Y', strtotime($date) ) );        
    }
 
@@ -55,7 +81,10 @@ class ControllerApp
 	 */   
    protected function generateAvatarIcon($avatar, $nickName)
    {
-      return '<div class="user-avatar-icon" style="background-color: ' . $avatar . ';">' . ucfirst(substr($nickName,0,1)) . '</div>';
+      $html = '<div class="user-avatar-icon" style="background-color: ' . $avatar . ';">';
+      $html .= ucfirst(substr($nickName,0,1));
+      $html .= '</div>';
+      return $html;
    }
 
 	/**
@@ -71,7 +100,12 @@ class ControllerApp
          $postList[$key]->url = $this->app()->route()->setUrl(array('page' => 'viewpost', 'postId' => $post->id));
          $postList[$key]->creation_date = $this->generateFrenchDate($post->creation_date);
          $postList[$key]->last_modification_date = $this->generateFrenchDate($post->last_modification_date);
-         $postList[$key]->category_url = $this->app()->route()->setUrl(array('page' => 'posts', 'categoryId' => $post->category_id));
+         $postList[$key]->category_url = $this->app()->route()->setUrl(
+            array(
+               'page' => 'posts',
+               'categoryId' => $post->category_id
+            )
+         );
       }
       return $postList;
    }
@@ -97,13 +131,21 @@ class ControllerApp
       $pagination['pageNumber'] = ceil( (int) PostModel::getPostNumber($categoryId, $search) / POST_NUMBER );
 
       //réglage de la page en cours et de la valeur start de la requete à effectuer pour l'affichage des posts
-      if($this->app()->httpRequest()->getData('currentPage') > 0 && $this->app()->httpRequest()->getData('currentPage') <= $pagination['pageNumber']) {
+      if(
+         $this->app()->httpRequest()->getData('currentPage') > 0
+         && $this->app()->httpRequest()->getData('currentPage') <= $pagination['pageNumber']
+      ) {
          $pagination['currentPage'] = $this->app()->httpRequest()->getData('currentPage');
          $pagination['dbStart'] = ($this->app()->httpRequest()->getData('currentPage') - 1) * POST_NUMBER;
       }
 
       //création des urls par défaut des liens page suivante et page précédente
-      $parameters = array('page' => $this->app()->getPageName(), 'categoryId' => $categoryId, 'search' => $search, 'anchor' => $anchor);
+      $parameters = array(
+         'page' => $this->app()->getPageName(),
+         'categoryId' => $categoryId,
+         'search' => $search,
+         'anchor' => $anchor
+      );
       $pagination['nextPageUrl'] = $this->app()->route()->setUrl($parameters);
       $pagination['previousPageUrl'] = $this->app()->route()->setUrl($parameters);
 
@@ -142,7 +184,10 @@ class ControllerApp
 
       foreach($commentList as $i => $comment) {
           $commentList[$i]->date = $this->generateFrenchDate($comment->date);
-          $commentList[$i]->user_avatar_icon = $this->generateAvatarIcon($comment->user_avatar, $comment->user_nickname);
+          $commentList[$i]->user_avatar_icon = $this->generateAvatarIcon(
+             $comment->user_avatar,
+             $comment->user_nickname
+         );
       }
 
       foreach($commentList as $comment) {

@@ -36,7 +36,9 @@ class ContactController extends ControllerApp
             $form->setDbRowId($this->app()->httpRequest()->getData('contactId'));
             $form->setForm();
             if($form->setValidation()) {
-                return $this->app()->route()->setRoute('index.php?page=contact&action=view&contactId=' . $this->app()->httpRequest()->getData('contactId'));
+                return $this->app()->route()->setRoute(
+                    'index.php?page=contact&action=view&contactId=' . $this->app()->httpRequest()->getData('contactId')
+                );
             }  
             $this->app()->setData('form', $form);
         }

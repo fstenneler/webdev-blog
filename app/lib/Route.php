@@ -19,7 +19,10 @@ class Route extends ApplicationComponent
     {
         if(
             strtolower($this->app()->getPageName()) === 'home'
-            || (strtolower($this->app()->getPageName()) === 'user' && $this->app()->httpRequest()->getData('action') === 'account')
+            || (
+                strtolower($this->app()->getPageName()) === 'user'
+                && $this->app()->httpRequest()->getData('action') === 'account'
+            )
             || strtolower($this->app()->getPageName()) === 'posts'
             || strtolower($this->app()->getPageName()) === 'viewpost'
             || strtolower($this->app()->getPageName()) === 'contact'
@@ -37,7 +40,10 @@ class Route extends ApplicationComponent
         if($this->app()->user()->isAuthenticated() === false) {
             return $this->setRoute($this->setUrl(array('zone' => 'front', 'page' => 'user', 'action' => 'login')));
         } elseif($this->app()->httpRequest()->getSession('user')->role !== 'Administrateur') {
-            if($this->app()->httpRequest()->getSession('lastUrl') !== null && $this->app()->httpRequest()->getSession('lastZoneName') !== 'admin') {
+            if(
+                $this->app()->httpRequest()->getSession('lastUrl') !== null
+                && $this->app()->httpRequest()->getSession('lastZoneName') !== 'admin'
+            ) {
                 return $this->setRoute($this->app()->httpRequest()->getSession('lastUrl'));
             }
             return $this->setRoute($this->setUrl(array('zone' => 'front')));

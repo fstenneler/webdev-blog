@@ -63,7 +63,12 @@ class PostModel
 
         if(self::getParam('search') !== '') {
             $query .= '
-        AND (post.title LIKE :search1 OR post.header LIKE :search2 OR post.content LIKE :search3 OR category.name LIKE :search4)';
+        AND (
+            post.title LIKE :search1
+            OR post.header LIKE :search2
+            OR post.content LIKE :search3
+            OR category.name LIKE :search4
+        )';
         }
 
         if(self::getParam('isHero') === 1) {
@@ -140,7 +145,12 @@ class PostModel
         };
         if($search !== '') {
             $query .= '
-        AND (post.title LIKE :search1 OR post.header LIKE :search2 OR post.content LIKE :search3 OR category.name LIKE :search4)';
+        AND (
+            post.title LIKE :search1
+            OR post.header LIKE :search2
+            OR post.content LIKE :search3
+            OR category.name LIKE :search4
+        )';
         }        
 
         $attributes = array();

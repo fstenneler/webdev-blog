@@ -15,11 +15,25 @@ class TopbarController extends ControllerApp
         //Deconnexion
         if($this->app()->httpRequest()->getData('logout') === 'true') {
             $this->app()->user()->setDisconnection();
-            return $this->app()->route()->setRoute($this->app()->route()->setUrl(array('zone' => 'front', 'page' => 'user', 'action' => 'login')));
+            return $this->app()->route()->setRoute(
+                $this->app()->route()->setUrl(
+                    array(
+                        'zone' => 'front',
+                        'page' => 'user',
+                        'action' => 'login'
+                    )
+                )
+            );
         }
         
         //Avatar
-        $this->app()->setData('avatarIcon', $this->generateAvatarIcon($this->app()->httpRequest()->getSession('user')->avatar, $this->app()->httpRequest()->getSession('user')->nickname));
+        $this->app()->setData(
+            'avatarIcon',
+            $this->generateAvatarIcon(
+                $this->app()->httpRequest()->getSession('user')->avatar,
+                $this->app()->httpRequest()->getSession('user')->nickname
+            )
+        );
 
         //commentList
         $commentList = CommentModel::getCommentList(0, 'Attente'); 
@@ -29,7 +43,10 @@ class TopbarController extends ControllerApp
         $this->app()->setData('CommentNumberText', $this->generateCommentNumberText($commentList));
 
         //Liste des messages
-        $this->app()->setData('contactList', ContactModel::getContactList($this->app()->httpRequest()->getData('contactId'), 0));
+        $this->app()->setData(
+            'contactList',
+            ContactModel::getContactList($this->app()->httpRequest()->getData('contactId'), 0)
+        );
 
         return $this->app()->httpResponse()->generateView('topbar');
 

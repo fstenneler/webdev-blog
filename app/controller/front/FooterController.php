@@ -19,7 +19,12 @@ class FooterController extends ControllerApp
         //categoryList
         $categoryList = CategoryModel::getCategoryList();
         foreach($categoryList as $key => $category) {
-            $categoryList[$key]->url = $this->app()->route()->setUrl(array('page' => 'posts', 'categoryId' => $category->id));
+            $categoryList[$key]->url = $this->app()->route()->setUrl(
+                array(
+                    'page' => 'posts',
+                    'categoryId' => $category->id
+                )
+            );
         }
         $this->app()->setData('categoryList', $categoryList);
 
