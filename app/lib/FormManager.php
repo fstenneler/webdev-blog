@@ -88,10 +88,17 @@ class FormManager Extends FormComponent
                     $field->setError($this->formHandler()->getFileFieldError($field));
                     $success = false;
                 } else {
-                    if(move_uploaded_file($_FILES[$field->getName()]['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . GALLERY_DIR . $_FILES[$field->getName()]['name'])) {
+                    if(
+                        move_uploaded_file(
+                            $_FILES[$field->getName()]['tmp_name'],
+                            $_SERVER['DOCUMENT_ROOT'] . GALLERY_DIR . $_FILES[$field->getName()]['name']
+                        )
+                    ) {
                         $field->setValue($_FILES[$field->getName()]['name']);
                     } else {
-                        $field->setError('Une erreur s\'est produite lors du chargement de l\'image (code erreur : ' . $_FILES[$field->getName()]['error'] . ')');
+                        $error = 'Une erreur s\'est produite lors du chargement de l\'image';
+                        $error .= '(code erreur : ' . $_FILES[$field->getName()]['error'] . ')';
+                        $field->setError($error);
                         $success = false;
                     }
                 }

@@ -37,8 +37,15 @@ class Form extends FormClassBuilder
     public function isSubmited()
     {
         if(
-            ($this->app()->httpRequest()->postData('submit') !== null && $this->getFormId() === 0)
-            || ($this->app()->httpRequest()->postData('submit') !== null && $this->getFormId() === (int) $this->app()->httpRequest()->postData('id'))
+            (
+                $this->app()->httpRequest()->postData('submit') !== null
+                && $this->getFormId() === 0
+            )
+            || 
+            (
+                $this->app()->httpRequest()->postData('submit') !== null
+                && $this->getFormId() === (int) $this->app()->httpRequest()->postData('id')
+            )
         ) {
             return true;
         }
@@ -47,7 +54,13 @@ class Form extends FormClassBuilder
 
     public function setSuccess($success)
     {
-        $this->app()->httpRequest()->setSession('formUpdate', array('destination' => $this->getDestination(), 'success' => $success));
+        $this->app()->httpRequest()->setSession(
+            'formUpdate',
+            array(
+                'destination' => $this->getDestination(),
+                'success' => $success
+            )
+        );
     }
 
     public function getSuccess()

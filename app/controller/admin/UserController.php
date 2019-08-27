@@ -31,7 +31,10 @@ class UserController extends ControllerApp
         }
 
         //userForm update
-        if($this->app()->httpRequest()->getData('action') === 'update' && $this->app()->httpRequest()->getData('userId') > 0) {
+        if(
+            $this->app()->httpRequest()->getData('action') === 'update'
+            && $this->app()->httpRequest()->getData('userId') > 0
+        ) {
             $form = new Form($this->app());
             $form->setMode('update');
             $form->setDestination('user');
@@ -39,7 +42,9 @@ class UserController extends ControllerApp
             $form->setDbRowId($this->app()->httpRequest()->getData('userId'));
             $form->setForm();
             if($form->setValidation()) {
-                return $this->app()->route()->setRoute('index.php?page=user&action=update&userId=' . $this->app()->httpRequest()->getData('userId'));
+                return $this->app()->route()->setRoute(
+                    'index.php?page=user&action=update&userId=' . $this->app()->httpRequest()->getData('userId')
+                );
             }
             $this->app()->setData('form', $form);
         }

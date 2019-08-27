@@ -13,7 +13,14 @@ class HeaderController extends ControllerApp
 
         //search
         if($this->app()->httpRequest()->getData('s') !== null) {
-            return $this->app()->route()->setRoute( $this->app()->route()->setUrl(array('page' => 'posts', 'search' => urlencode($this->app()->httpRequest()->getData('s')))));
+            return $this->app()->route()->setRoute(
+                $this->app()->route()->setUrl(
+                    array(
+                        'page' => 'posts',
+                        'search' => urlencode($this->app()->httpRequest()->getData('s'))
+                    )
+                )
+            );
         }
 
         //infos user
@@ -30,7 +37,12 @@ class HeaderController extends ControllerApp
         //categoryList
         $categoryList = CategoryModel::getCategoryList();
         foreach($categoryList as $key => $category) {
-            $categoryList[$key]->url = $this->app()->route()->setUrl(array('page' => 'posts', 'categoryId' => $category->id));
+            $categoryList[$key]->url = $this->app()->route()->setUrl(
+                array(
+                    'page' => 'posts',
+                    'categoryId' => $category->id
+                )
+            );
         }
         $this->app()->setData('categoryList', $categoryList);
 

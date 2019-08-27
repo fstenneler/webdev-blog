@@ -13,7 +13,12 @@ class FormHandler Extends FormComponent
 
     public function getEmailFieldError(Field $field)
     {
-        if(!preg_match ("/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,6}$/", $field->getValue())) {
+        if(
+            !preg_match(
+                "/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,6}$/",
+                $field->getValue()
+            )
+        ) {
             return 'L\'adresse e-mail saisie est erronée';
         }
         if($this->form()->getMode() === 'insert') {

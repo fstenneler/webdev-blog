@@ -44,7 +44,10 @@ class PostController extends ControllerApp
         $this->app()->setData('userList', UserModel::getUserList('Administrateur'));
 
         //postForm update
-        if($this->app()->httpRequest()->getData('action') === 'update' && $this->app()->httpRequest()->getData('postId') > 0) {
+        if(
+            $this->app()->httpRequest()->getData('action') === 'update'
+            && $this->app()->httpRequest()->getData('postId') > 0
+        ) {
             $form = new Form($this->app());
             $form->setMode('update');
             $form->setDestination('post');
@@ -53,7 +56,9 @@ class PostController extends ControllerApp
             $form->setDbRowId($this->app()->httpRequest()->getData('postId'));
             $form->setForm();
             if($form->setValidation()) {
-                return $this->app()->route()->setRoute('index.php?page=post&action=update&postId=' . $this->app()->httpRequest()->getData('postId'));
+                return $this->app()->route()->setRoute(
+                    'index.php?page=post&action=update&postId=' . $this->app()->httpRequest()->getData('postId')
+                );
             }
             $this->app()->setData('form', $form);
         }
@@ -64,7 +69,14 @@ class PostController extends ControllerApp
             $form->setMode('insert');
             $form->setDestination('post');
             $form->setMandatoryFields(array('title', 'header', 'content', 'is_hero', 'user_id', 'category_id'));
-            $form->setDefaultValues(array('id' => 0, 'creation_date' => date('Y-m-d'), 'last_modification_date' => date('Y-m-d'), 'display' => 1));
+            $form->setDefaultValues(
+                array(
+                    'id' => 0,
+                    'creation_date' => date('Y-m-d'),
+                    'last_modification_date' => date('Y-m-d'),
+                    'display' => 1
+                )
+            );
             $form->setForm();
             if($form->setValidation()) {
                 return $this->app()->route()->setRoute('index.php?page=post');
