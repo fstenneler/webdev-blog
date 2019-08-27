@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `name`, `first_name`, `nickname`, `avatar`, `description`, `registration_date`, `role`) VALUES
-(1, 'admin@webdev.fr', 0x616161616161, 'WebDevBlog', 'Admin', 'Admin', '#7D3C98', '', '2019-08-19', 'Administrateur');
+(1, 'admin@webdev.fr', 0x61646d696e, 'WebDevBlog', 'Admin', 'Admin', '#7D3C98', '', '2019-08-19', 'Administrateur');
 
 --
 -- Contraintes pour les tables déchargées
