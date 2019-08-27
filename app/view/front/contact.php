@@ -42,37 +42,37 @@
             <fieldset>
 
                 <div>
-                    <input name="name" id="cName" class="full-width" placeholder="Votre nom*" value="<?= esc($form->formBuilder()->getField('name')->getValue()); ?>" type="text">
+                    <input name="name" id="cName" class="full-width" placeholder="Votre nom*" value="<?= htmlspecialchars($form->formBuilder()->getField('name')->getValue()); ?>" type="text">
                     <?php if($form->formBuilder()->getField('name')->getError() !== null && $form->isSubmited()) { ?>
-                        <div class="error"><?= esc($form->formBuilder()->getField('name')->getError()); ?></div>
+                        <div class="error"><?= htmlspecialchars($form->formBuilder()->getField('name')->getError()); ?></div>
                     <?php } ?>
                 </div>
 
                 <div class="form-field">
-                    <input name="email" id="cEmail" class="full-width" placeholder="Votre adresse e-mail*" value="<?= esc($form->formBuilder()->getField('email')->getValue()); ?>" type="email">
+                    <input name="email" id="cEmail" class="full-width" placeholder="Votre adresse e-mail*" value="<?= htmlspecialchars($form->formBuilder()->getField('email')->getValue()); ?>" type="email">
                     <?php if($form->formBuilder()->getField('email')->getError() !== null && $form->isSubmited()) { ?>
-                        <div class="error"><?= esc($form->formBuilder()->getField('email')->getError()); ?></div>
+                        <div class="error"><?= htmlspecialchars($form->formBuilder()->getField('email')->getError()); ?></div>
                     <?php } ?>
                 </div>
 
                 <div class="form-field">
-                    <input name="subject" id="cEmail" class="full-width" placeholder="Objet*" value="<?= esc($form->formBuilder()->getField('subject')->getValue()); ?>" type="text">
+                    <input name="subject" id="cEmail" class="full-width" placeholder="Objet*" value="<?= htmlspecialchars($form->formBuilder()->getField('subject')->getValue()); ?>" type="text">
                     <?php if($form->formBuilder()->getField('subject')->getError() !== null && $form->isSubmited()) { ?>
-                        <div class="error"><?= esc($form->formBuilder()->getField('subject')->getError()); ?></div>
+                        <div class="error"><?= htmlspecialchars($form->formBuilder()->getField('subject')->getError()); ?></div>
                     <?php } ?>
                 </div>
 
                 <div class="message form-field">
-                    <textarea name="message" id="cMessage" class="full-width" placeholder="Votre message*"><?= esc($form->formBuilder()->getField('message')->getValue()); ?></textarea>
+                    <textarea name="message" id="cMessage" class="full-width" placeholder="Votre message*"><?= htmlspecialchars($form->formBuilder()->getField('message')->getValue()); ?></textarea>
                     <?php if($form->formBuilder()->getField('message')->getError() !== null && $form->isSubmited()) { ?>
-                        <div class="error"><?= esc($form->formBuilder()->getField('message')->getError()); ?></div>
+                        <div class="error"><?= htmlspecialchars($form->formBuilder()->getField('message')->getError()); ?></div>
                     <?php } ?>
                 </div>
 
                 <div class="message form-field form-privacy-consent">
                     <input type="checkbox" id="checkbox-privacy-consent"><span class="privacy-consent">En soumettant ce formulaire, j'accepte que les informations saisies soient enregistrées et utilisées dans le cadre de la relation qui découle de cette demande.</span>
                     <?php if($form->formBuilder()->getField('privacy_consent_date')->getError() !== null && $form->isSubmited()) { ?>
-                        <div class="error"><?= esc($form->formBuilder()->getField('privacy_consent_date')->getError()); ?></div>
+                        <div class="error"><?= htmlspecialchars($form->formBuilder()->getField('privacy_consent_date')->getError()); ?></div>
                     <?php } ?>
                 </div>
 

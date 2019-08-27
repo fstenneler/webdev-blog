@@ -10,9 +10,6 @@ require 'config/config.php';
 require('app/ClassAutoloader.php');
 app\ClassAutoloader::register();
 
-//chargement des fonctions de rendu        
-require('app/lib/Render.php');
-
 //routeur
 $zone = 'front'; //zone par défaut
 if(isset($_GET['zone'])) {

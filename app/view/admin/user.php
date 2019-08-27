@@ -39,12 +39,12 @@
                     <?php foreach($this->app()->getData('userList') as $user) { ?>
                     <tr>
                       <td><?= $user->id; ?></td>
-                      <td><a href="index.php?page=user&action=update&userId=<?= esc($user->id); ?>"><?= esc($user->avatarIcon); ?><?= esc($user->nickname); ?></a></td>
-                      <td><?= esc($user->name); ?></td>
-                      <td><?= esc($user->first_name); ?></td>
-                      <td><?= esc($user->email); ?></td>
-                      <td><?= esc($user->role); ?></td>
-                      <td><?= esc($user->registration_date); ?></td>
+                      <td><a href="index.php?page=user&action=update&userId=<?= htmlspecialchars($user->id); ?>"><?= $user->avatarIcon; ?><?= htmlspecialchars($user->nickname); ?></a></td>
+                      <td><?= htmlspecialchars($user->name); ?></td>
+                      <td><?= htmlspecialchars($user->first_name); ?></td>
+                      <td><?= htmlspecialchars($user->email); ?></td>
+                      <td><?= htmlspecialchars($user->role); ?></td>
+                      <td><?= htmlspecialchars($user->registration_date); ?></td>
                     </tr>
                     <?php } ?>
                   </tbody>

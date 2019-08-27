@@ -41,11 +41,11 @@
 
                     <tr>
                       <td><?php if($comment->status === 'Attente') { echo '<i class="fas fa-circle comment-status-att"></i>'; } ?></td>
-                      <td><?= esc($comment->date); ?></td>
-                      <td><a href="index.php?page=comment&action=view&postId=<?= esc($comment->post_id); ?>"<?php if($comment->status === 'Attente') { echo ' class="comment-status-att"'; } ?>><?= esc(substr($comment->content,0,50)); ?> ...</a></td>
-                      <td><a href="index.php?page=user&action=update&userId=<?= esc($comment->user_id); ?>"><?= esc($comment->user_avatar_icon); ?><?= esc($comment->user_nickname); ?></a></td>
-                      <td><a href="index.php?page=post&action=update&postId=<?= esc($comment->post_id); ?>"><?= esc($comment->post_title); ?></a></td>
-                      <td><a href="" class="comment-status-<?= esc(strtolower(substr($comment->status,0,3))); ?>"><?= esc($comment->status); ?></a></td>
+                      <td><?= htmlspecialchars($comment->date); ?></td>
+                      <td><a href="index.php?page=comment&action=view&postId=<?= htmlspecialchars($comment->post_id); ?>"<?php if($comment->status === 'Attente') { echo ' class="comment-status-att"'; } ?>><?= htmlspecialchars(substr($comment->content,0,50)); ?> ...</a></td>
+                      <td><a href="index.php?page=user&action=update&userId=<?= htmlspecialchars($comment->user_id); ?>"><?= $comment->user_avatar_icon; ?><?= htmlspecialchars($comment->user_nickname); ?></a></td>
+                      <td><a href="index.php?page=post&action=update&postId=<?= htmlspecialchars($comment->post_id); ?>"><?= htmlspecialchars($comment->post_title); ?></a></td>
+                      <td><a href="" class="comment-status-<?= htmlspecialchars(strtolower(substr($comment->status,0,3))); ?>"><?= htmlspecialchars($comment->status); ?></a></td>
                     </tr>
 
                     <?php

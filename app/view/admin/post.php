@@ -40,20 +40,20 @@
                   <tbody>
                     <?php foreach($this->app()->getData('postList') as $post) { ?>
                     <tr>
-                      <td><?= esc($post->id); ?></td>
-                      <td><a href="index.php?page=post&action=update&postId=<?= esc($post->id); ?>"><?= esc($post->title); ?></a></td>
-                      <td><?= esc($post->creation_date); ?></td>
-                      <td><?= esc($post->last_modification_date); ?></td>
-                      <td><?= esc($post->user_nickname); ?></td>
+                      <td><?= htmlspecialchars($post->id); ?></td>
+                      <td><a href="index.php?page=post&action=update&postId=<?= htmlspecialchars($post->id); ?>"><?= htmlspecialchars($post->title); ?></a></td>
+                      <td><?= htmlspecialchars($post->creation_date); ?></td>
+                      <td><?= htmlspecialchars($post->last_modification_date); ?></td>
+                      <td><?= htmlspecialchars($post->user_nickname); ?></td>
                       <td>
                         <?php if($post->is_hero > 0) { ?>oui<?php } ?>
                       </td>
-                      <td><?= esc($post->category_name); ?></td>
+                      <td><?= htmlspecialchars($post->category_name); ?></td>
                       <td>
                         <?php if($post->comment_number > 0) { ?>
-                          <a class="postlist-comment-link" href="index.php?page=comment&action=view&postId=<?= esc($post->id); ?>"><?= esc($post->comment_number); ?></a>
+                          <a class="postlist-comment-link" href="index.php?page=comment&action=view&postId=<?= htmlspecialchars($post->id); ?>"><?= htmlspecialchars($post->comment_number); ?></a>
                         <?php } else { ?>
-                          <?= esc($post->comment_number); ?>
+                          <?= htmlspecialchars($post->comment_number); ?>
                         <?php } ?>
                       </td>
                     </tr>

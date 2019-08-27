@@ -31,17 +31,4 @@ class HttpResponse extends ApplicationComponent
         require 'templates/' . $this->app()->getzoneName() . '.php';
     }
 
-    /**
-    * Permet d'échapper le code html
-    *
-    * @return string Texte échappé
-    */
-    protected function esc($html)
-    {   
-        if(!preg_match("#<#",html_entity_decode($html))) {
-            return htmlspecialchars($html);
-        }
-        return $html;        
-    }
-
 }
