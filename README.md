@@ -1,15 +1,26 @@
 # webdev-blog
-Blog PHP basé sur le pattern MVC
+### Blog PHP basé sur le pattern MVC
 
-Instructions d'installation :
+Version en ligne du projet [ici](http://webdev-blog.orlinstreet.rocks/).
 
-[1] Télécharger le projet
+[![SymfonyInsight](https://insight.symfony.com/projects/d48cdb25-7152-4066-a9a5-1f88b3d2679d/big.svg)](https://insight.symfony.com/projects/d48cdb25-7152-4066-a9a5-1f88b3d2679d)
 
-[2] Créer la base de données en important le script MySQL situé dans le dossier setup :
+## Instructions d'installation :
 
-  webdev-blog.sql
+### Télécharger le projet :
 
-[3] Éditer le fichier config.php situé dans le dossier config :
+#### Soit depuis l'url :  
+https://github.com/fstenneler/webdev-blog/archive/master.zip
+
+#### Ou directement dans Git :
+
+    git clone https://github.com/fstenneler/webdev-blog.git
+
+### Créer la base de données en important le script MySQL situé dans le dossier setup :
+
+[https://github.com/fstenneler/webdev-blog/blob/master/setup/webdev-blog.sql](https://github.com/fstenneler/webdev-blog/blob/master/setup/webdev-blog.sql)
+
+### Éditer le fichier config.php situé dans le dossier config :
 
     define('DB_SERVER', '');
     define('DB_USER','');
@@ -19,29 +30,28 @@ Instructions d'installation :
     define('MAX_FILE_SIZE', 500000);
     define('GALLERY_DIR', '/public/front/images/gallery/');
     
-  Paramètres à modifier :  
-  DB_SERVER : adresse ou IP du serveur MySQL  
-  DB_USER : identifiant de connexion à la base de données  
-  DB_PASSWORD : mot de passe de connexion à la base de données
+ #### Paramètres à modifier :  
+  * DB_SERVER : adresse ou IP du serveur MySQL  
+  * DB_USER : identifiant de connexion à la base de données  
+  * DB_PASSWORD : mot de passe de connexion à la base de données
   
-  Les autres paramètres sont déjà renseignés mais peuvent être modifiés en cas de besoin :  
-  DB_NAME : nom de la base de données  
-  POST_NUMBER : nombre d'articles à afficher sur une page  
-  MAX_FILE_SIZE : taille maximale en octets des images à charger  
-  GALLERY_DIR : chemin vers le dossier des images chargées  
+ #### Les autres paramètres sont déjà renseignés mais peuvent être modifiés en cas de besoin :  
+  * DB_NAME : nom de la base de données  
+  * POST_NUMBER : nombre d'articles à afficher sur une page  
+  * MAX_FILE_SIZE : taille maximale en octets des images à charger  
+  * GALLERY_DIR : chemin vers le dossier des images chargées  
   
-[4] Copier tous les dossiers et fichiers sur le serveur distant
+### Téléverser tous les dossiers et fichiers sur le serveur distant
 
-[5] Se connecter au site en utilisant le compte administrateur par défaut :
-  
-  Adresse : [URL]/index.php?page=user&action=login (ou clic sur le lien en haut à droite)  
-  Identifiant : admin@webdev.fr  
-  mot de passe : aaaaaa  
-  
-[6] Personnaliser les coordonnées et le mot de passe du compte administrateur
+### Se connecter en utilisant le compte administrateur par défaut
 
-[7] Accéder à l'admin pour créer les articles :
+  * Identifiant : admin@webdev.fr  
+  * mot de passe : admin  
   
-  Adresse : [URL]/admin/ (ou clic sur le lien dans le footer)  
+### Personnaliser le compte administrateur
+
+(Rubrique mon compte)
+
+### Accéder à l'admin pour gérer le site et créer les articles :
   
-  Pour ajouter/modifier/supprimer des catégories, modifier le contenu de la table category directement dans la base de données.
+(Ciquer sur le lien Admin dans le footer du site)
