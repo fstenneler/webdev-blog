@@ -11,20 +11,20 @@
                     <div class="featured__slide">
                         <div class="entry">
 
-                            <div class="entry__background" style="background-image:url('<?= $this->esc(GALLERY_DIR . $post->image_main); ?>');"></div>
+                            <div class="entry__background" style="background-image:url('<?= esc(GALLERY_DIR . $post->image_main); ?>');"></div>
                             
                             <div class="entry__content">
-                                <span class="entry__category"><a href="<?= $this->esc($post->category_url); ?>"><?= $this->esc($post->category_name); ?></a></span>
+                                <span class="entry__category"><a href="<?= esc($post->category_url); ?>"><?= esc($post->category_name); ?></a></span>
 
-                                <h1><a href="<?= $this->esc($post->url); ?>" title="<?= $this->esc($post->title); ?>"><?= $this->esc($post->title); ?></a></h1>
+                                <h1><a href="<?= esc($post->url); ?>" title="<?= esc($post->title); ?>"><?= esc($post->title); ?></a></h1>
 
                                 <div class="entry__info">
                                     <span class="entry__profile-pic">
-                                        <?= $this->esc($post->avatar_icon); ?>
+                                        <?= esc($post->avatar_icon); ?>
                                     </span>
                                     <ul class="entry__meta">
-                                        <li><?= $this->esc($post->user_nickname); ?></li>
-                                        <li><?= $this->esc($post->creation_date); ?></li>
+                                        <li><?= esc($post->user_nickname); ?></li>
+                                        <li><?= esc($post->creation_date); ?></li>
                                     </ul>
                                 </div>
                             </div> <!-- end entry__content -->
@@ -54,20 +54,20 @@
                     
                     <div class="item-entry" data-aos="zoom-in">
                         <div class="item-entry__thumb">
-                            <a href="<?= $this->esc($post->url); ?>" class="item-entry__thumb-link">
-                                <img src="<?= $this->esc(GALLERY_DIR . $post->image_medium); ?>" alt="">
+                            <a href="<?= esc($post->url); ?>" class="item-entry__thumb-link">
+                                <img src="<?= esc(GALLERY_DIR . $post->image_medium); ?>" alt="">
                             </a>
                         </div>
         
                         <div class="item-entry__text">    
                             <div class="item-entry__cat">
-                                <a href="<?= $this->esc($post->category_url); ?>"><?= $this->esc($post->category_name); ?></a> 
+                                <a href="<?= esc($post->category_url); ?>"><?= esc($post->category_name); ?></a> 
                             </div>
     
-                            <h1 class="item-entry__title"><a href="<?= $this->esc($post->url); ?>"><?= $this->esc($post->title); ?></a></h1>
+                            <h1 class="item-entry__title"><a href="<?= esc($post->url); ?>"><?= esc($post->title); ?></a></h1>
                                 
                             <div class="item-entry__date">
-                                <a href="<?= $this->esc($post->url); ?>"><?= $this->esc($post->creation_date); ?></a>
+                                <a href="<?= esc($post->url); ?>"><?= esc($post->creation_date); ?></a>
                             </div>
                         </div>
                     </div> <!-- item-entry -->
@@ -83,13 +83,13 @@
                 <nav class="pgn" data-aos="fade-up">
                     <?php $pagination = $this->app()->getData('pagination'); ?>
                     <ul>
-                        <li><a class="pgn__prev" href="<?= $this->esc($pagination['previousPageUrl']); ?>">Prev</a></li>
+                        <li><a class="pgn__prev" href="<?= esc($pagination['previousPageUrl']); ?>">Prev</a></li>
 
                         <?php foreach($pagination['pageList'] as $page => $url) { ?>
-                        <li><a class="pgn__num <?php if($page == $pagination['currentPage']) { echo 'current'; } ?>" href="<?= $this->esc($url); ?>"><?= $this->esc($page); ?></a></li>
+                        <li><a class="pgn__num <?php if($page == $pagination['currentPage']) { echo 'current'; } ?>" href="<?= esc($url); ?>"><?= esc($page); ?></a></li>
                         <?php } ?>
 
-                        <li><a class="pgn__next" href="<?= $this->esc($pagination['nextPageUrl']); ?>">Next</a></li>
+                        <li><a class="pgn__next" href="<?= esc($pagination['nextPageUrl']); ?>">Next</a></li>
                     </ul>
                 </nav>
             </div>

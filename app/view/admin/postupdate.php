@@ -11,18 +11,18 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">[<?= $this->esc($post->id); ?>] <?= $this->esc($post->title); ?></h6>
+              <h6 class="m-0 font-weight-bold text-primary">[<?= esc($post->id); ?>] <?= esc($post->title); ?></h6>
             </div>
             <div class="card-body">
 
                 <?php $form = $this->app()->getData('form'); ?>
 
                 <form class="user" method="post" action="" enctype="multipart/form-data">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="<?= $this->esc(MAX_FILE_SIZE); ?>" />
+                    <input type="hidden" name="MAX_FILE_SIZE" value="<?= esc(MAX_FILE_SIZE); ?>" />
                     <div class="form-group row">
                         <div class="col-sm-12 col-xl-9">
                             <input id="checkbox-display" type="checkbox"<?php if($form->formBuilder()->getField('display')->getValue() === 1) { echo ' checked'; } ?>> Afficher l'article sur le blog
-                            <input id="form-display" type="hidden" name="display" value="<?= $this->esc($form->formBuilder()->getField('display')->getValue()); ?>">
+                            <input id="form-display" type="hidden" name="display" value="<?= esc($form->formBuilder()->getField('display')->getValue()); ?>">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -31,11 +31,11 @@
                             <select name='category_id' class="form-control form-control-user" id="articleCategory" placeholder="Catégorie">
                                 <option value=""></option>
                                 <?php foreach($this->app()->getData('categoryList') as $category) { ?>
-                                <option value="<?= $this->esc($category->id); ?>"<?php if($form->formBuilder()->getField('category_id')->getValue() == $category->id) { echo " selected"; } ?>><?= $this->esc($category->name); ?></option>
+                                <option value="<?= esc($category->id); ?>"<?php if($form->formBuilder()->getField('category_id')->getValue() == $category->id) { echo " selected"; } ?>><?= esc($category->name); ?></option>
                                 <?php } ?>
                             </select>
                             <?php if($form->formBuilder()->getField('category_id')->getError() !== null && $form->isSubmited()) { ?>
-                                <div class="form-control-error"><?= $this->esc($form->formBuilder()->getField('category_id')->getError()); ?></div>
+                                <div class="form-control-error"><?= esc($form->formBuilder()->getField('category_id')->getError()); ?></div>
                             <?php } ?>
                         </div>
                         <div class="col-xl-3">
@@ -43,11 +43,11 @@
                             <select name='user_id' class="form-control form-control-user" id="articleUser" placeholder="Auteur">
                                 <option value=""></option>
                                 <?php foreach($this->app()->getData('userList') as $user) { ?>
-                                <option value="<?= $this->esc($user->id); ?>"<?php if( $form->formBuilder()->getField('user_id')->getValue() == $user->id) { echo " selected"; } ?>><?= $this->esc($user->nickname); ?></option>
+                                <option value="<?= esc($user->id); ?>"<?php if( $form->formBuilder()->getField('user_id')->getValue() == $user->id) { echo " selected"; } ?>><?= esc($user->nickname); ?></option>
                                 <?php } ?>
                             </select>
                             <?php if($form->formBuilder()->getField('user_id')->getError() !== null && $form->isSubmited()) { ?>
-                                <div class="form-control-error"><?= $this->esc($form->formBuilder()->getField('user_id')->getError()); ?></div>
+                                <div class="form-control-error"><?= esc($form->formBuilder()->getField('user_id')->getError()); ?></div>
                             <?php } ?>
                         </div>
                         <div class="col-xl-2">
@@ -81,7 +81,7 @@
                             <label for="articleContent">Contenu</label>
                             <textarea name='content' id="post-content" class="form-control form-control-user" id="articleContent" placeholder="Contenu"><?= $form->formBuilder()->getField('content')->getValue(); ?></textarea>
                             <?php if($form->formBuilder()->getField('content')->getError() !== null && $form->isSubmited()) { ?>
-                                <div class="form-control-error"><?= $this->esc($form->formBuilder()->getField('content')->getError()); ?></div>
+                                <div class="form-control-error"><?= esc($form->formBuilder()->getField('content')->getError()); ?></div>
                             <?php } ?>
                         </div>
                     </div>
@@ -89,31 +89,31 @@
                         <div class="col-xl-3">
                             <label class="form-control-image-label" for="articleImageMain">Image principale</label>
                             <?php if($form->formBuilder()->getField('image_main')->getValue() !== '') { ?>
-                                <img class="form-control-image-thumb" src="<?= $this->esc(GALLERY_DIR . $form->formBuilder()->getField('image_main')->getValue()); ?>" alt="<?= $this->esc($form->formBuilder()->getField('title')->getValue()); ?>" />
+                                <img class="form-control-image-thumb" src="<?= esc(GALLERY_DIR . $form->formBuilder()->getField('image_main')->getValue()); ?>" alt="<?= esc($form->formBuilder()->getField('title')->getValue()); ?>" />
                             <?php } ?>
                             <input name='image_main' type="file" class="form-control form-control-image" id="articleImageMain" placeholder="Image principale" value="Image principale">
                             <?php if($form->formBuilder()->getField('image_main')->getError() !== null && $form->isSubmited()) { ?>
-                                <div class="form-control-error"><?= $this->esc($form->formBuilder()->getField('image_main')->getError()); ?></div>
+                                <div class="form-control-error"><?= esc($form->formBuilder()->getField('image_main')->getError()); ?></div>
                             <?php } ?>
                         </div>
                         <div class="col-xl-3">
                             <label class="form-control-image-label" for="articleImageMedium">Image moyenne</label>
                             <?php if($form->formBuilder()->getField('image_medium')->getValue() !== '') { ?>
-                                <img class="form-control-image-thumb" src="<?= $this->esc(GALLERY_DIR . $form->formBuilder()->getField('image_medium')->getValue()); ?>" alt="<?= $this->esc($form->formBuilder()->getField('title')->getValue()); ?>" />
+                                <img class="form-control-image-thumb" src="<?= esc(GALLERY_DIR . $form->formBuilder()->getField('image_medium')->getValue()); ?>" alt="<?= esc($form->formBuilder()->getField('title')->getValue()); ?>" />
                             <?php } ?>
                             <input name='image_medium' type="file" class="form-control form-control-image" id="articleImageMedium" placeholder="Image moyenne" value="Image moyenne">
                             <?php if($form->formBuilder()->getField('image_medium')->getError() !== null && $form->isSubmited()) { ?>
-                                <div class="form-control-error"><?= $this->esc($form->formBuilder()->getField('image_medium')->getError()); ?></div>
+                                <div class="form-control-error"><?= esc($form->formBuilder()->getField('image_medium')->getError()); ?></div>
                             <?php } ?>
                         </div>
                         <div class="col-xl-3">
                             <label class="form-control-image-label" for="articleImageSmall">Image petite</label>
                             <?php if($form->formBuilder()->getField('image_small')->getValue() !== '') { ?>
-                                <img class="form-control-image-thumb" src="<?= $this->esc(GALLERY_DIR . $form->formBuilder()->getField('image_small')->getValue()); ?>" alt="<?= $this->esc($form->formBuilder()->getField('title')->getValue()); ?>" />
+                                <img class="form-control-image-thumb" src="<?= esc(GALLERY_DIR . $form->formBuilder()->getField('image_small')->getValue()); ?>" alt="<?= esc($form->formBuilder()->getField('title')->getValue()); ?>" />
                             <?php } ?>
                             <input name='image_small' type="file" class="form-control form-control-image" id="articleImageSmall" placeholder="Image petite" value="Image petite">
                             <?php if($form->formBuilder()->getField('image_small')->getError() !== null && $form->isSubmited()) { ?>
-                                <div class="form-control-error"><?= $this->esc($form->formBuilder()->getField('image_small')->getError()); ?></div>
+                                <div class="form-control-error"><?= esc($form->formBuilder()->getField('image_small')->getError()); ?></div>
                             <?php } ?>
                         </div>
                     </div>

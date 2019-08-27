@@ -39,7 +39,7 @@
     <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="fas fa-bell fa-fw"></i>
       <!-- Counter - Alerts -->
-      <span class="badge badge-danger badge-counter"><?= $this->esc($this->app()->getData('CommentNumber')); ?></span>
+      <span class="badge badge-danger badge-counter"><?= esc($this->app()->getData('CommentNumber')); ?></span>
     </a>
     <!-- Dropdown - Alerts -->
     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
@@ -54,13 +54,13 @@
           $nb ++;
       ?>
 
-      <a class="dropdown-item d-flex align-items-center" href="index.php?page=comment&action=view&postId=<?= $this->esc($comment->post_id); ?>">
+      <a class="dropdown-item d-flex align-items-center" href="index.php?page=comment&action=view&postId=<?= esc($comment->post_id); ?>">
         <div class="mr-3">
-        <?= $this->esc($comment->user_avatar_icon); ?>
+        <?= esc($comment->user_avatar_icon); ?>
         </div>
         <div>
-          <div class="small text-gray-500"><?= $this->esc($comment->date); ?></div>
-          <?= $this->esc(substr($comment->content,0,50)); ?>...
+          <div class="small text-gray-500"><?= esc($comment->date); ?></div>
+          <?= esc(substr($comment->content,0,50)); ?>...
         </div>
       </a>
 
@@ -80,7 +80,7 @@
     <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="fas fa-envelope fa-fw"></i>
       <!-- Counter - Messages -->
-      <span class="badge badge-danger badge-counter"><?= $this->esc(count($this->app()->getData('contactList'))); ?></span>
+      <span class="badge badge-danger badge-counter"><?= esc(count($this->app()->getData('contactList'))); ?></span>
     </a>
     <!-- Dropdown - Messages -->
     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
@@ -90,10 +90,10 @@
 
       <?php foreach($this->app()->getData('contactList') as $contact) { ?>
 
-      <a class="dropdown-item d-flex align-items-center" href="index.php?page=contact&action=view&contactId=<?= $this->esc($contact->id); ?>">
+      <a class="dropdown-item d-flex align-items-center" href="index.php?page=contact&action=view&contactId=<?= esc($contact->id); ?>">
         <div class="font-weight-bold">
-          <div class="text-truncate"><?= $this->esc($contact->subject); ?></div>
-          <div class="small text-gray-500"><?= $this->esc($contact->name); ?> · <?= $this->esc($contact->date); ?></div>
+          <div class="text-truncate"><?= esc($contact->subject); ?></div>
+          <div class="small text-gray-500"><?= esc($contact->name); ?> · <?= esc($contact->date); ?></div>
         </div>
       </a>
 

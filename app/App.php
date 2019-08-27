@@ -192,8 +192,8 @@ class App
             } else {
                 return false;
             }
-        }
-        
+        }  
+
         //on inclut le template concerné, qui va afficher les vues du tableau $content
         $this->httpResponse()->sendHttp();
 
