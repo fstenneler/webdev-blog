@@ -13,7 +13,7 @@
                 <fieldset>
 
                     <div>
-                        <input name="cEmail" id="cEmail" class="full-width" placeholder="Your Email*" value="<?= htmlspecialchars($this->app()->getData('email')); ?>" type="email">
+                        <input name="cEmail" id="cEmail" class="full-width" placeholder="Your Email*" value="<?= $this->esc($this->app()->getData('email')); ?>" type="email">
                     </div>
 
                     <div class="form-field">
@@ -25,7 +25,7 @@
                     </div>
 
                     <div class='form-error'>
-                        <?= $this->app()->getData('formError'); ?>
+                        <?= $this->esc($this->app()->getData('formError')); ?>
                     </div>
 
                     <button type="submit" class="submit btn btn--primary btn--large full-width">Se connecter</button>
@@ -33,7 +33,7 @@
                 </fieldset>
             </form>
 
-            <div class='existing-account'>Pas encore inscrit ? <a href="<?= $this->app()->route()->setUrl(array('page' => 'user', 'action' => 'signup')); ?>">Cliquez ici</a> pour créer un nouveau compte</div>
+            <div class='existing-account'>Pas encore inscrit ? <a href="<?= $this->esc($this->app()->route()->setUrl(array('page' => 'user', 'action' => 'signup'))); ?>">Cliquez ici</a> pour créer un nouveau compte</div>
 
         </div>
     </div>

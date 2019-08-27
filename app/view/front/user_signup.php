@@ -15,38 +15,38 @@
                 <fieldset>
 
                     <div>
-                        <input name="first_name" id="cfirst_name" class="full-width" placeholder="Votre prénom*" value="<?= htmlspecialchars($form->formBuilder()->getField('first_name')->getValue()); ?>" type="text" maxlength="<?= htmlspecialchars($form->formBuilder()->getField('first_name')->getMaxLength()); ?>" required>
+                        <input name="first_name" id="cfirst_name" class="full-width" placeholder="Votre prénom*" value="<?= $this->esc($form->formBuilder()->getField('first_name')->getValue()); ?>" type="text" maxlength="<?= $this->esc($form->formBuilder()->getField('first_name')->getMaxLength()); ?>" required>
                     </div>
                     <?php if($form->formBuilder()->getField('first_name')->getError() !== null && $form->isSubmited()) { ?>
-                        <div class="error"><?= $form->formBuilder()->getField('first_name')->getError(); ?></div>
+                        <div class="error"><?= $this->esc($form->formBuilder()->getField('first_name')->getError()); ?></div>
                     <?php } ?>
 
                     <div>
-                        <input name="name" id="cname" class="full-width" placeholder="Votre nom*" value="<?= htmlspecialchars($form->formBuilder()->getField('name')->getValue()); ?>" type="text" maxlength="<?= htmlspecialchars($form->formBuilder()->getField('name')->getMaxLength()); ?>" required>
+                        <input name="name" id="cname" class="full-width" placeholder="Votre nom*" value="<?= $this->esc($form->formBuilder()->getField('name')->getValue()); ?>" type="text" maxlength="<?= $this->esc($form->formBuilder()->getField('name')->getMaxLength()); ?>" required>
                     </div>
                     <?php if($form->formBuilder()->getField('name')->getError() !== null && $form->isSubmited()) { ?>
-                        <div class="error"><?= $form->formBuilder()->getField('name')->getError(); ?></div>
+                        <div class="error"><?= $this->esc($form->formBuilder()->getField('name')->getError()); ?></div>
                     <?php } ?>
 
                     <div>
-                        <input name="email" id="cemail" class="full-width" placeholder="Votre adresse e-mail*" value="<?= htmlspecialchars($form->formBuilder()->getField('email')->getValue()); ?>" type="email" maxlength="<?= htmlspecialchars($form->formBuilder()->getField('email')->getMaxLength()); ?>" required>
+                        <input name="email" id="cemail" class="full-width" placeholder="Votre adresse e-mail*" value="<?= $this->esc($form->formBuilder()->getField('email')->getValue()); ?>" type="email" maxlength="<?= $this->esc($form->formBuilder()->getField('email')->getMaxLength()); ?>" required>
                     </div>
                     <?php if($form->formBuilder()->getField('email')->getError() !== null && $form->isSubmited()) { ?>
-                        <div class="error"><?= $form->formBuilder()->getField('email')->getError(); ?></div>
+                        <div class="error"><?= $this->esc($form->formBuilder()->getField('email')->getError()); ?></div>
                     <?php } ?>
 
                     <div>
-                        <input name="nickname" id="cnickname" class="full-width" placeholder="Choisissez un pseudo*" value="<?= htmlspecialchars($form->formBuilder()->getField('nickname')->getValue()); ?>" type="text" maxlength="<?= htmlspecialchars($form->formBuilder()->getField('nickname')->getMaxLength()); ?>" required>
+                        <input name="nickname" id="cnickname" class="full-width" placeholder="Choisissez un pseudo*" value="<?= $this->esc($form->formBuilder()->getField('nickname')->getValue()); ?>" type="text" maxlength="<?= $this->esc($form->formBuilder()->getField('nickname')->getMaxLength()); ?>" required>
                     </div>
                     <?php if($form->formBuilder()->getField('nickname')->getError() !== null && $form->isSubmited()) { ?>
-                        <div class="error"><?= $form->formBuilder()->getField('nickname')->getError(); ?></div>
+                        <div class="error"><?= $this->esc($form->formBuilder()->getField('nickname')->getError()); ?></div>
                     <?php } ?>
 
                     <div>
-                        <input name="password" id="cpassword" class="full-width" placeholder="Choisissez un mot de passe*" value="<?= htmlspecialchars($form->formBuilder()->getField('password')->getValue()); ?>" type="password" minlength="<?= htmlspecialchars($form->formBuilder()->getField('password')->getMinLength()); ?>" maxlength="<?= htmlspecialchars($form->formBuilder()->getField('password')->getMaxLength()); ?>" required>
+                        <input name="password" id="cpassword" class="full-width" placeholder="Choisissez un mot de passe*" value="<?= $this->esc($form->formBuilder()->getField('password')->getValue()); ?>" type="password" minlength="<?= $this->esc($form->formBuilder()->getField('password')->getMinLength()); ?>" maxlength="<?= $this->esc($form->formBuilder()->getField('password')->getMaxLength()); ?>" required>
                     </div>
                     <?php if($form->formBuilder()->getField('password')->getError() !== null && $form->isSubmited()) { ?>
-                        <div class="error"><?= $form->formBuilder()->getField('password')->getError(); ?></div>
+                        <div class="error"><?= $this->esc($form->formBuilder()->getField('password')->getError()); ?></div>
                     <?php } ?>
 
                     <div class="form-color-picker-title">Choissez une couleur pour votre avatar*</div>
@@ -74,10 +74,10 @@
                         <li data-color="#273746" style="background-color: #273746;"></li>
                     </ul>
 
-                    <input type="hidden" id="cAvatarColor" name="avatar" value="<?= $form->formBuilder()->getField('avatar')->getValue(); ?>">
+                    <input type="hidden" id="cAvatarColor" name="avatar" value="<?= $this->esc($form->formBuilder()->getField('avatar')->getValue()); ?>">
 
                     <?php if($form->formBuilder()->getField('avatar')->getError() !== null && $form->isSubmited()) { ?>
-                        <div class="error"><?= $form->formBuilder()->getField('avatar')->getError(); ?></div>
+                        <div class="error"><?= $this->esc($form->formBuilder()->getField('avatar')->getError()); ?></div>
                     <?php } ?>
 
                     <input type="hidden" name="page" value="user">
@@ -88,7 +88,7 @@
                 </fieldset>
             </form>
 
-            <div class='existing-account'>Déjà inscrit ? <a href="<?= $this->app()->route()->setUrl(array('page' => 'user', 'action' => 'login')); ?>">Cliquez ici</a> pour vous identifier</div>
+            <div class='existing-account'>Déjà inscrit ? <a href="<?= $this->esc($this->app()->route()->setUrl(array('page' => 'user', 'action' => 'login'))); ?>">Cliquez ici</a> pour vous identifier</div>
 
         </div>
     </div>
