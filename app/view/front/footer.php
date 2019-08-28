@@ -14,10 +14,10 @@
                         <a href="<?= htmlspecialchars($post->url); ?>" class="popular__thumb">
                             <img src="<?= GALLERY_DIR . $post->image_small; ?>" alt="<?= htmlspecialchars($post->title); ?>">
                         </a>
-                        <h5><?= htmlspecialchars($post->title); ?></h5>
+                        <h5><?= $post->title; ?></h5>
                         <section class="popular__meta">
-                            <span class="popular__author"><span>Par</span> <?= htmlspecialchars($post->user_nickname); ?></span>
-                            <span class="popular__date"><span>le</span> <?= htmlspecialchars($post->creation_date); ?></span>
+                            <span class="popular__author"><span>Par</span> <?= $post->user_nickname; ?></span>
+                            <span class="popular__date"><span>le</span> <?= $post->creation_date; ?></span>
                         </section>
                     </article>
                     <?php } ?>
@@ -32,7 +32,7 @@
         
                         <ul class="linklist">
                             <?php foreach($this->app()->getData('categoryList') as $category) { ?>
-                            <li><a href="<?= htmlspecialchars($category->url); ?>"><?= htmlspecialchars($category->name); ?></a></li>
+                            <li><a href="<?= htmlspecialchars($category->url); ?>"><?= $category->name; ?></a></li>
                             <?php } ?>
                         </ul>
                     </div> <!-- end categories -->
@@ -41,11 +41,11 @@
                         <h3>Plan du site</h3>
         
                         <ul class="linklist">
-                            <li><a href="<?= htmlspecialchars($this->app()->route()->setUrl(array('page' => 'home'))); ?>">Accueil</a></li>
-                            <li><a href="<?= htmlspecialchars($this->app()->route()->setUrl(array('page' => 'about'))); ?>">Qui suis-je</a></li>
-                            <li><a href="<?= htmlspecialchars($this->app()->route()->setUrl(array('page' => 'contact'))); ?>">Contact</a></li>
-                            <li><a href="<?= htmlspecialchars($this->app()->route()->setUrl(array('page' => 'privacy'))); ?>">Protection des données</a></li>
-                            <li><a href="<?= htmlspecialchars($this->app()->route()->setUrl(array('zone' => 'admin'))); ?>">Admin</a></li>
+                            <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'home')); ?>">Accueil</a></li>
+                            <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'about')); ?>">Qui suis-je</a></li>
+                            <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'contact')); ?>">Contact</a></li>
+                            <li><a href="<?= $this->app()->route()->setUrl(array('page' => 'privacy')); ?>">Protection des données</a></li>
+                            <li><a href="<?= $this->app()->route()->setUrl(array('zone' => 'admin')); ?>">Admin</a></li>
                         </ul>
                         <ul class="footer-social">
                             <li>

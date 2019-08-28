@@ -10,7 +10,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Utilisateur : [<?= htmlspecialchars($user->id); ?>] <?= htmlspecialchars($user->nickname); ?></h6>
+              <h6 class="m-0 font-weight-bold text-primary">Utilisateur : [<?= $user->id; ?>] <?= $user->nickname; ?></h6>
             </div>
             <div class="card-body">
 
@@ -22,11 +22,11 @@
                             <label for="userRole">Rôle</label>
                             <select name="role" class="form-control form-control-user" id="userRole" placeholder="Rôle">
                                 <option></option>
-                                <option value="Administrateur"<?php if($form->formBuilder()->getField('role')->getValue() === 'Administrateur') { echo " selected"; } ?>>Administrateur</option>
-                                <option value="Visiteur"<?php if($form->formBuilder()->getField('role')->getValue() === 'Visiteur') { echo " selected"; } ?>>Visiteur</option>
+                                <option value="Administrateur"<?php if($form->formBuilder()->getField('role')->getValue() === 'Administrateur') { ?> selected<?php } ?>>Administrateur</option>
+                                <option value="Visiteur"<?php if($form->formBuilder()->getField('role')->getValue() === 'Visiteur') { ?> selected<?php } ?>>Visiteur</option>
                             </select>
                             <?php if($form->formBuilder()->getField('role')->getError() !== null && $form->isSubmited()) { ?>
-                                <div class="form-control-error"><?= htmlspecialchars($form->formBuilder()->getField('role')->getError()); ?></div>
+                                <div class="form-control-error"><?= $form->formBuilder()->getField('role')->getError(); ?></div>
                             <?php } ?>
                         </div>
                    </div>
@@ -35,14 +35,14 @@
                             <label for="userNickname">Pseudo</label>
                             <input name="nickname" type="text" class="form-control form-control-user" id="userNickname" placeholder="Pseudo" value="<?= htmlspecialchars($form->formBuilder()->getField('nickname')->getValue()); ?>">
                             <?php if($form->formBuilder()->getField('nickname')->getError() !== null && $form->isSubmited()) { ?>
-                                <div class="form-control-error"><?= htmlspecialchars($form->formBuilder()->getField('nickname')->getError()); ?></div>
+                                <div class="form-control-error"><?= $form->formBuilder()->getField('nickname')->getError(); ?></div>
                             <?php } ?>
                         </div>
                         <div class="col-sm-12 col-lg-4">
                             <label for="userNickname">E-mail</label>
                             <input name="email" type="text" class="form-control form-control-user" id="userNickname" placeholder="E-mail" value="<?= htmlspecialchars($form->formBuilder()->getField('email')->getValue()); ?>">
                             <?php if($form->formBuilder()->getField('email')->getError() !== null && $form->isSubmited()) { ?>
-                                <div class="form-control-error"><?= htmlspecialchars($form->formBuilder()->getField('email')->getError()); ?></div>
+                                <div class="form-control-error"><?= $form->formBuilder()->getField('email')->getError(); ?></div>
                             <?php } ?>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                             <label for="userDescription">Description</label>
                             <textarea name="description" class="form-control form-control-user" id="userDescription" placeholder="Description" style="height: 15em;"><?= $form->formBuilder()->getField('description')->getValue(); ?></textarea>
                             <?php if($form->formBuilder()->getField('description')->getError() !== null && $form->isSubmited()) { ?>
-                                <div class="form-control-error"><?= htmlspecialchars($form->formBuilder()->getField('description')->getError()); ?></div>
+                                <div class="form-control-error"><?= $form->formBuilder()->getField('description')->getError(); ?></div>
                             <?php } ?>
                         </div>
                     </div>

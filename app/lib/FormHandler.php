@@ -59,13 +59,16 @@ class FormHandler Extends FormComponent
 
     public function getFileFieldError(Field $field)
     {   
-        if(!preg_match('#image#', $_FILES[$field->getName()]['type'])) {
-            return 'Le type du fichier chargé n\'est pas pris en charge';
+        if(isset($_FILES[$field->getName()])) {
+            if(!preg_match('#image#', $_FILES[$field->getName()]['type'])) {
+                return 'Le type du fichier chargé n\'est pas pris en charge';
+            }
+            if(!preg_match('#image#', $_FILES[$field->getName()]['type'])) {
+                return 'Le fichier chargé dépasse la taille maximum autorisée';
+            }
+            return $field->getError();    
         }
-        if(!preg_match('#image#', $_FILES[$field->getName()]['type'])) {
-            return 'Le fichier chargé dépasse la taille maximum autorisée';
-        }
-        return $field->getError();
+        return null;
     }
 
     public function getGenericFieldError(Field $field)

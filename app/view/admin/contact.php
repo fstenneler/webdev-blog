@@ -35,10 +35,10 @@
                     <?php foreach($this->app()->getData('contactList') as $contact) { ?>
                     <tr>
                       <td><?php if($contact->message_read == 0) { ?><i class="fas fa-circle comment-status-att"></i><?php } ?></td>
-                      <td><a href="index.php?page=contact&action=view&contactId=<?= htmlspecialchars($contact->id); ?>" class="comment-status-waiting"><?= htmlspecialchars($contact->subject); ?></a></td>
-                      <td><?= htmlspecialchars($contact->email); ?></td>
-                      <td><?= htmlspecialchars($contact->name); ?></td>
-                      <td><?= htmlspecialchars($contact->date); ?></td>
+                      <td><a href="index.php?page=contact&action=view&contactId=<?= $contact->id; ?>" class="comment-status-waiting"><?= $contact->subject; ?></a></td>
+                      <td><?= $contact->email; ?></td>
+                      <td><?= $contact->name; ?></td>
+                      <td><?= $contact->date; ?></td>
                     </tr>
                     <?php } ?>
                   </tbody>

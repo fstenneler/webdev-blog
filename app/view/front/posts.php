@@ -5,7 +5,7 @@
         <?php if($this->app()->httpRequest()->getData('categoryId') > 0) { ?>
         <div class="row narrow">
             <div class="col-full s-content__header" data-aos="fade-up">
-                <h1 class="display-1 display-1--with-line-sep">Categorie : <?= htmlspecialchars($this->app()->getData('categoryName')); ?></h1>
+                <h1 class="display-1 display-1--with-line-sep">Categorie : <?= $this->app()->getData('categoryName'); ?></h1>
             </div>
         </div>
         <?php } ?>
@@ -13,7 +13,7 @@
         <?php if($this->app()->httpRequest()->getData('search') != '') { ?>
         <div class="row narrow">
             <div class="col-full s-content__header" data-aos="fade-up">
-                <h1 class="display-1 display-1--with-line-sep">Recherche : <?= htmlspecialchars($this->app()->httpRequest()->getData('search')); ?></h1>
+                <h1 class="display-1 display-1--with-line-sep">Recherche : <?= $this->app()->httpRequest()->getData('search'); ?></h1>
             </div>
         </div>
         <?php } ?>
@@ -36,13 +36,13 @@
         
                         <div class="item-entry__text">    
                             <div class="item-entry__cat">
-                                <a href="<?= htmlspecialchars($post->category_url); ?>"><?= htmlspecialchars($post->category_name); ?></a> 
+                                <a href="<?= htmlspecialchars($post->category_url); ?>"><?= $post->category_name; ?></a> 
                             </div>
     
-                            <h1 class="item-entry__title"><a href="<?= htmlspecialchars($post->url); ?>"><?= htmlspecialchars($post->title); ?></a></h1>
+                            <h1 class="item-entry__title"><a href="<?= htmlspecialchars($post->url); ?>"><?= $post->title; ?></a></h1>
                                 
                             <div class="item-entry__date">
-                                <a href="<?= htmlspecialchars($post->url); ?>"><?= htmlspecialchars($post->creation_date); ?></a>
+                                <a href="<?= htmlspecialchars($post->url); ?>"><?= $post->creation_date; ?></a>
                             </div>
                         </div>
                     </div> <!-- item-entry -->
@@ -65,13 +65,13 @@
                 <nav class="pgn" data-aos="fade-up">
                     <?php $pagination = $this->app()->getData('pagination'); ?>
                     <ul>
-                        <li><a class="pgn__prev" href="<?= htmlspecialchars($pagination['previousPageUrl']); ?>">Prev</a></li>
+                        <li><a class="pgn__prev" href="<?= $pagination['previousPageUrl']; ?>">Prev</a></li>
 
                         <?php foreach($pagination['pageList'] as $page => $url) { ?>
-                        <li><a class="pgn__num <?php if($page == $pagination['currentPage']) { echo 'current'; } ?>" href="<?= htmlspecialchars($url); ?>"><?= htmlspecialchars($page); ?></a></li>
+                        <li><a class="pgn__num <?php if($page == $pagination['currentPage']) { ?>current<?php } ?>" href="<?= $url; ?>"><?= $page; ?></a></li>
                         <?php } ?>
 
-                        <li><a class="pgn__next" href="<?= htmlspecialchars($pagination['nextPageUrl']); ?>">Next</a></li>
+                        <li><a class="pgn__next" href="<?= $pagination['nextPageUrl']; ?>">Next</a></li>
                     </ul>
                 </nav>
             </div>
