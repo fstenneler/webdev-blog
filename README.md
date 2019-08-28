@@ -3,7 +3,15 @@
 
 Version en ligne du projet [ici](http://webdev-blog.orlinstreet.rocks/).
 
+## Certifications
+
+### Symfony Insights
+
 [![SymfonyInsight](https://insight.symfony.com/projects/d48cdb25-7152-4066-a9a5-1f88b3d2679d/big.svg)](https://insight.symfony.com/projects/d48cdb25-7152-4066-a9a5-1f88b3d2679d)
+
+### Codacy
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/498a5166102d4352bd25f41ed6e12260)](https://www.codacy.com/app/fstenneler/webdev-blog?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fstenneler/webdev-blog&amp;utm_campaign=Badge_Grade)
 
 ## Instructions d'installation
 
