@@ -7,7 +7,7 @@ Version en ligne du projet [ici](http://webdev-blog.orlinstreet.rocks/).
 
 ### Symfony Insights
 
-[![SymfonyInsight](https://insight.symfony.com/projects/d48cdb25-7152-4066-a9a5-1f88b3d2679d/big.svg)](https://insight.symfony.com/projects/d48cdb25-7152-4066-a9a5-1f88b3d2679d)
+[![SymfonyInsight](http://webdev-blog.orlinstreet.rocks/public/front/images/symfony_insight_badge.svg)](http://webdev-blog.orlinstreet.rocks/public/front/images/analyse_symfony_insights.jpg)
 
 ### Codacy
 
